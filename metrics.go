@@ -1,106 +1,152 @@
 package main
 
-import (
-	"math"
-)
+import "math"
 
-// MetricStats holds the metrics actually used by the study path.
+// MetricStats holds the final calculated metrics for human consumption.
 type MetricStats struct {
 	Count        int
-	ICPearson    float64 // linear IC
-	Sharpe       float64 // per-trade Sharpe
-	SharpeAnnual float64 // scaled Sharpe (sqrt(N) over sample)
-	HitRate      float64 // directional accuracy (non-zero signal & return)
-	BreakevenBps float64 // break-even cost per unit turnover (bps)
+	ICPearson    float64 // Linear IC
+	Sharpe       float64 // Per-trade Sharpe
+	SharpeAnnual float64 // t-statistic (Sharpe * sqrt(N))
+	HitRate      float64 // Directional accuracy
+	BreakevenBps float64 // Cost per unit turnover to zero PnL
 }
 
-// ComputeStats calculates IC, Sharpe, hit rate, and break-even cost
-// for a signal vs return series. sig and ret must be aligned and of
-// equal length. This function is called very frequently in the study
-// pipeline and is written to be single-pass and branch-light.
-func ComputeStats(sig, ret []float64) MetricStats {
+// Moments holds raw sums for global aggregation (IC, Sharpe, Turnover).
+// Optimized for memory alignment on amd64.
+type Moments struct {
+	Count     float64
+	SumSig    float64
+	SumRet    float64
+	SumProd   float64 // Sum(Sig * Ret)
+	SumSqSig  float64
+	SumSqRet  float64
+	SumPnL    float64
+	SumSqPnL  float64
+	Hits      float64
+	ValidHits float64
+	Turnover  float64
+}
+
+// Add accumulates m2 into m (In-place).
+func (m *Moments) Add(m2 Moments) {
+	m.Count += m2.Count
+	m.SumSig += m2.SumSig
+	m.SumRet += m2.SumRet
+	m.SumProd += m2.SumProd
+	m.SumSqSig += m2.SumSqSig
+	m.SumSqRet += m2.SumSqRet
+	m.SumPnL += m2.SumPnL
+	m.SumSqPnL += m2.SumSqPnL
+	m.Hits += m2.Hits
+	m.ValidHits += m2.ValidHits
+	m.Turnover += m2.Turnover
+}
+
+// CalcMoments computes raw moments for a single chunk/day.
+// Optimized for AVX2 pipeline (simple float operations, branch-light).
+func CalcMoments(sig, ret []float64) Moments {
 	n := len(sig)
 	if n < 2 {
-		return MetricStats{}
+		return Moments{}
 	}
 
-	ms := MetricStats{Count: n}
+	var m Moments
+	m.Count = float64(n)
 
+	// Local registers for hot loop
 	var (
-		sumSig, sumRet     float64
-		sumSqSig, sumSqRet float64
-		sumProd            float64
-
-		// PnL aggregates
-		sumPnL, sumSqPnL float64
-
-		// Hit-rate aggregates
-		hits, validHits float64
-
-		// Turnover
-		turnover float64
-		prevSig  float64
+		sSum, rSum, sSq, rSq, prodSum float64
+		pnlSum, pnlSq                 float64
+		hits, valid                   float64
+		turnover, prevSig             float64
 	)
+
+	prevSig = sig[0] // approximation
 
 	for i := 0; i < n; i++ {
 		s := sig[i]
 		r := ret[i]
 
-		// Moments for Pearson IC
-		sumSig += s
-		sumRet += r
-		sumSqSig += s * s
-		sumSqRet += r * r
-		sumProd += s * r
+		// Pearson components
+		sSum += s
+		rSum += r
+		sSq += s * s
+		rSq += r * r
+		prodSum += s * r
 
-		// PnL stats
+		// PnL components
 		pnl := s * r
-		sumPnL += pnl
-		sumSqPnL += pnl * pnl
+		pnlSum += pnl
+		pnlSq += pnl * pnl
 
-		// Hit rate (directional)
+		// Hit Rate
 		if s != 0 && r != 0 {
-			validHits++
+			valid++
 			if (s > 0 && r > 0) || (s < 0 && r < 0) {
 				hits++
 			}
 		}
 
-		// Turnover (L1 change of signal)
+		// Turnover
 		if i > 0 {
-			turnover += math.Abs(s - prevSig)
+			d := s - prevSig
+			if d < 0 {
+				d = -d
+			}
+			turnover += d
 		}
 		prevSig = s
 	}
 
-	fn := float64(n)
+	m.SumSig = sSum
+	m.SumRet = rSum
+	m.SumSqSig = sSq
+	m.SumSqRet = rSq
+	m.SumProd = prodSum
+	m.SumPnL = pnlSum
+	m.SumSqPnL = pnlSq
+	m.Hits = hits
+	m.ValidHits = valid
+	m.Turnover = turnover
 
-	// 1) Pearson IC
-	num := fn*sumProd - sumSig*sumRet
-	denX := fn*sumSqSig - sumSig*sumSig
-	denY := fn*sumSqRet - sumRet*sumRet
+	return m
+}
+
+// FinalizeMetrics computes the ratios from aggregated moments.
+func FinalizeMetrics(m Moments) MetricStats {
+	if m.Count <= 1 {
+		return MetricStats{}
+	}
+
+	ms := MetricStats{Count: int(m.Count)}
+
+	// 1. Global Pearson IC
+	num := m.Count*m.SumProd - m.SumSig*m.SumRet
+	denX := m.Count*m.SumSqSig - m.SumSig*m.SumSig
+	denY := m.Count*m.SumSqRet - m.SumRet*m.SumRet
 	if denX > 0 && denY > 0 {
 		ms.ICPearson = num / math.Sqrt(denX*denY)
 	}
 
-	// 2) Sharpe per trade and "annualized" via sqrt(N) over sample.
-	meanPnL := sumPnL / fn
-	varPnL := (sumSqPnL / fn) - (meanPnL * meanPnL)
+	// 2. Per-Trade Sharpe
+	meanPnL := m.SumPnL / m.Count
+	varPnL := (m.SumSqPnL / m.Count) - (meanPnL * meanPnL)
+
 	if varPnL > 0 {
-		stdPnL := math.Sqrt(varPnL)
-		sh := meanPnL / stdPnL
-		ms.Sharpe = sh
-		ms.SharpeAnnual = sh * math.Sqrt(fn)
+		ms.Sharpe = meanPnL / math.Sqrt(varPnL)
+		// Annualized via t-stat logic
+		ms.SharpeAnnual = ms.Sharpe * math.Sqrt(m.Count)
 	}
 
-	// 3) Hit rate
-	if validHits > 0 {
-		ms.HitRate = hits / validHits
+	// 3. Hit Rate
+	if m.ValidHits > 0 {
+		ms.HitRate = m.Hits / m.ValidHits
 	}
 
-	// 4) Break-even cost in bps per unit turnover.
-	if turnover > 0 {
-		ms.BreakevenBps = (sumPnL / turnover) * 10000.0
+	// 4. Breakeven
+	if m.Turnover > 0 {
+		ms.BreakevenBps = (m.SumPnL / m.Turnover) * 10000.0
 	}
 
 	return ms

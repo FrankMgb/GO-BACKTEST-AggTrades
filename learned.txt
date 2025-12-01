@@ -1,0 +1,276 @@
+Here’s a compact “handoff note” you can give to another AI about what we’ve explored and learned so far.
+
+---
+
+## 1. Data & Framework
+
+**Raw data:**
+
+* Source: Binance aggTrades for `BTCUSDT`.
+* Storage: Custom `AGG3` binary format:
+
+  * Per trade row (48 bytes): price, qty, first/last IDs, count, maker flag, timestamp (ms).
+* Derived fields:
+
+  * `TradePrice(row)`, `TradeQty(row)`, `TradeDollar(row) = price * qty`.
+  * `TradeSign(row)` = +1 taker buy, -1 taker sell (from maker flag).
+
+**Backtest framework:**
+
+* **Build step (`runBuild`)**:
+
+  * For each day: load compressed monthly blob, decompress to raw rows, stream rows through a model `Update(row)` → output 1 float64 signal per trade to `.bin`.
+* **Study step (`runStudy`)**:
+
+  * Load signal `.bin` + same raw data.
+  * For each horizon `H` (10, 30, 60, 180, 300 seconds):
+
+    * For trade i at time `t_i`, find first j with `t_j ≥ t_i + H`.
+    * Return: `r = (p_j - p_i) / p_i`.
+    * Build aligned `sig` / `ret` arrays, compute per-day stats, aggregate IS vs OOS.
+* **Metrics per day, then averaged:**
+
+  * Pearson IC, Spearman IC.
+  * Per-trade Sharpe and annualized Sharpe.
+  * Hit rate (sign agreement).
+  * Win rate.
+  * Profit factor.
+  * Breakeven bps (PnL / turnover).
+
+**Split:**
+
+* IS: days before `2024-01-01`.
+* OOS: days from `2024-01-01` onward.
+
+---
+
+## 2. Baseline Models Tested
+
+### 2.1 A_Hawkes_Core (2-scale Hawkes on signed dollar flow)
+
+**Idea:**
+
+* Two Hawkes kernels (fast/slow) on buy and sell excitations:
+
+  * State: `eBuyFast`, `eSellFast`, `eBuySlow`, `eSellSlow`.
+* At each trade:
+
+  * Time decay: `e *= exp(-dt / tauFast)` and `exp(-dt / tauSlow)`.
+  * Mark: `mark = log(1 + TradeDollar / D0)`; add to buy or sell excitation based on `TradeSign`.
+* Intensities:
+
+  * `λ_buy = μ_b + (A_pp_fast * eBuyFast + A_pm_fast * eSellFast) + (A_pp_slow * eBuySlow + A_pm_slow * eSellSlow)`.
+  * `λ_sell = μ_s + (A_mp_fast * eBuyFast + A_mm_fast * eSellFast) + (A_mp_slow * eBuySlow + A_mm_slow * eSellSlow)`.
+* Imbalance:
+
+  * `imb = (λ_buy - λ_sell) / (λ_buy + λ_sell)` (if denominator > 0).
+* Vol normalization:
+
+  * EWMA of log returns (`VolEWMA`), `sigma = sqrt(VarEWMA)`, fallback sigma=1 if zero.
+* Z-scoring & squashing:
+
+  * `z = ZScoreEWMA.Update(imb / sigma)`.
+  * Final signal: `tanh(SquashScale * z)`.
+
+**Outcome:** Solid, but not the best. Served as a good baseline Hawkes OFI model.
+
+---
+
+### 2.2 B_Hawkes_Adaptive (winner among A/B/C/D)
+
+**Idea vs A:**
+
+* Same two-scale Hawkes structure, but **adapts the blend between fast and slow kernels** based on recent activity (trade arrival rate).
+
+**Key additions:**
+
+* Activity EWMA:
+
+  * `actEWMA` updated from `1/dt` (higher when trades are dense).
+  * `actLambda` smoothing.
+* Slow weight:
+
+  * `wSlow = sigmoid( - actSlope * (log(actEWMA) - log(actMid)) )`.
+  * `wFast = 1 - wSlow`.
+  * In **high activity**, `wSlow ↓`, more weight on fast kernel.
+  * In **low activity**, `wSlow ↑`, more weight on slow kernel.
+* Hawkes structure same as A, but:
+
+  * Fast intensities: `bf, sf`.
+  * Slow intensities: `bs, ss`.
+  * Blended: `buy = wFast*bf + wSlow*bs`, `sell = wFast*sf + wSlow*ss`.
+* Then same `imb → vol EWMA → z-score → tanh`.
+
+**Empirical result (4-variant test A/B/C/D):**
+
+* **B_Hawkes_Adaptive** had the highest OOS Sharpe and IC across all horizons.
+* Effectively: **regime-aware Hawkes on trade-flow**, normalized by volatility, was the best of the initial set.
+
+---
+
+### 2.3 C_MultiEMA_PowerLaw
+
+**Idea:**
+
+* Multiple EMAs of signed “marked” order flow across several time constants:
+
+  * `x = TradeSign * log(1 + dollar/D0)`.
+  * For each tau: `ema_j = λ_j*ema_j + (1-λ_j)*x`, `λ_j = exp(-dt / tau_j)`.
+* Combine EMAs with weights into a single imbalance metric.
+* Same vol EWMA + z-score + tanh pipeline.
+
+**Outcome:**
+
+* Decent, but under B on OOS Sharpe and IC.
+* Good benchmark for non-Hawkes, but not a winner.
+
+---
+
+### 2.4 D_EMA_Baseline
+
+**Idea:**
+
+* Single EMA on marked signed flow:
+
+  * `ema = λ*ema + (1-λ)*x`.
+* Same vol normalization + z-scoring + tanh.
+
+**Outcome:**
+
+* Similar to C at longer horizons, but generally behind B.
+* Serves as a “simple OFI EMA” baseline.
+
+---
+
+## 3. Extended Models and Lessons
+
+Later we added:
+
+* **H_Hawkes_BigAdaptive** – separate treatment for “big” trades.
+* **I_OFI_MultiTimeZ** – multi-horizon OFI z-scores blended.
+* **J_Hawkes_TrendMix** – Hawkes imbalance with a trend/velocity component.
+
+### 3.1 H_Hawkes_BigAdaptive (big vs small trades)
+
+**Concept:**
+
+* Split mark into:
+
+  * Small trades: near or below typical size.
+  * Big trades: trades larger than a size EWMA threshold.
+* Maintain separate excitations for big vs small; overweight big-trade excitations (Smart Money).
+* Still activity-adaptive (fast vs slow blend), plus vol-normalization and tanh.
+
+**Outcome:**
+
+* Very close to B in OOS stats.
+* Slight improvement in some horizons but not consistently beating J.
+
+**Lesson:** Big-trade emphasis adds value, but marginal compared to good core Hawkes+activity logic.
+
+---
+
+### 3.2 I_OFI_MultiTimeZ (multi-horizon OFI)
+
+**Concept (simplified):**
+
+* Build OFI-like features across multiple time windows.
+* Normalize each via its own z-score or variance estimate.
+* Combine linearly.
+
+**Outcome:**
+
+* Very weak OOS performance (low IC, low Sharpe, ~50% hit).
+* Essentially near noise.
+
+**Lesson:** Naive aggregation of multiple OFI horizons without strong structure (like Hawkes / regime logic) underperforms. The market microstructure edge here seems to demand **dynamics-aware** models (Hawkes, adaptive kernels) rather than static multiscale signals.
+
+---
+
+### 3.3 J_Hawkes_TrendMix (best overall in multi-variant test)
+
+**Concept:**
+
+* Start from **Hawkes_Adaptive core** (like B).
+* Add **trend / momentum structure** to the imbalance itself:
+
+  * e.g. combine:
+
+    * Level of Hawkes imbalance (current `imb`),
+    * Its fast EMA vs slow EMA (imbalance “velocity”),
+    * Or multiple Hawkes-based timescales of imbalance.
+  * Then normalize (vol EWMA) and transform via:
+
+    * fast z-score, slow z-score, and/or z-score difference (`z_fast - z_slow`).
+* Final signal is a mixture of **imbalance level + imbalance slope**.
+
+**Empirical outcome (4-variant run with B, H, I, J):**
+
+At 10 seconds:
+
+* **J_Hawkes_TrendMix**
+
+  * OOS_IC ≈ 0.1524 (better than B’s 0.1391).
+  * OOS_Sharpe ≈ 167.8 (better than B’s 152.8).
+  * OOS_Hit ≈ 58.6% (slightly better than B).
+  * OOS_Breakeven bps ≈ 2.1 (much more efficient than B’s ~16.2).
+
+Similar “J > B > H >> I” ordering held at other horizons.
+
+**Lesson:**
+
+* Adding a **trend/velocity term of the Hawkes imbalance** (level + slope style) improves performance.
+* The market seems to reward:
+
+  * Not just current imbalance,
+  * But also whether that imbalance is accelerating or decelerating.
+
+---
+
+## 4. Structural / Performance Learnings (math-adjacent)
+
+Even though you asked math-focused, there are some crucial “how we compute” learnings that affect what math we can safely run:
+
+* **Day-parallel execution** with per-thread reusable buffers:
+
+  * One zlib decompress per day, used for *all* variants.
+* **No interface calls** in the hot loop (or minimized):
+
+  * Interfaces block inlining; generic or concrete dispatch helps the compiler inline the math.
+* **Handling high-vol days correctly:**
+
+  * Must allow up to ~10M rows/day; no dropping days due to cap.
+  * Using large preallocated buffers (`BuildMaxRows`, `StudyMaxRows`) and growing dynamically if needed.
+* **Volatility normalization is critical:**
+
+  * Almost everything that worked well did:
+
+    * Raw imbalance → divide by sigma (EWMA of log-returns) → z-score → tanh.
+  * This makes the signal more stable across different market regimes.
+
+---
+
+## 5. High-Level Takeaways To Pass On
+
+If you want to brief another AI succinctly, here are the core points:
+
+1. **Best baseline math so far:**
+
+   * **B_Hawkes_Adaptive**: 2-scale Hawkes on signed dollar flow, activity-adjusted slow/fast blend, vol-normalized and z-scored, with tanh squashing.
+2. **Best extended math so far:**
+
+   * **J_Hawkes_TrendMix**: B’s adaptive Hawkes + an extra layer that captures *trend/velocity* of imbalance (e.g., fast vs slow imbalance / z-scores), giving consistently better OOS Sharpe/IC.
+3. **Ideas that helped:**
+
+   * Activity-driven mixing of kernel scales (fast vs slow).
+   * Volatility normalization before z-scoring.
+   * Incorporating both **level and slope** of imbalance.
+   * Considering big trades separately (H) gave smaller but positive contributions.
+4. **Ideas that did not help:**
+
+   * Naive multi-horizon OFI aggregation (I_OFI_MultiTimeZ) without strong dynamics/regime structure.
+5. **Statistically, the edge is:**
+
+   * In the microstructure, **trade-flow imbalance + activity + momentum of that imbalance**, properly normalized, is where the real signal lives.
+
+If you want, I can now write a very small, clean spec document (no code, just math definitions) for only the current champion logic (B or J, depending which you want to standardize on) to hand off as a “model card” to another system.
