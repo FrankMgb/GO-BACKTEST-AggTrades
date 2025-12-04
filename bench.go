@@ -23,9 +23,6 @@ type benchStats struct {
 }
 
 // runBench is called from main when you do: go run . bench
-// It benchmarks the STUDY pipeline on a single day:
-//
-//	loadDayColumns + feature decode + returns + moments + quantiles.
 func runBench() {
 	fmt.Println("=== BENCHMARK: QuantDev STUDY (processStudyDay) ===")
 	fmt.Printf("Go: %s | GOOS/GOARCH: %s/%s | Threads: %d\n",
@@ -51,14 +48,10 @@ func runBench() {
 		fmt.Printf("[bench] Approx feature bytes/day: %d\n", featureBytes)
 	}
 
-	// Quantiles are the expensive part; mimic real logic but keep worst-case feel.
-	doQuantiles := dayInt < oosBoundaryYMD
-
 	// --- Warm-up to decide iteration count ---
-	warmStats := benchStudy(sym, dayInt, variants, featRoot, 1, doQuantiles)
+	warmStats := benchStudy(sym, dayInt, variants, featRoot, 1)
 	warm := warmStats.Total
 	if warm <= 0 {
-		// Clock weirdness / too fast — assume a tiny but non-zero duration.
 		warm = 2 * time.Millisecond
 	}
 	target := 500 * time.Millisecond
@@ -69,8 +62,8 @@ func runBench() {
 		iters = 2000
 	}
 
-	fmt.Printf("[bench] warm-up: %s per study, selecting %d iterations (fallback=%v)\n",
-		warmStats.Total, iters, warmStats.Total <= 0)
+	fmt.Printf("[bench] warm-up: %s per study, selecting %d iterations\n",
+		warmStats.Total, iters)
 
 	// --- CPU profile + real benchmark ---
 	var cpuFile *os.File
@@ -88,7 +81,7 @@ func runBench() {
 		}
 	}
 
-	stats := benchStudy(sym, dayInt, variants, featRoot, iters, doQuantiles)
+	stats := benchStudy(sym, dayInt, variants, featRoot, iters)
 	stats.BytesPerIter = featureBytes
 
 	if cpuFile != nil {
@@ -113,7 +106,6 @@ func runBench() {
 		memFile.Close()
 	}
 
-	// --- Inline pprof -top summaries (best-effort) ---
 	runPprofTop("bench_cpu.pprof", "cpu")
 	runPprofTop("bench_mem.pprof", "heap")
 
@@ -121,16 +113,7 @@ func runBench() {
 }
 
 // benchStudy repeatedly runs processStudyDay for one symbol/day
-// and measures time + allocations. This hits:
-//
-//   - loadDayColumns (GNC decompress)
-//   - computeReturns for each horizon
-//   - feature decode for each variant/dim
-//   - CalcMomentsVectors
-//   - ComputeQuantilesStrided (if doQuantiles)
-//
-// i.e. the "mega compute" path.
-func benchStudy(sym string, dayInt int, variants []string, featRoot string, iters int, doQuantiles bool) benchStats {
+func benchStudy(sym string, dayInt int, variants []string, featRoot string, iters int) benchStats {
 	stats := benchStats{
 		Name:  "StudyDay",
 		Iters: iters,
@@ -140,7 +123,6 @@ func benchStudy(sym string, dayInt int, variants []string, featRoot string, iter
 		return stats
 	}
 
-	// Prepare worker-like buffers (same pattern as runStudy workers).
 	var sigBuf []float64
 	var fileBuf []byte
 	var retBuf []float64
@@ -154,15 +136,15 @@ func benchStudy(sym string, dayInt int, variants []string, featRoot string, iter
 
 	start := time.Now()
 	for i := 0; i < iters; i++ {
+		// FIXED: Removed doQuantiles bool argument
 		res := processStudyDay(
 			sym, dayInt, variants, featRoot,
 			&sigBuf, &fileBuf, &retBuf, &retsPerHBuf, &gncBuf,
-			doQuantiles,
 		)
 
-		// On first iter, infer rows and feature count from Moments.
 		if i == 0 {
 			rows := 0
+			// V3 DayResult just has Metrics map[string][]Moments
 			for _, momsSlice := range res.Metrics {
 				if len(momsSlice) > 0 {
 					rows = int(momsSlice[0].Count)
@@ -187,7 +169,6 @@ func benchStudy(sym string, dayInt int, variants []string, featRoot string, iter
 	return stats
 }
 
-// printBenchStats pretty-prints the stats in a human-friendly way.
 func printBenchStats(bs benchStats) {
 	if bs.Iters <= 0 || bs.Total <= 0 {
 		fmt.Printf("[bench] %s: no data\n", bs.Name)
@@ -197,7 +178,7 @@ func printBenchStats(bs benchStats) {
 	nsPerOp := float64(bs.Total.Nanoseconds()) / float64(bs.Iters)
 	totalRows := float64(bs.RowsPerIter * bs.Iters)
 	totalBytes := float64(bs.BytesPerIter * bs.Iters)
-	totalCells := totalRows * float64(bs.FeatPerIter) // rows × features
+	totalCells := totalRows * float64(bs.FeatPerIter)
 
 	secs := bs.Total.Seconds()
 	rowsPerSec := 0.0
@@ -233,77 +214,83 @@ func printBenchStats(bs benchStats) {
 		bs.MallocsPerOp, bs.AllocBytesPerOp)
 }
 
-// runPprofTop runs "go tool pprof -top <profile>" and prints its output.
-// Best-effort: if 'go' isn't on PATH or anything fails, it just logs and returns.
 func runPprofTop(profilePath, kind string) {
 	if _, err := os.Stat(profilePath); err != nil {
-		// No profile file; nothing to do.
 		return
 	}
-
 	cmd := exec.Command("go", "tool", "pprof", "-top", profilePath)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Printf("[bench] go tool pprof -top (%s) failed: %v\n", kind, err)
-		if len(out) > 0 {
-			fmt.Printf("[pprof-%s]\n%s\n", kind, string(out))
-		}
 		return
 	}
-
 	fmt.Printf("\n[pprof-%s] go tool pprof -top %s\n", kind, profilePath)
 	fmt.Println(string(out))
 }
 
-// findStudySample locates the first symbol/day that has feature files
-// so we can benchmark a realistic study workload.
 func findStudySample() (sym string, dayInt int, variants []string, featRoot string, ok bool) {
-	syms := discoverFeatureSymbols()
-	if syms == nil {
+	// Re-using common.go/study.go logic implicitly via shared package
+	// But we need to implement discovery here if not exported.
+	// Since we are in main package, we can use discoverFeatureSymbols from study.go if exported?
+	// No, discoverFeatureSymbols returns iter.Seq.
+	// We'll just do a quick manual scan.
+
+	featDir := filepath.Join(BaseDir, "features")
+	entries, err := os.ReadDir(featDir)
+	if err != nil {
 		return "", 0, nil, "", false
 	}
 
-	for s := range syms {
-		featRoot = filepath.Join(BaseDir, "features", s)
-		entries, err := os.ReadDir(featRoot)
+	for _, e := range entries {
+		if !e.IsDir() || e.Name()[0] == '.' {
+			continue
+		}
+		s := e.Name()
+
+		featRoot = filepath.Join(featDir, s)
+		vEntries, err := os.ReadDir(featRoot)
 		if err != nil {
 			continue
 		}
 
 		var vs []string
-		for _, e := range entries {
-			if e.IsDir() && !isDotDir(e.Name()) {
-				vs = append(vs, e.Name())
+		for _, ve := range vEntries {
+			if ve.IsDir() && ve.Name()[0] != '.' {
+				vs = append(vs, ve.Name())
 			}
 		}
 		if len(vs) == 0 {
 			continue
 		}
 
-		// Use the first variant (same as runStudy) to discover days.
-		baseVariantDir := filepath.Join(featRoot, vs[0])
-
-		var days []int
-		for d := range discoverStudyDays(baseVariantDir) {
-			days = append(days, d)
+		// Find a day
+		vDir := filepath.Join(featRoot, vs[0])
+		files, _ := os.ReadDir(vDir)
+		for _, f := range files {
+			if len(f.Name()) > 4 && filepath.Ext(f.Name()) == ".bin" {
+				// 20200101.bin
+				base := f.Name()[:len(f.Name())-4]
+				if d, err := parseDateInt(base); err == nil {
+					return s, d, vs, featRoot, true
+				}
+			}
 		}
-		if len(days) == 0 {
-			continue
-		}
-
-		// Pick a mid-day (roughly typical load).
-		dayInt = days[len(days)/2]
-		return s, dayInt, vs, featRoot, true
 	}
 	return "", 0, nil, "", false
 }
 
-func isDotDir(name string) bool {
-	return len(name) > 0 && name[0] == '.'
+func parseDateInt(s string) (int, error) {
+	var n int
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return 0, fmt.Errorf("bad int")
+		}
+		n = n*10 + int(c-'0')
+	}
+	return n, nil
 }
 
 // featureBytesForDay sums the sizes of all variant feature files for this day.
-// It's an approximation for "bytes/iter" to give a sense of memory bandwidth.
 func featureBytesForDay(featRoot string, variants []string, dayInt int) int {
 	y := dayInt / 10000
 	m := (dayInt % 10000) / 100
@@ -317,7 +304,6 @@ func featureBytesForDay(featRoot string, variants []string, dayInt int) int {
 		if err != nil {
 			continue
 		}
-		// Only count regular files.
 		if fi.Mode().IsRegular() {
 			if sz := fi.Size(); sz > 0 {
 				total += int(sz)

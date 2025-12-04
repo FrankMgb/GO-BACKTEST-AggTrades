@@ -1,0 +1,6 @@
+=== QuantDev Winning Math Report ===
+Generated: 2025-12-04T13:21:32-06:00
+BaseDir:  data
+OOS Cut:  2024-01-01 (YMD=20240101)
+
+[report] no features found under data\features

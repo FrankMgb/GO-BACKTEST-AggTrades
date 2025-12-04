@@ -13,39 +13,20 @@ import (
 	"time"
 )
 
-// --- Atomic Configuration ---
-
-type AtomConfig struct {
-	WhaleThreshold float64 // Volume threshold for iceberg detection
-}
-
-var DefaultAtoms = AtomConfig{
-	WhaleThreshold: 5.0, // Lowered slightly to capture mid-sized absorption
-}
-
-const (
-	EPS = 1e-9
-)
-
 type ofiTask struct {
 	Y, M, D        int
 	Offset, Length int64
 }
 
-// --- Execution Logic ---
-
 func runBuild() {
 	start := time.Now()
-
-	// Pipeline: Symbols -> Build
 	found := false
 	for sym := range discoverSymbols() {
 		found = true
 		buildForSymbol(sym)
 	}
-
 	if !found {
-		fmt.Printf("[build] no symbols discovered under %q\n", BaseDir)
+		fmt.Printf("[build] no symbols discovered under %q\n", filepath.Join(BaseDir))
 	}
 	fmt.Printf("[build] Complete in %s\n", time.Since(start))
 }
@@ -54,36 +35,28 @@ func discoverSymbols() iter.Seq[string] {
 	return func(yield func(string) bool) {
 		entries, err := os.ReadDir(BaseDir)
 		if err != nil {
-			fmt.Printf("[build] ReadDir(%s): %v\n", BaseDir, err)
 			return
 		}
 		for _, e := range entries {
-			if !e.IsDir() {
-				continue
-			}
-			name := e.Name()
-			if name == "features" || name == "common" || len(name) == 0 || name[0] == '.' {
-				continue
-			}
-			if !yield(name) {
-				return
+			if e.IsDir() && e.Name() != "features" && e.Name() != "common" && e.Name()[0] != '.' {
+				if !yield(e.Name()) {
+					return
+				}
 			}
 		}
 	}
 }
 
 func buildForSymbol(sym string) {
-	fmt.Printf(">>> Building %s (Enhanced Atoms v2)\n", sym)
+	fmt.Printf(">>> Building %s (Atoms v4: Modular)\n", sym)
 	featRoot := filepath.Join(BaseDir, "features", sym)
-
-	tasksCh := make(chan ofiTask, 1024)
-
-	outDir := filepath.Join(featRoot, "Atoms_v1")
-	if err := os.MkdirAll(outDir, 0755); err != nil {
-		fmt.Printf("[build] MkdirAll(%s): %v\n", outDir, err)
+	outDir := filepath.Join(featRoot, "Atoms_v4")
+	if err := os.MkdirAll(outDir, 0o755); err != nil {
+		fmt.Printf("[build] MkdirAll: %v\n", err)
 		return
 	}
 
+	tasksCh := make(chan ofiTask, 1024)
 	var wg sync.WaitGroup
 
 	for i := 0; i < CPUThreads; i++ {
@@ -93,61 +66,45 @@ func buildForSymbol(sym string) {
 			var binBuf []byte
 			var gncBuf []byte
 			for t := range tasksCh {
-				processAtomDay(sym, t, outDir, DefaultAtoms, &binBuf, &gncBuf)
+				processDynamicDay(sym, t, outDir, &binBuf, &gncBuf)
 			}
 		}()
 	}
 
-	count := 0
 	for t := range discoverTasks(sym) {
 		tasksCh <- t
-		count++
 	}
 	close(tasksCh)
-
-	if count == 0 {
-		fmt.Printf("[build] no tasks for symbol %s\n", sym)
-	}
-
 	wg.Wait()
 }
 
 func discoverTasks(sym string) iter.Seq[ofiTask] {
 	return func(yield func(ofiTask) bool) {
 		root := filepath.Join(BaseDir, sym)
-		years, err := os.ReadDir(root)
-		if err != nil {
-			return
-		}
-
+		years, _ := os.ReadDir(root)
 		for _, yDir := range years {
 			if !yDir.IsDir() {
 				continue
 			}
 			y, err := strconv.Atoi(yDir.Name())
-			if err != nil || y <= 0 {
-				continue
-			}
-			yearPath := filepath.Join(root, yDir.Name())
-			months, err := os.ReadDir(yearPath)
 			if err != nil {
 				continue
 			}
+			yearPath := filepath.Join(root, yDir.Name())
+			months, _ := os.ReadDir(yearPath)
 			for _, mDir := range months {
 				if !mDir.IsDir() {
 					continue
 				}
 				m, err := strconv.Atoi(mDir.Name())
-				if err != nil || m < 1 || m > 12 {
+				if err != nil {
 					continue
 				}
-
 				idxPath := filepath.Join(yearPath, mDir.Name(), "index.quantdev")
 				f, err := os.Open(idxPath)
 				if err != nil {
 					continue
 				}
-
 				var hdr [16]byte
 				if _, err := io.ReadFull(f, hdr[:]); err != nil {
 					f.Close()
@@ -167,11 +124,7 @@ func discoverTasks(sym string) iter.Seq[ofiTask] {
 					offset := int64(binary.LittleEndian.Uint64(row[2:]))
 					length := int64(binary.LittleEndian.Uint64(row[10:]))
 					if length > 0 {
-						task := ofiTask{
-							Y: y, M: m, D: d,
-							Offset: offset, Length: length,
-						}
-						if !yield(task) {
+						if !yield(ofiTask{Y: y, M: m, D: d, Offset: offset, Length: length}) {
 							f.Close()
 							return
 						}
@@ -183,9 +136,13 @@ func discoverTasks(sym string) iter.Seq[ofiTask] {
 	}
 }
 
-func processAtomDay(sym string, t ofiTask, outDir string, cfg AtomConfig, binBuf, gncBuf *[]byte) {
-	dateStr := fmt.Sprintf("%04d%02d%02d", t.Y, t.M, t.D)
-	outPath := filepath.Join(outDir, dateStr+".bin")
+func processDynamicDay(sym string, t ofiTask, outDir string, binBuf, gncBuf *[]byte) {
+	// 1. Get Atoms
+	atoms := GetActiveAtoms()
+	numAtoms := len(atoms)
+	if numAtoms == 0 {
+		return
+	}
 
 	gncBlob, ok := loadRawGNC(sym, t, gncBuf)
 	if !ok {
@@ -202,149 +159,96 @@ func processAtomDay(sym string, t ofiTask, outDir string, cfg AtomConfig, binBuf
 		return
 	}
 
-	reqSize := rowCount * FeatRowBytes
+	times := cols.Times
+	qtys := cols.Qtys
+	sides := cols.Sides
+	prices := cols.Prices
+
+	// 2. Prepare Header
+	// Magic(4) + Count(2) + [Len(1) + Str]...
+	var headerBuf []byte
+	headerBuf = append(headerBuf, AtomHeaderMagic...)
+	var scratch [2]byte
+	binary.LittleEndian.PutUint16(scratch[:], uint16(numAtoms))
+	headerBuf = append(headerBuf, scratch[:]...)
+
+	for _, a := range atoms {
+		name := a.Name()
+		if len(name) > 255 {
+			name = name[:255]
+		}
+		headerBuf = append(headerBuf, uint8(len(name)))
+		headerBuf = append(headerBuf, []byte(name)...)
+		a.Reset()
+	}
+
+	// 3. Alloc Buffer
+	rowBytes := numAtoms * 4
+	reqSize := len(headerBuf) + (rowCount * rowBytes)
 	if cap(*binBuf) < reqSize {
 		*binBuf = make([]byte, reqSize)
 	}
 	*binBuf = (*binBuf)[:reqSize]
 
-	times := cols.Times
-	qtys := cols.Qtys
-	prices := cols.Prices
-	sides := cols.Sides
-	matches := cols.Matches
+	// 4. Write Header
+	copy((*binBuf)[0:], headerBuf)
+	writePtr := len(headerBuf)
 
-	writeVal := func(rowIdx, atomIdx int, val float64) {
-		off := rowIdx*FeatRowBytes + atomIdx*4
-		binary.LittleEndian.PutUint32((*binBuf)[off:], math.Float32bits(float32(val)))
-	}
-
-	prevP := prices[0]
-	// State for stateful features
-	prevFlow := 0.0
+	prevTime := times[0]
 
 	for i := 0; i < rowCount; i++ {
 		q := qtys[i]
 		s := float64(sides[i])
 		p := prices[i]
+		ts := times[i]
+		flow := q * s
 
-		// Net Flow for this step
-		currFlow := q * s
-
-		m := 1.0
-		if len(matches) > i {
-			m = float64(matches[i])
-		}
-
-		dt := 0.0
+		dtSec := 0.0
 		if i > 0 {
-			dt = float64(times[i] - times[i-1])
+			dtMs := float64(ts - prevTime)
+			if dtMs < 0 {
+				dtMs = 0
+			}
+			dtSec = dtMs / 1000.0
 		}
-		dp := 0.0
-		if i > 0 {
-			dp = p - prevP
+		if dtSec < 1e-4 {
+			dtSec = 1e-4
 		}
 
-		// 1. OFI (Order Flow Imbalance) - Standard
-		writeVal(i, 0, currFlow)
+		// Dynamic Update Loop
+		for _, atom := range atoms {
+			val := atom.Update(q, s, p, flow, dtSec)
 
-		// 2. TCI (Trade Continuation) - Standard
-		writeVal(i, 1, s)
+			// Clamp
+			if val > 50 {
+				val = 50
+			}
+			if val < -50 {
+				val = -50
+			}
 
-		// 3. Whale v2: Iceberg/Absorption Detector
-		// Logic: If Volume is High but Price Change is approx Zero,
-		// the PASSIVE side absorbed the aggressor.
-		// If Aggressor = Buy (1) and dp=0, Seller absorbed it -> Bearish (-).
-		val3 := 0.0
-		if q > cfg.WhaleThreshold && math.Abs(dp) < EPS {
-			// Invert sign of aggressor to show who "won" (the passive wall)
-			val3 = -1.0 * s * q
+			// Inline Write
+			bits := math.Float32bits(float32(val))
+			(*binBuf)[writePtr] = byte(bits)
+			(*binBuf)[writePtr+1] = byte(bits >> 8)
+			(*binBuf)[writePtr+2] = byte(bits >> 16)
+			(*binBuf)[writePtr+3] = byte(bits >> 24)
+			writePtr += 4
 		}
-		writeVal(i, 2, val3)
-
-		// 4. Lumpiness (Sign Flip)
-		// Old: -(q^2)*s (Inverse correlation)
-		// New: (q^2)*s (Positive correlation: Buy lumps = Bullish)
-		writeVal(i, 3, (q*q)*s)
-
-		// 5. Sweep - Standard
-		writeVal(i, 4, m*s)
-
-		// 6. Fragility - Standard
-		val6 := 0.0
-		if q > EPS {
-			val6 = (m / q) * s
-		}
-		writeVal(i, 5, val6)
-
-		// 7. Magnet v2: Round Number Proximity ($100)
-		// Logic: Strongest (1.0) at X00.00, decays as we move away.
-		// BTC typically respects 100/500/1000 levels.
-		mod := math.Mod(p, 100.0)
-		if mod > 50.0 {
-			mod = 100.0 - mod
-		}
-		// Dist is between 0 and 50.
-		// Feature = 1 / (1 + dist)
-		writeVal(i, 6, 1.0/(1.0+mod))
-
-		// 8. Velocity - Standard
-		vel := 0.0
-		if dt > EPS {
-			vel = q / dt
-		}
-		writeVal(i, 7, vel*s)
-
-		// 9. Accel v2: Flow Acceleration
-		// Old: Derivative of Price Velocity (Noisy)
-		// New: Change in Net Flow (Force)
-		accel := currFlow - prevFlow
-		writeVal(i, 8, accel)
-
-		// 10. Gap - Standard
-		writeVal(i, 9, dt*s)
-
-		// 11. DGT - Standard
-		signDp := 0.0
-		if dp > 0 {
-			signDp = 1.0
-		} else if dp < 0 {
-			signDp = -1.0
-		}
-		val11 := 0.0
-		if s == signDp {
-			val11 = q * s
-		}
-		writeVal(i, 10, val11)
-
-		// 12. Absorb - Standard
-		val12 := 0.0
-		if s != signDp {
-			val12 = q * s
-		}
-		writeVal(i, 11, val12)
-
-		// 13. Fractal - Standard
-		val13 := 0.0
-		if q > EPS {
-			val13 = math.Abs(dp) / q
-		}
-		writeVal(i, 12, val13)
-
-		prevP = p
-		prevFlow = currFlow
+		prevTime = ts
 	}
 
-	if err := os.WriteFile(outPath, *binBuf, 0644); err != nil {
-		fmt.Printf("[build] WriteFile(%s): %v\n", outPath, err)
+	dateStr := fmt.Sprintf("%04d%02d%02d", t.Y, t.M, t.D)
+	outPath := filepath.Join(outDir, dateStr+".bin")
+	if err := os.WriteFile(outPath, *binBuf, 0o644); err != nil {
+		fmt.Printf("[build] Write error: %v\n", err)
 	}
 }
 
 func loadRawGNC(sym string, t ofiTask, buf *[]byte) ([]byte, bool) {
-	path := filepath.Join(BaseDir,
-		sym,
-		fmt.Sprintf("%04d", t.Y),
-		fmt.Sprintf("%02d", t.M),
+	path := filepath.Join(
+		BaseDir, sym,
+		fmt.Sprintf("%04d", t.Y), fmt.Sprintf("%02d", t.M),
 		"data.quantdev",
 	)
 	f, err := os.Open(path)
@@ -352,12 +256,7 @@ func loadRawGNC(sym string, t ofiTask, buf *[]byte) ([]byte, bool) {
 		return nil, false
 	}
 	defer f.Close()
-
 	if _, err := f.Seek(t.Offset, io.SeekStart); err != nil {
-		return nil, false
-	}
-
-	if t.Length <= 0 || t.Length > 1<<31-1 {
 		return nil, false
 	}
 	need := int(t.Length)
@@ -365,11 +264,10 @@ func loadRawGNC(sym string, t ofiTask, buf *[]byte) ([]byte, bool) {
 		*buf = make([]byte, need)
 	}
 	b := (*buf)[:need]
-
 	if _, err := io.ReadFull(f, b); err != nil {
 		return nil, false
 	}
-	if len(b) < 4 || string(b[0:4]) != GNCMagic {
+	if string(b[0:4]) != GNCMagic {
 		return nil, false
 	}
 	return b, true

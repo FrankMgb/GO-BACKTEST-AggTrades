@@ -1,3 +1,4 @@
+// --- File: metrics.go ---
 package main
 
 import (
@@ -16,6 +17,14 @@ type MetricStats struct {
 	AutoCorrAbs  float64
 	AvgSegLen    float64
 	MaxSegLen    float64
+
+	// New: distribution-level understanding
+	MeanSig float64
+	StdSig  float64
+	MeanRet float64
+	StdRet  float64
+	MeanPnL float64
+	StdPnL  float64
 }
 
 type Moments struct {
@@ -92,7 +101,7 @@ func CalcMomentsVectors(sigs, rets []float64) Moments {
 		sumSqPnL += pnl * pnl
 
 		// Branchless Abs for vectorization
-		// Go 1.25 compiler recognizes this pattern for float abs
+		// Go compiler recognizes this pattern for float abs
 		absS := s
 		if s < 0 {
 			absS = -s
@@ -212,6 +221,7 @@ func FinalizeMetrics(m Moments, dailyICs []float64) MetricStats {
 	}
 	ms := MetricStats{Count: int(m.Count)}
 
+	// --- Core IC (Pearson) ---
 	num := m.Count*m.SumProd - m.SumSig*m.SumRet
 	denX := m.Count*m.SumSqSig - m.SumSig*m.SumSig
 	denY := m.Count*m.SumSqRet - m.SumRet*m.SumRet
@@ -219,12 +229,35 @@ func FinalizeMetrics(m Moments, dailyICs []float64) MetricStats {
 		ms.ICPearson = num / math.Sqrt(denX*denY)
 	}
 
-	meanPnL := m.SumPnL / m.Count
-	varPnL := (m.SumSqPnL / m.Count) - meanPnL*meanPnL
+	// --- Signal / Return / PnL distributions ---
+	// Signal
+	ms.MeanSig = m.SumSig / m.Count
+	varSig := (m.SumSqSig / m.Count) - ms.MeanSig*ms.MeanSig
+	if varSig < 0 {
+		varSig = 0
+	}
+	ms.StdSig = math.Sqrt(varSig)
+
+	// Return
+	ms.MeanRet = m.SumRet / m.Count
+	varRet := (m.SumSqRet / m.Count) - ms.MeanRet*ms.MeanRet
+	if varRet < 0 {
+		varRet = 0
+	}
+	ms.StdRet = math.Sqrt(varRet)
+
+	// PnL
+	ms.MeanPnL = m.SumPnL / m.Count
+	varPnL := (m.SumSqPnL / m.Count) - ms.MeanPnL*ms.MeanPnL
+	if varPnL < 0 {
+		varPnL = 0
+	}
+	ms.StdPnL = math.Sqrt(varPnL)
 	if varPnL > 1e-18 {
-		ms.Sharpe = meanPnL / math.Sqrt(varPnL)
+		ms.Sharpe = ms.MeanPnL / ms.StdPnL
 	}
 
+	// --- Basic directional quality ---
 	if m.ValidHits > 0 {
 		ms.HitRate = m.Hits / m.ValidHits
 	}
@@ -232,10 +265,9 @@ func FinalizeMetrics(m Moments, dailyICs []float64) MetricStats {
 		ms.BreakevenBps = (m.SumPnL / m.SumAbsDeltaSig) * 10000.0
 	}
 
-	meanSig := m.SumSig / m.Count
-	covLag := (m.SumProdLag / m.Count) - meanSig*meanSig
-	varSig := (m.SumSqSig / m.Count) - meanSig*meanSig
+	// --- Autocorrelation of signal and |signal| ---
 	if varSig > 1e-18 {
+		covLag := (m.SumProdLag / m.Count) - ms.MeanSig*ms.MeanSig
 		ms.AutoCorr = covLag / varSig
 	}
 
@@ -248,11 +280,13 @@ func FinalizeMetrics(m Moments, dailyICs []float64) MetricStats {
 		}
 	}
 
+	// --- Segment length stats (trend persistence) ---
 	if m.SegCount > 0 {
 		ms.AvgSegLen = m.SegLenTotal / m.SegCount
 	}
 	ms.MaxSegLen = m.SegLenMax
 
+	// --- Daily IC t-stat for stability across days ---
 	if len(dailyICs) > 1 {
 		var sum, sumSq float64
 		n := float64(len(dailyICs))
@@ -267,6 +301,7 @@ func FinalizeMetrics(m Moments, dailyICs []float64) MetricStats {
 			ms.IC_TStat = mean / (stdDev / math.Sqrt(n))
 		}
 	}
+
 	return ms
 }
 

@@ -44,6 +44,8 @@ func main() {
 		runSanity()
 	case "bench":
 		runBench()
+	case "report":
+		runReport()
 	default:
 		fmt.Printf("Unknown command: %s\n", cmd)
 		printHelp()

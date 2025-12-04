@@ -1,279 +1,6 @@
-PS Z:\Benchmarks> go run . build
-go1.25.5 X:jsonv2,greenteagc | Env: windows/amd64 | Threads: 24 | RAM Limit: 24GB | GOGC: 200 | GOAMD64: v4
->>> Building BTCUSDT (Canonical 2025 Atoms)
-[build] Complete in 20.0234607s
-
-[sys] Execution Time: 20.0239951s | Mem: 9958 MB
-PS Z:\Benchmarks> go run . study 
-go1.25.5 X:jsonv2,greenteagc | Env: windows/amd64 | Threads: 24 | RAM Limit: 24GB | GOGC: 200 | GOAMD64: v4
-
->>> STUDY: BTCUSDT <<<
-Variants: 1 | Days: 2163
-[========================================] 100.0% (2163/2163) | 112.8 days/s  
-== Horizon 0.500s [IS: 1461 | OOS: 702] ==
-FEATURE                 IS_IC    IS_T    OOS_IC   OOS_T   AC1     |AC1|  AVG_SEG   MAX_SEG  IS_BPS/TR  OOS_BPS/TR
-Atoms_v1_f01_OFI        0.0653   88.05   0.0795   90.58   0.098   0.084  3.11      1103.0   0.30       0.36
-Atoms_v1_f02_TCI        0.1406   76.40   0.3204   113.30  0.357   0.000  3.11      1103.0   0.38       0.77
-Atoms_v1_f03_Whale      0.0222   59.43   0.0207   44.57   0.041   0.042  1.03      6.0      0.52       0.68
-Atoms_v1_f04_Lumpiness  -0.0110  -56.47  -0.0066  -45.08  0.018   0.018  3.11      1103.0   -0.60      -0.85
-Atoms_v1_f05_Sweep      0.0974   89.27   0.1531   93.49   0.110   0.071  3.11      1103.0   0.30       0.37
-Atoms_v1_f06_Fragility  0.0816   48.84   0.2445   83.92   0.190   0.225  3.11      1103.0   0.19       0.41
-Atoms_v1_f07_Magnet     -0.0006  -2.81   -0.0001  0.52    0.386   0.386  33155.20  65467.0  0.07       0.06
-Atoms_v1_f08_Velocity   0.0204   68.77   0.0201   53.40   0.008   0.013  1.64      128.0    0.38       0.40
-Atoms_v1_f09_Accel      0.0000   -1.71   -0.0001  -1.21   -0.507  0.514  1.43      10.0     0.00       -0.00
-Atoms_v1_f10_Gap        0.0168   53.20   0.0173   50.47   0.047   0.337  1.64      128.0    0.06       0.03
-Atoms_v1_f11_DGT        0.0582   78.73   0.0746   81.47   0.073   0.064  2.33      1101.0   0.29       0.38
-Atoms_v1_f12_Absorb     0.0295   91.29   0.0296   67.97   0.059   0.054  1.63      103.0    0.27       0.25
-Atoms_v1_f13_Fractal    -0.0005  2.54    0.0043   2.66    0.103   0.103  9.00      6431.0   -0.00      0.03
-
--- Monotonicity Check (IS) Horizon 0.500s --
-FEATURE                MONO   B1(Sell) B2   B3   B4   B5(Buy)
-Atoms_v1_f01_OFI       0.995  -0.3     -0.2 -0.0 0.2  0.3
-Atoms_v1_f02_TCI       0.953  -0.2     -0.2 0.0  0.2  0.3
-Atoms_v1_f03_Whale     0.435  0.0      0.0  0.0  -0.0 0.0
-Atoms_v1_f04_Lumpiness -0.995 0.3      0.2  -0.0 -0.2 -0.3
-Atoms_v1_f05_Sweep     0.997  -0.3     -0.2 0.0  0.2  0.3
-Atoms_v1_f06_Fragility 0.951  -0.2     -0.2 0.0  0.2  0.2
-Atoms_v1_f07_Magnet    -0.961 0.0      0.0  0.0  0.0  0.0
-Atoms_v1_f08_Velocity  0.927  -0.2     -0.0 0.0  0.0  0.2
-Atoms_v1_f09_Accel     -0.531 0.0      0.0  0.0  -0.0 0.0
-Atoms_v1_f10_Gap       0.922  -0.1     -0.1 0.0  0.1  0.1
-Atoms_v1_f11_DGT       0.986  -0.3     -0.2 -0.0 0.2  0.3
-Atoms_v1_f12_Absorb    0.869  -0.0     0.0  0.0  -0.0 0.0
-Atoms_v1_f13_Fractal   0.475  0.0      0.0  0.0  0.0  0.0
-
-== Horizon 1.000s [IS: 1461 | OOS: 702] ==
-FEATURE                 IS_IC    IS_T    OOS_IC   OOS_T   AC1     |AC1|  AVG_SEG   MAX_SEG  IS_BPS/TR  OOS_BPS/TR
-Atoms_v1_f01_OFI        0.0604   84.21   0.0707   79.60   0.098   0.084  3.11      1103.0   0.35       0.38
-Atoms_v1_f02_TCI        0.1233   73.58   0.2942   101.70  0.357   0.000  3.11      1103.0   0.41       0.83
-Atoms_v1_f03_Whale      0.0212   58.70   0.0189   42.30   0.041   0.042  1.03      6.0      0.62       0.73
-Atoms_v1_f04_Lumpiness  -0.0106  -54.02  -0.0061  -39.49  0.018   0.018  3.11      1103.0   -0.72      -0.92
-Atoms_v1_f05_Sweep      0.0860   86.12   0.1417   88.66   0.110   0.071  3.11      1103.0   0.33       0.41
-Atoms_v1_f06_Fragility  0.0717   46.54   0.2295   80.69   0.190   0.225  3.11      1103.0   0.20       0.45
-Atoms_v1_f07_Magnet     -0.0008  -3.17   -0.0003  0.71    0.386   0.386  33155.20  65467.0  0.13       0.04
-Atoms_v1_f08_Velocity   0.0186   66.87   0.0181   50.05   0.008   0.013  1.64      128.0    0.44       0.42
-Atoms_v1_f09_Accel      -0.0000  -0.48   -0.0000  -0.86   -0.507  0.514  1.43      10.0     -0.00      -0.00
-Atoms_v1_f10_Gap        0.0157   58.96   0.0175   52.64   0.047   0.337  1.64      128.0    0.07       0.04
-Atoms_v1_f11_DGT        0.0542   77.09   0.0659   73.39   0.073   0.064  2.33      1101.0   0.34       0.40
-Atoms_v1_f12_Absorb     0.0267   80.61   0.0270   60.86   0.059   0.054  1.63      103.0    0.30       0.27
-Atoms_v1_f13_Fractal    0.0018   3.38    0.0006   2.11    0.103   0.103  9.00      6431.0   0.02       0.01
-
--- Monotonicity Check (IS) Horizon 1.000s --
-FEATURE                MONO   B1(Sell) B2   B3   B4   B5(Buy)
-Atoms_v1_f01_OFI       0.994  -0.3     -0.2 -0.0 0.2  0.3
-Atoms_v1_f02_TCI       0.950  -0.3     -0.3 0.0  0.3  0.3
-Atoms_v1_f03_Whale     0.740  0.0      0.0  0.0  0.0  0.0
-Atoms_v1_f04_Lumpiness -0.994 0.3      0.2  0.0  -0.2 -0.3
-Atoms_v1_f05_Sweep     0.998  -0.4     -0.2 0.0  0.2  0.4
-Atoms_v1_f06_Fragility 0.956  -0.3     -0.2 0.0  0.2  0.3
-Atoms_v1_f07_Magnet    -0.300 0.0      0.0  0.0  0.0  0.0
-Atoms_v1_f08_Velocity  0.931  -0.3     -0.0 0.0  0.0  0.3
-Atoms_v1_f09_Accel     -0.284 0.0      0.0  0.0  -0.0 0.0
-Atoms_v1_f10_Gap       0.913  -0.1     -0.1 0.0  0.2  0.1
-Atoms_v1_f11_DGT       0.983  -0.3     -0.2 -0.0 0.3  0.3
-Atoms_v1_f12_Absorb    0.865  -0.0     0.0  0.0  0.0  0.1
-Atoms_v1_f13_Fractal   0.899  0.0      0.0  0.0  0.0  0.0
-
-== Horizon 2.000s [IS: 1461 | OOS: 702] ==
-FEATURE                 IS_IC    IS_T    OOS_IC   OOS_T   AC1     |AC1|  AVG_SEG   MAX_SEG  IS_BPS/TR  OOS_BPS/TR
-Atoms_v1_f01_OFI        0.0517   74.59   0.0632   74.60   0.098   0.084  3.11      1103.0   0.40       0.40
-Atoms_v1_f02_TCI        0.1039   68.22   0.2679   93.60   0.357   0.000  3.11      1103.0   0.47       0.90
-Atoms_v1_f03_Whale      0.0182   53.29   0.0168   40.70   0.041   0.042  1.03      6.0      0.72       0.78
-Atoms_v1_f04_Lumpiness  -0.0091  -48.70  -0.0053  -38.76  0.018   0.018  3.11      1103.0   -0.82      -0.96
-Atoms_v1_f05_Sweep      0.0717   77.85   0.1300   83.87   0.110   0.071  3.11      1103.0   0.36       0.45
-Atoms_v1_f06_Fragility  0.0605   44.06   0.2112   77.08   0.190   0.225  3.11      1103.0   0.23       0.50
-Atoms_v1_f07_Magnet     -0.0009  -2.09   -0.0005  0.48    0.386   0.386  33155.20  65467.0  0.24       -0.06
-Atoms_v1_f08_Velocity   0.0155   59.90   0.0165   47.77   0.008   0.013  1.64      128.0    0.49       0.45
-Atoms_v1_f09_Accel      -0.0000  -1.03   -0.0000  -0.60   -0.507  0.514  1.43      10.0     -0.00      -0.00
-Atoms_v1_f10_Gap        0.0135   62.53   0.0174   54.94   0.047   0.337  1.64      128.0    0.08       0.05
-Atoms_v1_f11_DGT        0.0467   69.31   0.0588   68.75   0.073   0.064  2.33      1101.0   0.39       0.43
-Atoms_v1_f12_Absorb     0.0223   70.38   0.0244   56.43   0.059   0.054  1.63      103.0    0.34       0.29
-Atoms_v1_f13_Fractal    0.0048   3.67    -0.0045  1.36    0.103   0.103  9.00      6431.0   0.07       -0.04
-
--- Monotonicity Check (IS) Horizon 2.000s --
-FEATURE                MONO   B1(Sell) B2   B3  B4   B5(Buy)
-Atoms_v1_f01_OFI       0.992  -0.3     -0.2 0.0 0.2  0.4
-Atoms_v1_f02_TCI       0.948  -0.3     -0.3 0.0 0.3  0.3
-Atoms_v1_f03_Whale     0.455  -0.0     0.0  0.0 0.0  0.0
-Atoms_v1_f04_Lumpiness -0.992 0.4      0.3  0.0 -0.2 -0.3
-Atoms_v1_f05_Sweep     0.998  -0.4     -0.2 0.0 0.3  0.4
-Atoms_v1_f06_Fragility 0.961  -0.3     -0.3 0.0 0.3  0.3
-Atoms_v1_f07_Magnet    -0.637 0.0      0.0  0.0 0.0  0.0
-Atoms_v1_f08_Velocity  0.928  -0.3     -0.0 0.0 0.0  0.3
-Atoms_v1_f09_Accel     -0.266 0.0      0.0  0.0 -0.0 0.0
-Atoms_v1_f10_Gap       0.915  -0.1     -0.2 0.0 0.2  0.1
-Atoms_v1_f11_DGT       0.980  -0.4     -0.3 0.0 0.3  0.4
-Atoms_v1_f12_Absorb    0.793  -0.1     0.0  0.0 0.0  0.1
-Atoms_v1_f13_Fractal   0.930  0.0      0.0  0.0 0.0  0.0
-
-== Horizon 5.000s [IS: 1461 | OOS: 702] ==
-FEATURE                 IS_IC    IS_T    OOS_IC   OOS_T   AC1     |AC1|  AVG_SEG   MAX_SEG  IS_BPS/TR  OOS_BPS/TR
-Atoms_v1_f01_OFI        0.0347   58.82   0.0481   60.62   0.098   0.084  3.11      1103.0   0.41       0.41
-Atoms_v1_f02_TCI        0.0687   55.22   0.2110   74.21   0.357   0.000  3.11      1103.0   0.47       0.96
-Atoms_v1_f03_Whale      0.0123   43.07   0.0129   35.94   0.041   0.042  1.03      6.0      0.73       0.81
-Atoms_v1_f04_Lumpiness  -0.0059  -39.85  -0.0043  -33.73  0.018   0.018  3.11      1103.0   -0.81      -1.04
-Atoms_v1_f05_Sweep      0.0481   61.75   0.1029   69.75   0.110   0.071  3.11      1103.0   0.37       0.48
-Atoms_v1_f06_Fragility  0.0407   38.39   0.1700   66.78   0.190   0.225  3.11      1103.0   0.23       0.54
-Atoms_v1_f07_Magnet     -0.0007  -1.96   -0.0005  0.16    0.386   0.386  33155.20  65467.0  0.36       -0.06
-Atoms_v1_f08_Velocity   0.0101   47.71   0.0132   41.94   0.008   0.013  1.64      128.0    0.48       0.49
-Atoms_v1_f09_Accel      0.0000   -0.93   -0.0000  -1.10   -0.507  0.514  1.43      10.0     0.00       -0.00
-Atoms_v1_f10_Gap        0.0105   57.56   0.0160   48.22   0.047   0.337  1.64      128.0    0.09       0.06
-Atoms_v1_f11_DGT        0.0306   54.52   0.0442   56.49   0.073   0.064  2.33      1101.0   0.39       0.43
-Atoms_v1_f12_Absorb     0.0164   57.31   0.0196   47.55   0.059   0.054  1.63      103.0    0.38       0.31
-Atoms_v1_f13_Fractal    0.0060   2.27    -0.0006  1.09    0.103   0.103  9.00      6431.0   0.12       -0.01
-
--- Monotonicity Check (IS) Horizon 5.000s --
-FEATURE                MONO   B1(Sell) B2   B3  B4   B5(Buy)
-Atoms_v1_f01_OFI       0.989  -0.3     -0.2 0.0 0.3  0.4
-Atoms_v1_f02_TCI       0.952  -0.3     -0.3 0.0 0.3  0.3
-Atoms_v1_f03_Whale     0.468  -0.0     0.0  0.0 0.0  0.0
-Atoms_v1_f04_Lumpiness -0.989 0.4      0.3  0.0 -0.2 -0.3
-Atoms_v1_f05_Sweep     0.998  -0.4     -0.2 0.0 0.3  0.4
-Atoms_v1_f06_Fragility 0.958  -0.3     -0.3 0.0 0.3  0.3
-Atoms_v1_f07_Magnet    -0.749 0.0      0.0  0.0 0.0  0.0
-Atoms_v1_f08_Velocity  0.935  -0.3     -0.0 0.1 0.0  0.3
-Atoms_v1_f09_Accel     -0.043 0.0      0.0  0.0 0.0  0.0
-Atoms_v1_f10_Gap       0.914  -0.1     -0.2 0.1 0.2  0.2
-Atoms_v1_f11_DGT       0.978  -0.3     -0.3 0.0 0.3  0.4
-Atoms_v1_f12_Absorb    0.784  -0.1     0.0  0.0 0.0  0.1
-Atoms_v1_f13_Fractal   0.786  0.0      0.0  0.0 0.0  0.0
-
-== Horizon 10.000s [IS: 1461 | OOS: 702] ==
-FEATURE                 IS_IC    IS_T    OOS_IC   OOS_T   AC1     |AC1|  AVG_SEG   MAX_SEG  IS_BPS/TR  OOS_BPS/TR
-Atoms_v1_f01_OFI        0.0250   48.14   0.0375   52.54   0.098   0.084  3.11      1103.0   0.40       0.41
-Atoms_v1_f02_TCI        0.0488   45.17   0.1696   63.07   0.357   0.000  3.11      1103.0   0.45       0.98
-Atoms_v1_f03_Whale      0.0089   35.91   0.0103   30.78   0.041   0.042  1.03      6.0      0.72       0.81
-Atoms_v1_f04_Lumpiness  -0.0043  -34.58  -0.0032  -30.67  0.018   0.018  3.11      1103.0   -0.80      -0.98
-Atoms_v1_f05_Sweep      0.0340   50.68   0.0830   61.45   0.110   0.071  3.11      1103.0   0.35       0.49
-Atoms_v1_f06_Fragility  0.0289   33.92   0.1394   59.92   0.190   0.225  3.11      1103.0   0.23       0.56
-Atoms_v1_f07_Magnet     -0.0001  0.12    -0.0005  -0.63   0.386   0.386  33155.20  65467.0  0.74       -0.10
-Atoms_v1_f08_Velocity   0.0071   39.59   0.0106   37.55   0.008   0.013  1.64      128.0    0.46       0.50
-Atoms_v1_f09_Accel      -0.0000  -0.42   -0.0000  -0.65   -0.507  0.514  1.43      10.0     -0.00      -0.00
-Atoms_v1_f10_Gap        0.0087   43.21   0.0141   37.48   0.047   0.337  1.64      128.0    0.11       0.07
-Atoms_v1_f11_DGT        0.0214   43.57   0.0339   48.20   0.073   0.064  2.33      1101.0   0.37       0.42
-Atoms_v1_f12_Absorb     0.0130   49.60   0.0161   42.93   0.059   0.054  1.63      103.0    0.40       0.32
-Atoms_v1_f13_Fractal    0.0085   1.84    -0.0010  0.10    0.103   0.103  9.00      6431.0   0.24       -0.02
-
--- Monotonicity Check (IS) Horizon 10.000s --
-FEATURE                MONO   B1(Sell) B2   B3  B4   B5(Buy)
-Atoms_v1_f01_OFI       0.989  -0.3     -0.2 0.0 0.3  0.4
-Atoms_v1_f02_TCI       0.946  -0.3     -0.2 0.1 0.3  0.3
-Atoms_v1_f03_Whale     0.390  -0.0     0.1  0.1 0.0  0.0
-Atoms_v1_f04_Lumpiness -0.989 0.4      0.3  0.0 -0.2 -0.3
-Atoms_v1_f05_Sweep     0.998  -0.4     -0.1 0.0 0.3  0.4
-Atoms_v1_f06_Fragility 0.956  -0.2     -0.2 0.1 0.3  0.3
-Atoms_v1_f07_Magnet    -0.321 0.1      0.0  0.0 0.0  0.0
-Atoms_v1_f08_Velocity  0.932  -0.3     -0.0 0.1 0.1  0.3
-Atoms_v1_f09_Accel     0.099  0.0      0.0  0.1 0.0  0.0
-Atoms_v1_f10_Gap       0.896  -0.1     -0.2 0.1 0.2  0.2
-Atoms_v1_f11_DGT       0.979  -0.3     -0.2 0.0 0.3  0.4
-Atoms_v1_f12_Absorb    0.697  -0.1     0.1  0.1 0.0  0.1
-Atoms_v1_f13_Fractal   0.725  0.0      0.1  0.0 0.0  0.1
-
-[study] ALL COMPLETE in 19.2215265s
-
-[sys] Execution Time: 19.2215265s | Mem: 6722 MB
-PS Z:\Benchmarks> 
-PS Z:\Benchmarks> go run . bench 
-go1.25.5 X:jsonv2,greenteagc | Env: windows/amd64 | Threads: 24 | RAM Limit: 24GB | GOGC: 200 | GOAMD64: v4
-=== BENCHMARK: QuantDev STUDY (processStudyDay) ===
-Go: go1.25.5 X:jsonv2,greenteagc | GOOS/GOARCH: windows/amd64 | Threads: 24
-[bench] Sample symbol: BTCUSDT | day: 2022-12-17
-[bench] Variants: [Atoms_v1]
-[bench] Approx feature bytes/day: 883792
-[bench] warm-up: 17.3649ms per study, selecting 28 iterations (fallback=false)
-[bench] CPU profiling: ON
-[bench] CPU profile written to bench_cpu.pprof
-
-[bench] StudyDay
-  iters:         28
-  rows/iter:     16996
-  features/iter: 13
-  bytes/iter:    883792 (feature files)
-  total time:    380.452ms
-  ns/op:         13587571
-  throughput:    1250.849 krows/s, 16.261 Mcells/s, 62.031 MB/s (features)
-  allocs/op:     301 mallocs/op, 4907686 B/op
-[bench] Heap profile written to bench_mem.pprof
-
-[pprof-cpu] go tool pprof -top bench_cpu.pprof
-File: benchmarks.exe
-Build ID: C:\Users\dylan\AppData\Local\go-build\4b\4b7b85d33d33538529aedc6f870da8e2182b7e694899694979aacb8dcf226f3e-d\benchmarks.exe2025-12-03 17:45:54.1946538 -0600 CST
-Type: cpu
-Time: 2025-12-03 17:56:45 CST
-Duration: 503.38ms, Total samples = 360ms (71.52%)
-Showing nodes accounting for 360ms, 100% of 360ms total
-      flat  flat%   sum%        cum   cum%
-     270ms 75.00% 75.00%      270ms 75.00%  main.CalcMomentsVectors
-      20ms  5.56% 80.56%       20ms  5.56%  main.ComputeQuantilesStrided.func1
-      10ms  2.78% 83.33%       10ms  2.78%  main.computeReturns
-      10ms  2.78% 86.11%       10ms  2.78%  main.inflateGNCToColumns
-      10ms  2.78% 88.89%       10ms  2.78%  runtime.cgocall
-      10ms  2.78% 91.67%       10ms  2.78%  runtime.memmove
-      10ms  2.78% 94.44%       10ms  2.78%  runtime.stdcall1
-      10ms  2.78% 97.22%       10ms  2.78%  slices.insertionSortCmpFunc[go.shape.struct { main.s float64; main.r float64 }] (inline)
-      10ms  2.78%   100%       30ms  8.33%  slices.partitionCmpFunc[go.shape.struct { main.s float64; main.r float64 }]
-         0     0%   100%       50ms 13.89%  main.ComputeQuantilesStrided
-         0     0%   100%      350ms 97.22%  main.benchStudy
-         0     0%   100%       10ms  2.78%  main.fastLoadBytes
-         0     0%   100%       10ms  2.78%  main.loadDayColumns
-         0     0%   100%      350ms 97.22%  main.main
-         0     0%   100%      350ms 97.22%  main.processStudyDay
-         0     0%   100%      350ms 97.22%  main.runBench
-         0     0%   100%       10ms  2.78%  os.Open (inline)
-         0     0%   100%       10ms  2.78%  os.OpenFile
-         0     0%   100%       10ms  2.78%  os.openFileNolog
-         0     0%   100%       10ms  2.78%  runtime.gopreempt_m (inline)
-         0     0%   100%       10ms  2.78%  runtime.goschedImpl
-         0     0%   100%       10ms  2.78%  runtime.growslice
-         0     0%   100%      350ms 97.22%  runtime.main
-         0     0%   100%       10ms  2.78%  runtime.morestack
-         0     0%   100%       10ms  2.78%  runtime.newstack
-         0     0%   100%       10ms  2.78%  runtime.notewakeup
-         0     0%   100%       10ms  2.78%  runtime.semawakeup
-         0     0%   100%       10ms  2.78%  runtime.startm
-         0     0%   100%       10ms  2.78%  runtime.syscall_syscalln
-         0     0%   100%       10ms  2.78%  runtime.wakep
-         0     0%   100%       40ms 11.11%  slices.SortFunc[go.shape.[]main.pair·1,go.shape.struct { main.s float64; main.r float64 }] (inline)
-         0     0%   100%       40ms 11.11%  slices.pdqsortCmpFunc[go.shape.struct { main.s float64; main.r float64 }]
-         0     0%   100%       10ms  2.78%  syscall.Open
-         0     0%   100%       10ms  2.78%  syscall.Syscall9
-         0     0%   100%       10ms  2.78%  syscall.createFile
-
-
-[pprof-heap] go tool pprof -top bench_mem.pprof
-File: benchmarks.exe
-Build ID: C:\Users\dylan\AppData\Local\go-build\4b\4b7b85d33d33538529aedc6f870da8e2182b7e694899694979aacb8dcf226f3e-d\benchmarks.exe2025-12-03 17:45:54.1946538 -0600 CST
-Type: inuse_space
-Time: 2025-12-03 17:56:46 CST
-Showing nodes accounting for 15631.80kB, 100% of 15631.80kB total
-      flat  flat%   sum%        cum   cum%
-13066.80kB 83.59% 83.59% 13066.80kB 83.59%  main.inflateGNCToColumns
-    2565kB 16.41%   100%     2565kB 16.41%  runtime.allocm
-         0     0%   100% 13066.80kB 83.59%  main.benchStudy
-         0     0%   100% 13066.80kB 83.59%  main.loadDayColumns
-         0     0%   100% 13066.80kB 83.59%  main.main
-         0     0%   100% 13066.80kB 83.59%  main.processStudyDay
-         0     0%   100% 13066.80kB 83.59%  main.runBench
-         0     0%   100% 13066.80kB 83.59%  runtime.main
-         0     0%   100%     2052kB 13.13%  runtime.mcall
-         0     0%   100%      513kB  3.28%  runtime.mstart
-         0     0%   100%      513kB  3.28%  runtime.mstart0
-         0     0%   100%      513kB  3.28%  runtime.mstart1
-         0     0%   100%     2565kB 16.41%  runtime.newm
-         0     0%   100%     2052kB 13.13%  runtime.park_m
-         0     0%   100%     2565kB 16.41%  runtime.resetspinning
-         0     0%   100%     2565kB 16.41%  runtime.schedule
-         0     0%   100%     2565kB 16.41%  runtime.startm
-         0     0%   100%     2565kB 16.41%  runtime.wakep
-
-=== BENCHMARK COMPLETE ===
-
-[sys] Execution Time: 997.5415ms | Mem: 14 MB
-PS Z:\Benchmarks> 
-
 --- File Tree Structure ---
 |-- data/
+|-- atoms.go
 |-- bench.go
 |-- build.go
 |-- common.go
@@ -283,6 +10,7 @@ PS Z:\Benchmarks>
 |-- sanity.go
 |-- study.go
     |-- BTCUSDT/
+    |-- ETHUSDT/
     |-- features/
         |-- 2020/
         |-- 2021/
@@ -296,8 +24,318 @@ PS Z:\Benchmarks>
             |-- [01..12]/ (12 month dirs)
             |-- [01..12]/ (12 month dirs)
             |-- [01..12]/ (12 month dirs)
+        |-- 2020/
+        |-- 2021/
+        |-- 2022/
+        |-- 2023/
+        |-- 2024/
+        |-- 2025/
+            |-- [01..12]/ (12 month dirs)
+            |-- [01..12]/ (12 month dirs)
+            |-- [01..12]/ (12 month dirs)
+            |-- [01..12]/ (12 month dirs)
+            |-- [01..12]/ (12 month dirs)
+            |-- [01..12]/ (12 month dirs)
         |-- BTCUSDT/
-            |-- Atoms_v1/
+        |-- ETHUSDT/
+            |-- Atoms_v4/
+            |-- Atoms_v4/
+
+// --- File: atoms.go ---
+
+```go
+package main
+
+import "math"
+
+// --- Interface ---
+
+type Atom interface {
+	Name() string
+	Reset() // Clear state for new day
+	// Update calculates the feature value for the current trade.
+	Update(q, s, p, flow, dt float64) float64
+}
+
+// --- Constants ---
+
+const (
+	InputFlow = iota // Use q * s
+	InputSign        // Use s (Trade Continuation / Direction)
+)
+
+// --- Registry ---
+
+func GetActiveAtoms() []Atom {
+	return []Atom{
+		// --- Baseline ---
+		&RawOFI{},
+		&RawTCI{},
+
+		// --- Standard EMA (Baseline) ---
+		&EMAAtom{NameStr: "OFI_EMA_15s", Tau: 15.0, Input: InputFlow},
+		&EMAAtom{NameStr: "TCI_EMA_15s", Tau: 15.0, Input: InputSign}, // Added TCI variant
+
+		// --- Sniper Math (Lag Reduced) ---
+		&DEMAAtom{NameStr: "OFI_DEMA_15s", Tau: 15.0, Input: InputFlow},
+		&TEMAAtom{NameStr: "OFI_TEMA_15s", Tau: 15.0, Input: InputFlow},
+		&DEMAAtom{NameStr: "OFI_DEMA_5s", Tau: 5.0, Input: InputFlow},
+
+		// --- Sign-Based Sniper (New Capability!) ---
+		&DEMAAtom{NameStr: "TCI_DEMA_15s", Tau: 15.0, Input: InputSign},
+
+		// --- Advanced / Composite ---
+		&RSIAtom{NameStr: "OFI_RSI_15s", Tau: 15.0, Input: InputFlow},
+		&CubicAtom{NameStr: "OFI_Cubic_15s", Tau: 15.0, Input: InputFlow},
+
+		// --- Volatility / Force ---
+		&ImpulseAtom{NameStr: "Impulse_15s", Tau: 15.0, Input: InputFlow},  // Flow * Speed
+		&ForceAtom{NameStr: "Force_DEMA_15s", Tau: 15.0, Input: InputFlow}, // DEMA * Speed
+		&InstVelAtom{},
+
+		// --- Experimental ---
+		// Composite mixing TEMA and Cubic (both using InputFlow by default)
+		&CompositeAtom{
+			NameStr: "Sniper_Composite",
+			Tau:     15.0,
+			Input:   InputFlow,
+			WeightA: 0.5,
+			WeightB: 0.5,
+		},
+	}
+}
+
+// --- Helper ---
+
+// resolveInput centralizes the Flow vs Sign logic.
+// Inlined by compiler for zero overhead.
+func resolveInput(mode int, flow, s float64) float64 {
+	if mode == InputSign {
+		return s
+	}
+	return flow
+}
+
+// --- Implementations ---
+
+// 1. Raw OFI
+type RawOFI struct{}
+
+func (r *RawOFI) Name() string                             { return "OFI_Raw" }
+func (r *RawOFI) Reset()                                   {}
+func (r *RawOFI) Update(q, s, p, flow, dt float64) float64 { return flow }
+
+// 2. Raw TCI
+type RawTCI struct{}
+
+func (r *RawTCI) Name() string                             { return "TCI_Raw" }
+func (r *RawTCI) Reset()                                   {}
+func (r *RawTCI) Update(q, s, p, flow, dt float64) float64 { return s }
+
+// 3. Standard EMA
+type EMAAtom struct {
+	NameStr string
+	Tau     float64
+	Input   int
+	val     float64
+}
+
+func (a *EMAAtom) Name() string { return a.NameStr }
+func (a *EMAAtom) Reset()       { a.val = 0 }
+func (a *EMAAtom) Update(q, s, p, flow, dt float64) float64 {
+	x := resolveInput(a.Input, flow, s)
+	alpha := 1.0 - math.Exp(-dt/a.Tau)
+	a.val += alpha * (x - a.val)
+	return a.val
+}
+
+// 4. DEMA (Double EMA)
+type DEMAAtom struct {
+	NameStr string
+	Tau     float64
+	Input   int
+	e1, e2  float64
+}
+
+func (a *DEMAAtom) Name() string { return a.NameStr }
+func (a *DEMAAtom) Reset()       { a.e1 = 0; a.e2 = 0 }
+func (a *DEMAAtom) Update(q, s, p, flow, dt float64) float64 {
+	x := resolveInput(a.Input, flow, s)
+	alpha := 1.0 - math.Exp(-dt/a.Tau)
+	a.e1 += alpha * (x - a.e1)
+	a.e2 += alpha * (a.e1 - a.e2)
+	return 2*a.e1 - a.e2
+}
+
+// 5. TEMA (Triple EMA)
+type TEMAAtom struct {
+	NameStr    string
+	Tau        float64
+	Input      int
+	e1, e2, e3 float64
+}
+
+func (a *TEMAAtom) Name() string { return a.NameStr }
+func (a *TEMAAtom) Reset()       { a.e1 = 0; a.e2 = 0; a.e3 = 0 }
+func (a *TEMAAtom) Update(q, s, p, flow, dt float64) float64 {
+	x := resolveInput(a.Input, flow, s)
+	alpha := 1.0 - math.Exp(-dt/a.Tau)
+	a.e1 += alpha * (x - a.e1)
+	a.e2 += alpha * (a.e1 - a.e2)
+	a.e3 += alpha * (a.e2 - a.e3)
+	return 3*a.e1 - 3*a.e2 + a.e3
+}
+
+// 6. RSI (Relative Strength)
+type RSIAtom struct {
+	NameStr  string
+	Tau      float64
+	Input    int
+	up, down float64
+}
+
+func (a *RSIAtom) Name() string { return a.NameStr }
+func (a *RSIAtom) Reset()       { a.up = 0; a.down = 0 }
+func (a *RSIAtom) Update(q, s, p, flow, dt float64) float64 {
+	x := resolveInput(a.Input, flow, s)
+	alpha := 1.0 - math.Exp(-dt/a.Tau)
+
+	u, d := 0.0, 0.0
+	if x > 0 {
+		u = x
+	} else {
+		d = -x
+	}
+
+	a.up += alpha * (u - a.up)
+	a.down += alpha * (d - a.down)
+	sum := a.up + a.down
+
+	if sum < 1e-9 {
+		return 0.0
+	}
+	// Scaled -1 to 1
+	return 2.0*(a.up/sum) - 1.0
+}
+
+// 7. Cubic (Non-Linear)
+type CubicAtom struct {
+	NameStr string
+	Tau     float64
+	Input   int
+	val     float64
+}
+
+func (a *CubicAtom) Name() string { return a.NameStr }
+func (a *CubicAtom) Reset()       { a.val = 0 }
+func (a *CubicAtom) Update(q, s, p, flow, dt float64) float64 {
+	x := resolveInput(a.Input, flow, s)
+	alpha := 1.0 - math.Exp(-dt/a.Tau)
+
+	// Track EMA of Cube
+	x3 := x * x * x
+	a.val += alpha * (x3 - a.val)
+
+	// Return Cube Root to linearize scale for downstream tasks
+	if a.val > 0 {
+		return math.Cbrt(a.val)
+	}
+	return -math.Cbrt(-a.val)
+}
+
+// 8. Impulse (EMA * Speed)
+type ImpulseAtom struct {
+	NameStr string
+	Tau     float64
+	Input   int
+	val     float64
+}
+
+func (a *ImpulseAtom) Name() string { return a.NameStr }
+func (a *ImpulseAtom) Reset()       { a.val = 0 }
+func (a *ImpulseAtom) Update(q, s, p, flow, dt float64) float64 {
+	x := resolveInput(a.Input, flow, s)
+	alpha := 1.0 - math.Exp(-dt/a.Tau)
+	a.val += alpha * (x - a.val)
+
+	// Speed Cap
+	speed := 1.0 / dt // dt is guaranteed >= 1e-4 by build.go
+	if speed > 100 {
+		speed = 100
+	}
+
+	return a.val * speed
+}
+
+// 9. Force (DEMA * Speed)
+type ForceAtom struct {
+	NameStr string
+	Tau     float64
+	Input   int
+	e1, e2  float64
+}
+
+func (a *ForceAtom) Name() string { return a.NameStr }
+func (a *ForceAtom) Reset()       { a.e1 = 0; a.e2 = 0 }
+func (a *ForceAtom) Update(q, s, p, flow, dt float64) float64 {
+	x := resolveInput(a.Input, flow, s)
+	alpha := 1.0 - math.Exp(-dt/a.Tau)
+
+	a.e1 += alpha * (x - a.e1)
+	a.e2 += alpha * (a.e1 - a.e2)
+	dema := 2*a.e1 - a.e2
+
+	speed := 1.0 / dt
+	if speed > 100 {
+		speed = 100
+	}
+
+	return dema * speed
+}
+
+// 10. Instant Velocity
+type InstVelAtom struct{}
+
+func (a *InstVelAtom) Name() string { return "Vel_Inst" }
+func (a *InstVelAtom) Reset()       {}
+func (a *InstVelAtom) Update(q, s, p, flow, dt float64) float64 {
+	// Redundant check removed as requested
+	speed := 1.0 / dt
+	if speed > 100 {
+		speed = 100
+	}
+	return flow * speed
+}
+
+// 11. Composite (TEMA + Cubic)
+type CompositeAtom struct {
+	NameStr          string
+	Tau              float64
+	Input            int
+	WeightA, WeightB float64
+	tema             TEMAAtom
+	cubic            CubicAtom
+}
+
+func (a *CompositeAtom) Name() string { return a.NameStr }
+func (a *CompositeAtom) Reset() {
+	// Propagate configuration to children
+	a.tema.Tau = a.Tau
+	a.tema.Input = a.Input
+	a.tema.Reset()
+
+	a.cubic.Tau = a.Tau
+	a.cubic.Input = a.Input
+	a.cubic.Reset()
+}
+func (a *CompositeAtom) Update(q, s, p, flow, dt float64) float64 {
+	v1 := a.tema.Update(q, s, p, flow, dt)
+	v2 := a.cubic.Update(q, s, p, flow, dt)
+	return a.WeightA*v1 + a.WeightB*v2
+}
+```
+
+// --- End File: atoms.go ---
 
 // --- File: bench.go ---
 
@@ -327,9 +365,6 @@ type benchStats struct {
 }
 
 // runBench is called from main when you do: go run . bench
-// It benchmarks the STUDY pipeline on a single day:
-//
-//	loadDayColumns + feature decode + returns + moments + quantiles.
 func runBench() {
 	fmt.Println("=== BENCHMARK: QuantDev STUDY (processStudyDay) ===")
 	fmt.Printf("Go: %s | GOOS/GOARCH: %s/%s | Threads: %d\n",
@@ -355,14 +390,10 @@ func runBench() {
 		fmt.Printf("[bench] Approx feature bytes/day: %d\n", featureBytes)
 	}
 
-	// Quantiles are the expensive part; mimic real logic but keep worst-case feel.
-	doQuantiles := dayInt < oosBoundaryYMD
-
 	// --- Warm-up to decide iteration count ---
-	warmStats := benchStudy(sym, dayInt, variants, featRoot, 1, doQuantiles)
+	warmStats := benchStudy(sym, dayInt, variants, featRoot, 1)
 	warm := warmStats.Total
 	if warm <= 0 {
-		// Clock weirdness / too fast — assume a tiny but non-zero duration.
 		warm = 2 * time.Millisecond
 	}
 	target := 500 * time.Millisecond
@@ -373,8 +404,8 @@ func runBench() {
 		iters = 2000
 	}
 
-	fmt.Printf("[bench] warm-up: %s per study, selecting %d iterations (fallback=%v)\n",
-		warmStats.Total, iters, warmStats.Total <= 0)
+	fmt.Printf("[bench] warm-up: %s per study, selecting %d iterations\n",
+		warmStats.Total, iters)
 
 	// --- CPU profile + real benchmark ---
 	var cpuFile *os.File
@@ -392,7 +423,7 @@ func runBench() {
 		}
 	}
 
-	stats := benchStudy(sym, dayInt, variants, featRoot, iters, doQuantiles)
+	stats := benchStudy(sym, dayInt, variants, featRoot, iters)
 	stats.BytesPerIter = featureBytes
 
 	if cpuFile != nil {
@@ -417,7 +448,6 @@ func runBench() {
 		memFile.Close()
 	}
 
-	// --- Inline pprof -top summaries (best-effort) ---
 	runPprofTop("bench_cpu.pprof", "cpu")
 	runPprofTop("bench_mem.pprof", "heap")
 
@@ -425,16 +455,7 @@ func runBench() {
 }
 
 // benchStudy repeatedly runs processStudyDay for one symbol/day
-// and measures time + allocations. This hits:
-//
-//   - loadDayColumns (GNC decompress)
-//   - computeReturns for each horizon
-//   - feature decode for each variant/dim
-//   - CalcMomentsVectors
-//   - ComputeQuantilesStrided (if doQuantiles)
-//
-// i.e. the "mega compute" path.
-func benchStudy(sym string, dayInt int, variants []string, featRoot string, iters int, doQuantiles bool) benchStats {
+func benchStudy(sym string, dayInt int, variants []string, featRoot string, iters int) benchStats {
 	stats := benchStats{
 		Name:  "StudyDay",
 		Iters: iters,
@@ -444,7 +465,6 @@ func benchStudy(sym string, dayInt int, variants []string, featRoot string, iter
 		return stats
 	}
 
-	// Prepare worker-like buffers (same pattern as runStudy workers).
 	var sigBuf []float64
 	var fileBuf []byte
 	var retBuf []float64
@@ -458,15 +478,15 @@ func benchStudy(sym string, dayInt int, variants []string, featRoot string, iter
 
 	start := time.Now()
 	for i := 0; i < iters; i++ {
+		// FIXED: Removed doQuantiles bool argument
 		res := processStudyDay(
 			sym, dayInt, variants, featRoot,
 			&sigBuf, &fileBuf, &retBuf, &retsPerHBuf, &gncBuf,
-			doQuantiles,
 		)
 
-		// On first iter, infer rows and feature count from Moments.
 		if i == 0 {
 			rows := 0
+			// V3 DayResult just has Metrics map[string][]Moments
 			for _, momsSlice := range res.Metrics {
 				if len(momsSlice) > 0 {
 					rows = int(momsSlice[0].Count)
@@ -491,7 +511,6 @@ func benchStudy(sym string, dayInt int, variants []string, featRoot string, iter
 	return stats
 }
 
-// printBenchStats pretty-prints the stats in a human-friendly way.
 func printBenchStats(bs benchStats) {
 	if bs.Iters <= 0 || bs.Total <= 0 {
 		fmt.Printf("[bench] %s: no data\n", bs.Name)
@@ -501,7 +520,7 @@ func printBenchStats(bs benchStats) {
 	nsPerOp := float64(bs.Total.Nanoseconds()) / float64(bs.Iters)
 	totalRows := float64(bs.RowsPerIter * bs.Iters)
 	totalBytes := float64(bs.BytesPerIter * bs.Iters)
-	totalCells := totalRows * float64(bs.FeatPerIter) // rows × features
+	totalCells := totalRows * float64(bs.FeatPerIter)
 
 	secs := bs.Total.Seconds()
 	rowsPerSec := 0.0
@@ -537,77 +556,83 @@ func printBenchStats(bs benchStats) {
 		bs.MallocsPerOp, bs.AllocBytesPerOp)
 }
 
-// runPprofTop runs "go tool pprof -top <profile>" and prints its output.
-// Best-effort: if 'go' isn't on PATH or anything fails, it just logs and returns.
 func runPprofTop(profilePath, kind string) {
 	if _, err := os.Stat(profilePath); err != nil {
-		// No profile file; nothing to do.
 		return
 	}
-
 	cmd := exec.Command("go", "tool", "pprof", "-top", profilePath)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Printf("[bench] go tool pprof -top (%s) failed: %v\n", kind, err)
-		if len(out) > 0 {
-			fmt.Printf("[pprof-%s]\n%s\n", kind, string(out))
-		}
 		return
 	}
-
 	fmt.Printf("\n[pprof-%s] go tool pprof -top %s\n", kind, profilePath)
 	fmt.Println(string(out))
 }
 
-// findStudySample locates the first symbol/day that has feature files
-// so we can benchmark a realistic study workload.
 func findStudySample() (sym string, dayInt int, variants []string, featRoot string, ok bool) {
-	syms := discoverFeatureSymbols()
-	if syms == nil {
+	// Re-using common.go/study.go logic implicitly via shared package
+	// But we need to implement discovery here if not exported.
+	// Since we are in main package, we can use discoverFeatureSymbols from study.go if exported?
+	// No, discoverFeatureSymbols returns iter.Seq.
+	// We'll just do a quick manual scan.
+
+	featDir := filepath.Join(BaseDir, "features")
+	entries, err := os.ReadDir(featDir)
+	if err != nil {
 		return "", 0, nil, "", false
 	}
 
-	for s := range syms {
-		featRoot = filepath.Join(BaseDir, "features", s)
-		entries, err := os.ReadDir(featRoot)
+	for _, e := range entries {
+		if !e.IsDir() || e.Name()[0] == '.' {
+			continue
+		}
+		s := e.Name()
+
+		featRoot = filepath.Join(featDir, s)
+		vEntries, err := os.ReadDir(featRoot)
 		if err != nil {
 			continue
 		}
 
 		var vs []string
-		for _, e := range entries {
-			if e.IsDir() && !isDotDir(e.Name()) {
-				vs = append(vs, e.Name())
+		for _, ve := range vEntries {
+			if ve.IsDir() && ve.Name()[0] != '.' {
+				vs = append(vs, ve.Name())
 			}
 		}
 		if len(vs) == 0 {
 			continue
 		}
 
-		// Use the first variant (same as runStudy) to discover days.
-		baseVariantDir := filepath.Join(featRoot, vs[0])
-
-		var days []int
-		for d := range discoverStudyDays(baseVariantDir) {
-			days = append(days, d)
+		// Find a day
+		vDir := filepath.Join(featRoot, vs[0])
+		files, _ := os.ReadDir(vDir)
+		for _, f := range files {
+			if len(f.Name()) > 4 && filepath.Ext(f.Name()) == ".bin" {
+				// 20200101.bin
+				base := f.Name()[:len(f.Name())-4]
+				if d, err := parseDateInt(base); err == nil {
+					return s, d, vs, featRoot, true
+				}
+			}
 		}
-		if len(days) == 0 {
-			continue
-		}
-
-		// Pick a mid-day (roughly typical load).
-		dayInt = days[len(days)/2]
-		return s, dayInt, vs, featRoot, true
 	}
 	return "", 0, nil, "", false
 }
 
-func isDotDir(name string) bool {
-	return len(name) > 0 && name[0] == '.'
+func parseDateInt(s string) (int, error) {
+	var n int
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return 0, fmt.Errorf("bad int")
+		}
+		n = n*10 + int(c-'0')
+	}
+	return n, nil
 }
 
 // featureBytesForDay sums the sizes of all variant feature files for this day.
-// It's an approximation for "bytes/iter" to give a sense of memory bandwidth.
 func featureBytesForDay(featRoot string, variants []string, dayInt int) int {
 	y := dayInt / 10000
 	m := (dayInt % 10000) / 100
@@ -621,7 +646,6 @@ func featureBytesForDay(featRoot string, variants []string, dayInt int) int {
 		if err != nil {
 			continue
 		}
-		// Only count regular files.
 		if fi.Mode().IsRegular() {
 			if sz := fi.Size(); sz > 0 {
 				total += int(sz)
@@ -652,39 +676,20 @@ import (
 	"time"
 )
 
-// --- Atomic Configuration ---
-
-type AtomConfig struct {
-	WhaleThreshold float64 // K_95
-}
-
-var DefaultAtoms = AtomConfig{
-	WhaleThreshold: 10.0,
-}
-
-const (
-	EPS = 1e-9
-)
-
 type ofiTask struct {
 	Y, M, D        int
 	Offset, Length int64
 }
 
-// --- Execution Logic ---
-
 func runBuild() {
 	start := time.Now()
-
-	// Pipeline: Symbols -> Build
 	found := false
 	for sym := range discoverSymbols() {
 		found = true
 		buildForSymbol(sym)
 	}
-
 	if !found {
-		fmt.Printf("[build] no symbols discovered under %q\n", BaseDir)
+		fmt.Printf("[build] no symbols discovered under %q\n", filepath.Join(BaseDir))
 	}
 	fmt.Printf("[build] Complete in %s\n", time.Since(start))
 }
@@ -693,36 +698,28 @@ func discoverSymbols() iter.Seq[string] {
 	return func(yield func(string) bool) {
 		entries, err := os.ReadDir(BaseDir)
 		if err != nil {
-			fmt.Printf("[build] ReadDir(%s): %v\n", BaseDir, err)
 			return
 		}
 		for _, e := range entries {
-			if !e.IsDir() {
-				continue
-			}
-			name := e.Name()
-			if name == "features" || name == "common" || len(name) == 0 || name[0] == '.' {
-				continue
-			}
-			if !yield(name) {
-				return
+			if e.IsDir() && e.Name() != "features" && e.Name() != "common" && e.Name()[0] != '.' {
+				if !yield(e.Name()) {
+					return
+				}
 			}
 		}
 	}
 }
 
 func buildForSymbol(sym string) {
-	fmt.Printf(">>> Building %s (Canonical 2025 Atoms)\n", sym)
+	fmt.Printf(">>> Building %s (Atoms v4: Modular)\n", sym)
 	featRoot := filepath.Join(BaseDir, "features", sym)
-
-	tasksCh := make(chan ofiTask, 1024)
-
-	outDir := filepath.Join(featRoot, "Atoms_v1")
-	if err := os.MkdirAll(outDir, 0755); err != nil {
-		fmt.Printf("[build] MkdirAll(%s): %v\n", outDir, err)
+	outDir := filepath.Join(featRoot, "Atoms_v4")
+	if err := os.MkdirAll(outDir, 0o755); err != nil {
+		fmt.Printf("[build] MkdirAll: %v\n", err)
 		return
 	}
 
+	tasksCh := make(chan ofiTask, 1024)
 	var wg sync.WaitGroup
 
 	for i := 0; i < CPUThreads; i++ {
@@ -732,61 +729,45 @@ func buildForSymbol(sym string) {
 			var binBuf []byte
 			var gncBuf []byte
 			for t := range tasksCh {
-				processAtomDay(sym, t, outDir, DefaultAtoms, &binBuf, &gncBuf)
+				processDynamicDay(sym, t, outDir, &binBuf, &gncBuf)
 			}
 		}()
 	}
 
-	count := 0
 	for t := range discoverTasks(sym) {
 		tasksCh <- t
-		count++
 	}
 	close(tasksCh)
-
-	if count == 0 {
-		fmt.Printf("[build] no tasks for symbol %s\n", sym)
-	}
-
 	wg.Wait()
 }
 
 func discoverTasks(sym string) iter.Seq[ofiTask] {
 	return func(yield func(ofiTask) bool) {
 		root := filepath.Join(BaseDir, sym)
-		years, err := os.ReadDir(root)
-		if err != nil {
-			return
-		}
-
+		years, _ := os.ReadDir(root)
 		for _, yDir := range years {
 			if !yDir.IsDir() {
 				continue
 			}
 			y, err := strconv.Atoi(yDir.Name())
-			if err != nil || y <= 0 {
-				continue
-			}
-			yearPath := filepath.Join(root, yDir.Name())
-			months, err := os.ReadDir(yearPath)
 			if err != nil {
 				continue
 			}
+			yearPath := filepath.Join(root, yDir.Name())
+			months, _ := os.ReadDir(yearPath)
 			for _, mDir := range months {
 				if !mDir.IsDir() {
 					continue
 				}
 				m, err := strconv.Atoi(mDir.Name())
-				if err != nil || m < 1 || m > 12 {
+				if err != nil {
 					continue
 				}
-
 				idxPath := filepath.Join(yearPath, mDir.Name(), "index.quantdev")
 				f, err := os.Open(idxPath)
 				if err != nil {
 					continue
 				}
-
 				var hdr [16]byte
 				if _, err := io.ReadFull(f, hdr[:]); err != nil {
 					f.Close()
@@ -806,11 +787,7 @@ func discoverTasks(sym string) iter.Seq[ofiTask] {
 					offset := int64(binary.LittleEndian.Uint64(row[2:]))
 					length := int64(binary.LittleEndian.Uint64(row[10:]))
 					if length > 0 {
-						task := ofiTask{
-							Y: y, M: m, D: d,
-							Offset: offset, Length: length,
-						}
-						if !yield(task) {
+						if !yield(ofiTask{Y: y, M: m, D: d, Offset: offset, Length: length}) {
 							f.Close()
 							return
 						}
@@ -822,9 +799,13 @@ func discoverTasks(sym string) iter.Seq[ofiTask] {
 	}
 }
 
-func processAtomDay(sym string, t ofiTask, outDir string, cfg AtomConfig, binBuf, gncBuf *[]byte) {
-	dateStr := fmt.Sprintf("%04d%02d%02d", t.Y, t.M, t.D)
-	outPath := filepath.Join(outDir, dateStr+".bin")
+func processDynamicDay(sym string, t ofiTask, outDir string, binBuf, gncBuf *[]byte) {
+	// 1. Get Atoms
+	atoms := GetActiveAtoms()
+	numAtoms := len(atoms)
+	if numAtoms == 0 {
+		return
+	}
 
 	gncBlob, ok := loadRawGNC(sym, t, gncBuf)
 	if !ok {
@@ -841,122 +822,96 @@ func processAtomDay(sym string, t ofiTask, outDir string, cfg AtomConfig, binBuf
 		return
 	}
 
-	reqSize := rowCount * FeatRowBytes
+	times := cols.Times
+	qtys := cols.Qtys
+	sides := cols.Sides
+	prices := cols.Prices
+
+	// 2. Prepare Header
+	// Magic(4) + Count(2) + [Len(1) + Str]...
+	var headerBuf []byte
+	headerBuf = append(headerBuf, AtomHeaderMagic...)
+	var scratch [2]byte
+	binary.LittleEndian.PutUint16(scratch[:], uint16(numAtoms))
+	headerBuf = append(headerBuf, scratch[:]...)
+
+	for _, a := range atoms {
+		name := a.Name()
+		if len(name) > 255 {
+			name = name[:255]
+		}
+		headerBuf = append(headerBuf, uint8(len(name)))
+		headerBuf = append(headerBuf, []byte(name)...)
+		a.Reset()
+	}
+
+	// 3. Alloc Buffer
+	rowBytes := numAtoms * 4
+	reqSize := len(headerBuf) + (rowCount * rowBytes)
 	if cap(*binBuf) < reqSize {
 		*binBuf = make([]byte, reqSize)
 	}
 	*binBuf = (*binBuf)[:reqSize]
 
-	times := cols.Times
-	qtys := cols.Qtys
-	prices := cols.Prices
-	sides := cols.Sides
-	matches := cols.Matches
+	// 4. Write Header
+	copy((*binBuf)[0:], headerBuf)
+	writePtr := len(headerBuf)
 
-	writeVal := func(rowIdx, atomIdx int, val float64) {
-		off := rowIdx*FeatRowBytes + atomIdx*4
-		binary.LittleEndian.PutUint32((*binBuf)[off:], math.Float32bits(float32(val)))
-	}
-
-	prevP := prices[0]
-	prevVel := 0.0
+	prevTime := times[0]
 
 	for i := 0; i < rowCount; i++ {
 		q := qtys[i]
 		s := float64(sides[i])
 		p := prices[i]
+		ts := times[i]
+		flow := q * s
 
-		m := 1.0
-		if len(matches) > i {
-			m = float64(matches[i])
-		}
-
-		dt := 0.0
+		dtSec := 0.0
 		if i > 0 {
-			dt = float64(times[i] - times[i-1])
+			dtMs := float64(ts - prevTime)
+			if dtMs < 0 {
+				dtMs = 0
+			}
+			dtSec = dtMs / 1000.0
 		}
-		dp := 0.0
-		if i > 0 {
-			dp = p - prevP
+		if dtSec < 1e-4 {
+			dtSec = 1e-4
 		}
 
-		// 1. OFI
-		writeVal(i, 0, q*s)
-		// 2. TCI
-		writeVal(i, 1, s)
-		// 3. Whale
-		val3 := 0.0
-		if q > cfg.WhaleThreshold {
-			val3 = q * s
-		}
-		writeVal(i, 2, val3)
-		// 4. Lumpiness
-		writeVal(i, 3, -(q*q)*s)
-		// 5. Sweep
-		writeVal(i, 4, m*s)
-		// 6. Fragility
-		val6 := 0.0
-		if q > EPS {
-			val6 = (m / q) * s
-		}
-		writeVal(i, 5, val6)
-		// 7. Magnet
-		rem := math.Mod(p, 0.5)
-		if rem < 0 {
-			rem += 0.5
-		}
-		dist := math.Min(rem, 0.5-rem)
-		writeVal(i, 6, 1.0/(1.0+dist))
-		// 8. Velocity
-		vel := 0.0
-		if dt > EPS {
-			vel = q / dt
-		}
-		writeVal(i, 7, vel*s)
-		// 9. Accel
-		accel := vel - prevVel
-		writeVal(i, 8, accel)
-		// 10. Gap
-		writeVal(i, 9, dt*s)
-		// 11. DGT
-		signDp := 0.0
-		if dp > 0 {
-			signDp = 1.0
-		} else if dp < 0 {
-			signDp = -1.0
-		}
-		val11 := 0.0
-		if s == signDp {
-			val11 = q * s
-		}
-		writeVal(i, 10, val11)
-		// 12. Absorb
-		val12 := 0.0
-		if s != signDp {
-			val12 = q * s
-		}
-		writeVal(i, 11, val12)
-		// 13. Fractal
-		val13 := 0.0
-		if q > EPS {
-			val13 = math.Abs(dp) / q
-		}
-		writeVal(i, 12, val13)
+		// Dynamic Update Loop
+		for _, atom := range atoms {
+			val := atom.Update(q, s, p, flow, dtSec)
 
-		prevP = p
-		prevVel = vel
+			// Clamp
+			if val > 50 {
+				val = 50
+			}
+			if val < -50 {
+				val = -50
+			}
+
+			// Inline Write
+			bits := math.Float32bits(float32(val))
+			(*binBuf)[writePtr] = byte(bits)
+			(*binBuf)[writePtr+1] = byte(bits >> 8)
+			(*binBuf)[writePtr+2] = byte(bits >> 16)
+			(*binBuf)[writePtr+3] = byte(bits >> 24)
+			writePtr += 4
+		}
+		prevTime = ts
 	}
 
-	if err := os.WriteFile(outPath, *binBuf, 0644); err != nil {
-		fmt.Printf("[build] WriteFile(%s): %v\n", outPath, err)
+	dateStr := fmt.Sprintf("%04d%02d%02d", t.Y, t.M, t.D)
+	outPath := filepath.Join(outDir, dateStr+".bin")
+	if err := os.WriteFile(outPath, *binBuf, 0o644); err != nil {
+		fmt.Printf("[build] Write error: %v\n", err)
 	}
 }
 
 func loadRawGNC(sym string, t ofiTask, buf *[]byte) ([]byte, bool) {
-	path := filepath.Join(BaseDir,
-		sym,
-		fmt.Sprintf("%04d", t.Y),
-		fmt.Sprintf("%02d", t.M),
+	path := filepath.Join(
+		BaseDir, sym,
+		fmt.Sprintf("%04d", t.Y), fmt.Sprintf("%02d", t.M),
 		"data.quantdev",
 	)
 	f, err := os.Open(path)
@@ -964,12 +919,7 @@ func loadRawGNC(sym string, t ofiTask, buf *[]byte) ([]byte, bool) {
 		return nil, false
 	}
 	defer f.Close()
-
 	if _, err := f.Seek(t.Offset, io.SeekStart); err != nil {
-		return nil, false
-	}
-
-	if t.Length <= 0 || t.Length > 1<<31-1 {
 		return nil, false
 	}
 	need := int(t.Length)
@@ -977,11 +927,10 @@ func loadRawGNC(sym string, t ofiTask, buf *[]byte) ([]byte, bool) {
 		*buf = make([]byte, need)
 	}
 	b := (*buf)[:need]
-
 	if _, err := io.ReadFull(f, b); err != nil {
 		return nil, false
 	}
-	if len(b) < 4 || string(b[0:4]) != GNCMagic {
+	if string(b[0:4]) != GNCMagic {
 		return nil, false
 	}
 	return b, true
@@ -1005,43 +954,38 @@ import (
 // --- Shared Configuration ---
 
 const (
-	// Ryzen 9 7900X: 12 Cores / 24 Threads.
 	CPUThreads = 24
 	BaseDir    = "data"
 
-	// Binary Layout Constants (GNC-v2)
+	// Input Data Layout (GNC-v2)
 	PxScale = 100_000_000.0
 	QtScale = 100_000_000.0
 
-	// GNC Chunking
-	GNCChunkSize = 65536
-
-	// Magic Headers
+	GNCChunkSize  = 65536
 	GNCMagic      = "GNC2"
 	GNCHeaderSize = 32
 	IdxMagic      = "QIDX"
 	IdxVersion    = 1
 
-	// Feature layout on disk (13 Canonical Atoms)
-	FeatDims     = 13
-	FeatBytes    = 4
-	FeatRowBytes = FeatDims * FeatBytes
+	// Output File Magic (V4 Self-Describing)
+	AtomHeaderMagic = "ATM4"
 )
 
-// Intern the symbol to keep it in L3 cache.
-var SymbolHandle = unique.Make("BTCUSDT")
+var SymbolHandle = unique.Make("ETHUSDT")
 
 func Symbol() string { return SymbolHandle.Value() }
 
 // --- OPTIMIZED DATA SCHEMA (SoA) ---
 
 type DayColumns struct {
-	Count   int
-	Times   []int64   // epoch ms
-	Prices  []float64 // scaled
-	Qtys    []float64 // scaled
-	Sides   []int8    // 1, -1
-	Matches []uint16  // M_t
+	Count               int
+	Times               []int64
+	Prices              []float64
+	Qtys                []float64
+	Sides               []int8
+	Matches             []uint16
+	ScratchQtyDict      []float64
+	ScratchChunkOffsets []uint32
 }
 
 func (c *DayColumns) Reset() {
@@ -1051,16 +995,20 @@ func (c *DayColumns) Reset() {
 	c.Qtys = c.Qtys[:0]
 	c.Sides = c.Sides[:0]
 	c.Matches = c.Matches[:0]
+	c.ScratchQtyDict = c.ScratchQtyDict[:0]
+	c.ScratchChunkOffsets = c.ScratchChunkOffsets[:0]
 }
 
 var DayColumnPool = sync.Pool{
 	New: func() any {
 		return &DayColumns{
-			Times:   make([]int64, 0),
-			Prices:  make([]float64, 0),
-			Qtys:    make([]float64, 0),
-			Sides:   make([]int8, 0),
-			Matches: make([]uint16, 0),
+			Times:               make([]int64, 0, 65536),
+			Prices:              make([]float64, 0, 65536),
+			Qtys:                make([]float64, 0, 65536),
+			Sides:               make([]int8, 0, 65536),
+			Matches:             make([]uint16, 0, 65536),
+			ScratchQtyDict:      make([]float64, 0, 1024),
+			ScratchChunkOffsets: make([]uint32, 0, 128),
 		}
 	},
 }
@@ -1081,31 +1029,20 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		return 0, true
 	}
 
-	// Grow vectors
 	if cap(cols.Times) < totalRows {
 		cols.Times = make([]int64, 0, totalRows)
-	} else {
-		cols.Times = cols.Times[:0]
 	}
 	if cap(cols.Prices) < totalRows {
 		cols.Prices = make([]float64, 0, totalRows)
-	} else {
-		cols.Prices = cols.Prices[:0]
 	}
 	if cap(cols.Qtys) < totalRows {
 		cols.Qtys = make([]float64, 0, totalRows)
-	} else {
-		cols.Qtys = cols.Qtys[:0]
 	}
 	if cap(cols.Sides) < totalRows {
 		cols.Sides = make([]int8, 0, totalRows)
-	} else {
-		cols.Sides = cols.Sides[:0]
 	}
 	if cap(cols.Matches) < totalRows {
 		cols.Matches = make([]uint16, 0, totalRows)
-	} else {
-		cols.Matches = cols.Matches[:0]
 	}
 
 	footerOffset := binary.LittleEndian.Uint64(rawBlob[24:32])
@@ -1125,7 +1062,11 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		return 0, false
 	}
 
-	qtyDict := make([]float64, dictCount)
+	if cap(cols.ScratchQtyDict) < int(dictCount) {
+		cols.ScratchQtyDict = make([]float64, 0, int(dictCount))
+	}
+	qtyDict := cols.ScratchQtyDict[:dictCount]
+
 	for i := 0; i < int(dictCount); i++ {
 		qRaw := binary.LittleEndian.Uint64(dictBlob[ptr : ptr+8])
 		qtyDict[i] = float64(qRaw) / QtScale
@@ -1142,7 +1083,11 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		return 0, false
 	}
 
-	chunkOffsets := make([]uint32, chunkCount)
+	if cap(cols.ScratchChunkOffsets) < int(chunkCount) {
+		cols.ScratchChunkOffsets = make([]uint32, 0, int(chunkCount))
+	}
+	chunkOffsets := cols.ScratchChunkOffsets[:chunkCount]
+
 	for i := 0; i < int(chunkCount); i++ {
 		chunkOffsets[i] = binary.LittleEndian.Uint32(dictBlob[ptr : ptr+4])
 		ptr += 4
@@ -1157,14 +1102,12 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		baseT := int64(binary.LittleEndian.Uint64(chunk[2:10]))
 		baseP := int64(binary.LittleEndian.Uint64(chunk[10:18]))
 
-		// Offsets in chunk
 		pTime := 18
 		pPrice := pTime + n*4
-		pQty := pPrice + n*8 // int64 price deltas
+		pQty := pPrice + n*8
 		pMatches := pQty + n*2
 		pSide := pMatches + n*2
 
-		// Backward compatibility: If side is out of bounds, assume no matches stream
 		hasMatches := true
 		if pSide > len(chunk) {
 			pSideLegacy := pQty + n*2
@@ -1201,7 +1144,7 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 			cols.Prices = append(cols.Prices, float64(lastP)/PxScale)
 
 			qID := int(qIDs[i])
-			if qID >= 0 && qID < len(qtyDict) {
+			if qID < len(qtyDict) {
 				cols.Qtys = append(cols.Qtys, qtyDict[qID])
 			} else {
 				cols.Qtys = append(cols.Qtys, 0)
@@ -2019,58 +1962,97 @@ func (m *Moments) Add(m2 Moments) {
 	}
 }
 
+// CalcMomentsVectors is split into two loops to enable AVX-512 vectorization
+// for the pure math portion, while isolating the branching logic.
 func CalcMomentsVectors(sigs, rets []float64) Moments {
 	var m Moments
 	n := len(sigs)
 	if n == 0 {
 		return m
 	}
-	var prevSig float64
-	var prevSign float64
-	var curSegLen float64
+
+	// --- LOOP 1: Pure Math (Vectorization Candidate) ---
+	// Local accumulators to encourage register usage
+	var sumSig, sumRet, sumProd, sumSqSig, sumSqRet, sumPnL, sumSqPnL, sumAbsSig float64
+
+	// Bounds check elimination
+	_ = rets[n-1]
+	_ = sigs[n-1]
 
 	for i := 0; i < n; i++ {
 		s := sigs[i]
 		r := rets[i]
 
-		m.Count++
-		m.SumSig += s
-		m.SumRet += r
-		m.SumSqSig += s * s
-		m.SumSqRet += r * r
-		m.SumProd += s * r
+		sumSig += s
+		sumRet += r
+		sumProd += s * r
+		sumSqSig += s * s
+		sumSqRet += r * r
 
 		pnl := s * r
-		m.SumPnL += pnl
-		m.SumSqPnL += pnl * pnl
+		sumPnL += pnl
+		sumSqPnL += pnl * pnl
 
+		// Branchless Abs for vectorization
+		// Go 1.25 compiler recognizes this pattern for float abs
 		absS := s
-		if absS < 0 {
-			absS = -absS
+		if s < 0 {
+			absS = -s
 		}
-		m.SumAbsSig += absS
+		sumAbsSig += absS
+	}
 
+	m.Count = float64(n)
+	m.SumSig = sumSig
+	m.SumRet = sumRet
+	m.SumProd = sumProd
+	m.SumSqSig = sumSqSig
+	m.SumSqRet = sumSqRet
+	m.SumPnL = sumPnL
+	m.SumSqPnL = sumSqPnL
+	m.SumAbsSig = sumAbsSig
+
+	// --- LOOP 2: Logic & Dependencies (Scalar/Branchy) ---
+	var prevSig float64
+	var prevSign float64
+	var curSegLen float64
+
+	var hits, validHits, sumAbsDelta, sumProdLag, sumAbsProdLag float64
+	var segCount, segLenTotal, segLenMax float64
+
+	for i := 0; i < n; i++ {
+		s := sigs[i]
+		r := rets[i]
+
+		// Hit Logic
 		if s != 0 && r != 0 {
-			m.ValidHits++
+			validHits++
 			if (s > 0 && r > 0) || (s < 0 && r < 0) {
-				m.Hits++
+				hits++
 			}
 		}
 
+		// Lag Logic
 		if i > 0 {
 			d := s - prevSig
 			if d < 0 {
 				d = -d
 			}
-			m.SumAbsDeltaSig += d
-			m.SumProdLag += s * prevSig
+			sumAbsDelta += d
+			sumProdLag += s * prevSig
+
 			absPrev := prevSig
 			if absPrev < 0 {
 				absPrev = -absPrev
 			}
-			m.SumAbsProdLag += absS * absPrev
+			absS := s
+			if absS < 0 {
+				absS = -absS
+			}
+			sumAbsProdLag += absS * absPrev
 		}
 
+		// Segmentation Logic
 		sign := 0.0
 		if s > 0 {
 			sign = 1.0
@@ -2083,20 +2065,20 @@ func CalcMomentsVectors(sigs, rets []float64) Moments {
 				curSegLen++
 			} else {
 				if curSegLen > 0 {
-					m.SegCount++
-					m.SegLenTotal += curSegLen
-					if curSegLen > m.SegLenMax {
-						m.SegLenMax = curSegLen
+					segCount++
+					segLenTotal += curSegLen
+					if curSegLen > segLenMax {
+						segLenMax = curSegLen
 					}
 				}
 				curSegLen = 1
 			}
 		} else {
 			if curSegLen > 0 {
-				m.SegCount++
-				m.SegLenTotal += curSegLen
-				if curSegLen > m.SegLenMax {
-					m.SegLenMax = curSegLen
+				segCount++
+				segLenTotal += curSegLen
+				if curSegLen > segLenMax {
+					segLenMax = curSegLen
 				}
 				curSegLen = 0
 			}
@@ -2105,13 +2087,24 @@ func CalcMomentsVectors(sigs, rets []float64) Moments {
 		prevSign = sign
 	}
 
+	// Final segment close
 	if curSegLen > 0 {
-		m.SegCount++
-		m.SegLenTotal += curSegLen
-		if curSegLen > m.SegLenMax {
-			m.SegLenMax = curSegLen
+		segCount++
+		segLenTotal += curSegLen
+		if curSegLen > segLenMax {
+			segLenMax = curSegLen
 		}
 	}
+
+	m.Hits = hits
+	m.ValidHits = validHits
+	m.SumAbsDeltaSig = sumAbsDelta
+	m.SumProdLag = sumProdLag
+	m.SumAbsProdLag = sumAbsProdLag
+	m.SegCount = segCount
+	m.SegLenTotal = segLenTotal
+	m.SegLenMax = segLenMax
+
 	return m
 }
 
@@ -2660,7 +2653,6 @@ import (
 	"math"
 	"os"
 	"path/filepath"
-	"slices"
 	"sort"
 	"strings"
 	"sync"
@@ -2670,15 +2662,18 @@ import (
 	"unsafe"
 )
 
-// --- Configuration ---
-
 const (
-	OOSDateStr     = "2024-01-01"
-	NumBuckets     = 5
-	QuantileStride = 10
+	OOSDateStr = "2024-01-01"
 )
 
-var TimeHorizonsMS = []int{500, 1000, 2000, 5000, 10000}
+var TimeHorizonsMS = []int{
+	500,   // 0.5s - Sniper
+	1000,  // 1s
+	2000,  // 2s
+	5000,  // 5s
+	10000, // 10s
+}
+
 var oosBoundaryYMD int
 
 func init() {
@@ -2686,22 +2681,17 @@ func init() {
 }
 
 type DayResult struct {
-	YMD       int
-	Metrics   map[string][]Moments
-	Quantiles map[string]map[int][]BucketResult
+	YMD     int
+	Metrics map[string][]Moments
 }
-
-// --- Main Logic ---
 
 func runStudy() {
 	startT := time.Now()
-
 	found := false
 	for sym := range discoverFeatureSymbols() {
 		found = true
 		studySymbol(sym)
 	}
-
 	if !found {
 		fmt.Printf("[study] No features found in %s/features\n", BaseDir)
 	} else {
@@ -2714,7 +2704,6 @@ func discoverFeatureSymbols() iter.Seq[string] {
 		featDir := filepath.Join(BaseDir, "features")
 		entries, err := os.ReadDir(featDir)
 		if err != nil {
-			fmt.Printf("[study] ReadDir(%s): %v\n", featDir, err)
 			return
 		}
 		for _, e := range entries {
@@ -2730,22 +2719,18 @@ func discoverFeatureSymbols() iter.Seq[string] {
 func studySymbol(sym string) {
 	fmt.Printf("\n>>> STUDY: %s <<<\n", sym)
 	featRoot := filepath.Join(BaseDir, "features", sym)
-
-	entries, err := os.ReadDir(featRoot)
-	if err != nil {
-		return
-	}
+	entries, _ := os.ReadDir(featRoot)
 	var variants []string
 	for _, e := range entries {
 		if e.IsDir() && !strings.HasPrefix(e.Name(), ".") {
 			variants = append(variants, e.Name())
 		}
 	}
-	slices.Sort(variants)
 	if len(variants) == 0 {
 		return
 	}
 
+	// Discovery
 	var tasks []int
 	for d := range discoverStudyDays(filepath.Join(featRoot, variants[0])) {
 		tasks = append(tasks, d)
@@ -2755,36 +2740,28 @@ func studySymbol(sym string) {
 
 	isAcc := make(map[string][]Moments)
 	oosAcc := make(map[string][]Moments)
-	isDailyIC := make(map[string]map[int][]float64)
-	oosDailyIC := make(map[string]map[int][]float64)
-	isBuckets := make(map[string]map[int][]BucketAgg)
-	oosBuckets := make(map[string]map[int][]BucketAgg)
-
 	var accMu sync.Mutex
+
 	resultsChan := make(chan DayResult, 64)
 	jobsChan := make(chan int, len(tasks))
 	var wg sync.WaitGroup
-
 	var completed atomic.Int64
 	doneChan := make(chan bool)
 
 	go func() {
-		ticker := time.NewTicker(500 * time.Millisecond)
+		ticker := time.NewTicker(1000 * time.Millisecond)
 		defer ticker.Stop()
-		start := time.Now()
 		for {
 			select {
 			case <-doneChan:
-				printProgress(int(completed.Load()), totalTasks, start)
-				fmt.Println()
 				return
 			case <-ticker.C:
-				printProgress(int(completed.Load()), totalTasks, start)
+				printProgress(int(completed.Load()), totalTasks)
 			}
 		}
 	}()
 
-	for i := 0; i < CPUThreads; i++ {
+	for i := 0; i < 24; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -2793,15 +2770,9 @@ func studySymbol(sym string) {
 			var retBuf []float64
 			retsPerHBuf := make([][]float64, len(TimeHorizonsMS))
 			var gncBuf []byte
-
 			for idx := range jobsChan {
 				dayInt := tasks[idx]
-				doQuantiles := dayInt < oosBoundaryYMD
-				res := processStudyDay(
-					sym, dayInt, variants, featRoot,
-					&sigBuf, &fileBuf, &retBuf, &retsPerHBuf, &gncBuf,
-					doQuantiles,
-				)
+				res := processStudyDay(sym, dayInt, variants, featRoot, &sigBuf, &fileBuf, &retBuf, &retsPerHBuf, &gncBuf)
 				resultsChan <- res
 				completed.Add(1)
 			}
@@ -2819,66 +2790,20 @@ func studySymbol(sym string) {
 		close(doneChan)
 	}()
 
-	isDays, oosDays := 0, 0
 	for res := range resultsChan {
-		if len(res.Metrics) == 0 {
-			continue
-		}
 		isOOS := res.YMD >= oosBoundaryYMD
-		if isOOS {
-			oosDays++
-		} else {
-			isDays++
-		}
-
 		accMu.Lock()
 		for vName, moms := range res.Metrics {
 			if _, ok := isAcc[vName]; !ok {
 				isAcc[vName] = make([]Moments, len(TimeHorizonsMS))
 				oosAcc[vName] = make([]Moments, len(TimeHorizonsMS))
-				isDailyIC[vName] = make(map[int][]float64)
-				oosDailyIC[vName] = make(map[int][]float64)
-				isBuckets[vName] = make(map[int][]BucketAgg)
-				oosBuckets[vName] = make(map[int][]BucketAgg)
 			}
-
-			tMoments := isAcc[vName]
-			tDailyIC := isDailyIC[vName]
-			tBuckets := isBuckets[vName]
+			target := isAcc[vName]
 			if isOOS {
-				tMoments = oosAcc[vName]
-				tDailyIC = oosDailyIC[vName]
-				tBuckets = oosBuckets[vName]
+				target = oosAcc[vName]
 			}
-
 			for hIdx := range TimeHorizonsMS {
-				m := moms[hIdx]
-				if m.Count <= 0 {
-					continue
-				}
-				tMoments[hIdx].Add(m)
-
-				num := m.Count*m.SumProd - m.SumSig*m.SumRet
-				denX := m.Count*m.SumSqSig - m.SumSig*m.SumSig
-				denY := m.Count*m.SumSqRet - m.SumRet*m.SumRet
-				ic := 0.0
-				if denX > 0 && denY > 0 {
-					ic = num / math.Sqrt(denX*denY)
-				}
-				tDailyIC[hIdx] = append(tDailyIC[hIdx], ic)
-
-				if qMap, ok := res.Quantiles[vName]; ok {
-					if qList, ok2 := qMap[hIdx]; ok2 {
-						if len(tBuckets[hIdx]) == 0 {
-							tBuckets[hIdx] = make([]BucketAgg, NumBuckets)
-						}
-						for i, bucket := range qList {
-							if i < NumBuckets {
-								tBuckets[hIdx][i].Add(bucket)
-							}
-						}
-					}
-				}
+				target[hIdx].Add(moms[hIdx])
 			}
 		}
 		accMu.Unlock()
@@ -2891,9 +2816,7 @@ func studySymbol(sym string) {
 	sort.Strings(finalKeys)
 
 	for hIdx, ms := range TimeHorizonsMS {
-		printHorizonTable(ms, finalKeys, isAcc, oosAcc, isDailyIC, oosDailyIC, hIdx, isDays, oosDays)
-		printMonotonicityTable(ms, finalKeys, isBuckets, hIdx)
-		fmt.Println()
+		printHorizonTable(ms, finalKeys, isAcc, oosAcc, hIdx)
 	}
 }
 
@@ -2901,17 +2824,11 @@ func processStudyDay(
 	sym string, dayInt int, variants []string, featRoot string,
 	sigBuf *[]float64, fileBuf *[]byte, retBuf *[]float64,
 	retsPerH *[][]float64, gncBuf *[]byte,
-	doQuantiles bool,
 ) DayResult {
-
-	y := dayInt / 10000
-	m := (dayInt % 10000) / 100
-	d := dayInt % 100
-
+	y, m, d := dayInt/10000, (dayInt%10000)/100, dayInt%100
 	res := DayResult{
-		YMD:       dayInt,
-		Metrics:   make(map[string][]Moments),
-		Quantiles: make(map[string]map[int][]BucketResult),
+		YMD:     dayInt,
+		Metrics: make(map[string][]Moments),
 	}
 
 	colsAny := DayColumnPool.Get()
@@ -2925,16 +2842,8 @@ func processStudyDay(
 	}
 	n := rowCount
 
-	p := cols.Prices
-	tm := cols.Times
+	p, tm := cols.Prices, cols.Times
 	dStr := fmt.Sprintf("%04d%02d%02d", y, m, d)
-
-	featureNames := []string{
-		"f01_OFI", "f02_TCI", "f03_Whale", "f04_Lumpiness",
-		"f05_Sweep", "f06_Fragility", "f07_Magnet",
-		"f08_Velocity", "f09_Accel", "f10_Gap",
-		"f11_DGT", "f12_Absorb", "f13_Fractal",
-	}
 
 	for hIdx, ms := range TimeHorizonsMS {
 		computeReturns(p, tm, n, ms, retBuf)
@@ -2949,16 +2858,37 @@ func processStudyDay(
 
 	for _, v := range variants {
 		sigPath := filepath.Join(featRoot, v, dStr+".bin")
-
 		rawSigs, byteSize, ok := fastLoadBytes(sigPath, fileBuf)
 		if !ok || byteSize == 0 {
 			continue
 		}
 
-		dims := byteSize / (n * FeatBytes)
-		if dims < 1 || dims > FeatDims {
-			continue
+		// --- HEADER PARSING ---
+		if len(rawSigs) < 6 || string(rawSigs[0:4]) != AtomHeaderMagic {
+			continue // wrong magic
 		}
+
+		ptr := 4
+		numFeats := int(binary.LittleEndian.Uint16(rawSigs[ptr:]))
+		ptr += 2
+
+		featureNames := make([]string, numFeats)
+		for i := 0; i < numFeats; i++ {
+			if ptr >= len(rawSigs) {
+				break
+			}
+			nameLen := int(rawSigs[ptr])
+			ptr++
+			if ptr+nameLen > len(rawSigs) {
+				break
+			}
+			featureNames[i] = string(rawSigs[ptr : ptr+nameLen])
+			ptr += nameLen
+		}
+
+		// Data starts at ptr
+		dataBlob := rawSigs[ptr:]
+		dims := numFeats
 
 		if n > cap(*sigBuf) {
 			*sigBuf = make([]float64, n+n/4)
@@ -2966,40 +2896,62 @@ func processStudyDay(
 
 		for dim := 0; dim < dims; dim++ {
 			target := (*sigBuf)[:n]
-
-			decodeFeatureDim(rawSigs, n, dims, dim, target)
+			decodeFeatureDim(dataBlob, n, dims, dim, target)
 
 			key := v
-			if dims > 1 {
-				suffix := fmt.Sprintf("_d%d", dim+1)
-				if dim < len(featureNames) {
-					suffix = "_" + featureNames[dim]
-				}
-				key = v + suffix
+			if dim < len(featureNames) {
+				key = featureNames[dim]
 			}
-
 			moms := make([]Moments, len(TimeHorizonsMS))
-			var qMap map[int][]BucketResult
-			if doQuantiles {
-				qMap = make(map[int][]BucketResult)
-			}
-
 			for hIdx := range TimeHorizonsMS {
-				rets := (*retsPerH)[hIdx][:n]
-				moms[hIdx] = CalcMomentsVectors(target, rets)
-				if doQuantiles {
-					qMap[hIdx] = ComputeQuantilesStrided(target, rets, NumBuckets, QuantileStride)
-				}
+				moms[hIdx] = CalcMomentsVectors(target, (*retsPerH)[hIdx][:n])
 			}
-
 			res.Metrics[key] = moms
-			if doQuantiles && len(qMap) > 0 {
-				res.Quantiles[key] = qMap
-			}
 		}
 	}
 	return res
 }
+
+func printHorizonTable(hMS int, keys []string, isAcc, oosAcc map[string][]Moments, hIdx int) {
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
+	sec := float64(hMS) / 1000.0
+	fmt.Fprintf(w, "\n== Horizon %.3fs ==\n", sec)
+	fmt.Fprintln(w, "FEATURE\tIS_IC\tOOS_IC\tIS_BPS\tOOS_BPS")
+	for _, k := range keys {
+		mIS := isAcc[k][hIdx]
+		mOOS := oosAcc[k][hIdx]
+
+		icIS, icOOS := 0.0, 0.0
+		if mIS.Count > 0 {
+			num := mIS.Count*mIS.SumProd - mIS.SumSig*mIS.SumRet
+			den := math.Sqrt((mIS.Count*mIS.SumSqSig - mIS.SumSig*mIS.SumSig) * (mIS.Count*mIS.SumSqRet - mIS.SumRet*mIS.SumRet))
+			if den > 0 {
+				icIS = num / den
+			}
+		}
+		if mOOS.Count > 0 {
+			num := mOOS.Count*mOOS.SumProd - mOOS.SumSig*mOOS.SumRet
+			den := math.Sqrt((mOOS.Count*mOOS.SumSqSig - mOOS.SumSig*mOOS.SumSig) * (mOOS.Count*mOOS.SumSqRet - mOOS.SumRet*mOOS.SumRet))
+			if den > 0 {
+				icOOS = num / den
+			}
+		}
+
+		bpsIS := 0.0
+		if mIS.SumAbsDeltaSig > 0 {
+			bpsIS = (mIS.SumPnL / mIS.SumAbsDeltaSig) * 10000.0
+		}
+		bpsOOS := 0.0
+		if mOOS.SumAbsDeltaSig > 0 {
+			bpsOOS = (mOOS.SumPnL / mOOS.SumAbsDeltaSig) * 10000.0
+		}
+
+		fmt.Fprintf(w, "%s\t%.4f\t%.4f\t%.2f\t%.2f\n", k, icIS, icOOS, bpsIS, bpsOOS)
+	}
+	w.Flush()
+}
+
+// --- HELPERS ---
 
 func discoverStudyDays(vDir string) iter.Seq[int] {
 	return func(yield func(int) bool) {
@@ -3028,47 +2980,38 @@ func loadDayColumns(sym string, y, m, d int, cols *DayColumns, gncBuf *[]byte) (
 	dir := filepath.Join(BaseDir, sym, fmt.Sprintf("%04d", y), fmt.Sprintf("%02d", m))
 	idxPath := filepath.Join(dir, "index.quantdev")
 	dataPath := filepath.Join(dir, "data.quantdev")
-
 	offset, length := findBlobOffset(idxPath, d)
 	if length == 0 {
 		return 0, false
 	}
-
 	f, err := os.Open(dataPath)
 	if err != nil {
 		return 0, false
 	}
 	defer f.Close()
-
 	stat, err := f.Stat()
 	if err != nil {
 		return 0, false
 	}
-
 	off64 := int64(offset)
 	len64 := int64(length)
-
 	if off64 < 0 || len64 <= 0 || off64+len64 > stat.Size() {
 		return 0, false
 	}
-	// Sanity cap: 512MB
 	if len64 > 512*1024*1024 {
 		return 0, false
 	}
-
 	need := int(len64)
 	if cap(*gncBuf) < need {
 		*gncBuf = make([]byte, need)
 	}
 	raw := (*gncBuf)[:need]
-
 	if _, err := f.Seek(off64, io.SeekStart); err != nil {
 		return 0, false
 	}
 	if _, err := io.ReadFull(f, raw); err != nil {
 		return 0, false
 	}
-
 	return inflateGNCToColumns(raw, cols)
 }
 
@@ -3078,7 +3021,6 @@ func findBlobOffset(idxPath string, day int) (uint64, uint64) {
 		return 0, 0
 	}
 	defer f.Close()
-
 	var hdr [16]byte
 	if _, err := io.ReadFull(f, hdr[:]); err != nil {
 		return 0, 0
@@ -3124,21 +3066,14 @@ func fastLoadBytes(path string, fileBuf *[]byte) ([]byte, int, bool) {
 }
 
 func decodeFeatureDim(raw []byte, n, dims, dim int, out []float64) {
-	// FIX: Added explicit bounds check fallback
-	minBytes := n * dims * FeatBytes
+	// Re-using same logic, simplified for self-contained file
+	minBytes := n * dims * 4
 	if len(raw) < minBytes || dim < 0 || dim >= dims {
 		for i := 0; i < n; i++ {
-			offset := (i*dims + dim) * FeatBytes
-			if offset+4 > len(raw) {
-				out[i] = 0
-				continue
-			}
-			bits := binary.LittleEndian.Uint32(raw[offset:])
-			out[i] = float64(math.Float32frombits(bits))
+			out[i] = 0
 		}
 		return
 	}
-
 	f32s := unsafe.Slice((*float32)(unsafe.Pointer(&raw[0])), len(raw)/4)
 	for i := 0; i < n; i++ {
 		out[i] = float64(f32s[i*dims+dim])
@@ -3191,104 +3126,12 @@ func fastAtoi(s string) int {
 	return n
 }
 
-func printProgress(curr, total int, start time.Time) {
+func printProgress(curr, total int) {
 	if total == 0 {
 		return
 	}
-	const barWidth = 40
 	percent := float64(curr) / float64(total)
-	if percent > 1.0 {
-		percent = 1.0
-	}
-	filled := int(percent * float64(barWidth))
-	empty := barWidth - filled
-	bar := strings.Repeat("=", filled) + strings.Repeat("-", empty)
-	if filled > 0 && filled < barWidth {
-		bar = bar[:filled-1] + ">" + bar[filled:]
-	}
-	elapsed := time.Since(start).Seconds()
-	rate := 0.0
-	if elapsed > 0 {
-		rate = float64(curr) / elapsed
-	}
-	fmt.Printf("\r[%s] %.1f%% (%d/%d) | %.1f days/s  ", bar, percent*100, curr, total, rate)
-}
-
-func printHorizonTable(hMS int, keys []string, isAcc, oosAcc map[string][]Moments, isDailyIC, oosDailyIC map[string]map[int][]float64, hIdx, isDays, oosDays int) {
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
-	sec := float64(hMS) / 1000.0
-	fmt.Fprintf(w, "== Horizon %.3fs [IS: %d | OOS: %d] ==\n", sec, isDays, oosDays)
-	fmt.Fprintln(w, "FEATURE\tIS_IC\tIS_T\tOOS_IC\tOOS_T\tAC1\t|AC1|\tAVG_SEG\tMAX_SEG\tIS_BPS/TR\tOOS_BPS/TR")
-	for _, k := range keys {
-		var isICSlice, oosICSlice []float64
-		if m, ok := isDailyIC[k]; ok {
-			isICSlice = m[hIdx]
-		}
-		if m, ok := oosDailyIC[k]; ok {
-			oosICSlice = m[hIdx]
-		}
-		isStats := FinalizeMetrics(isAcc[k][hIdx], isICSlice)
-		oosStats := FinalizeMetrics(oosAcc[k][hIdx], oosICSlice)
-		fmt.Fprintf(w, "%s\t%.4f\t%.2f\t%.4f\t%.2f\t%.3f\t%.3f\t%.2f\t%.1f\t%.2f\t%.2f\n",
-			k,
-			isStats.ICPearson, isStats.IC_TStat,
-			oosStats.ICPearson, oosStats.IC_TStat,
-			isStats.AutoCorr, isStats.AutoCorrAbs,
-			isStats.AvgSegLen, isStats.MaxSegLen,
-			isStats.BreakevenBps, oosStats.BreakevenBps,
-		)
-	}
-	w.Flush()
-}
-
-func printMonotonicityTable(hMS int, keys []string, isBuckets map[string]map[int][]BucketAgg, hIdx int) {
-	sec := float64(hMS) / 1000.0
-	fmt.Printf("\n-- Monotonicity Check (IS) Horizon %.3fs --\n", sec)
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', 0)
-	fmt.Fprintln(w, "FEATURE\tMONO\tB1(Sell)\tB2\tB3\tB4\tB5(Buy)")
-	for _, k := range keys {
-		aggs, ok := isBuckets[k][hIdx]
-		if !ok || len(aggs) < NumBuckets {
-			continue
-		}
-		brets := make([]float64, NumBuckets)
-		for i := 0; i < NumBuckets; i++ {
-			br := aggs[i].Finalize(i + 1)
-			brets[i] = br.AvgRetBps
-		}
-		mono := bucketMonotonicity(brets)
-		fmt.Fprintf(w, "%s\t%.3f", k, mono)
-		for i := 0; i < NumBuckets; i++ {
-			fmt.Fprintf(w, "\t%.1f", brets[i])
-		}
-		fmt.Fprintln(w, "")
-	}
-	w.Flush()
-}
-
-func bucketMonotonicity(rets []float64) float64 {
-	n := len(rets)
-	if n == 0 {
-		return 0
-	}
-	var sumX, sumY, sumXY, sumX2, sumY2 float64
-	nf := float64(n)
-	for i := 0; i < n; i++ {
-		x := float64(i + 1)
-		y := rets[i]
-		sumX += x
-		sumY += y
-		sumXY += x * y
-		sumX2 += x * x
-		sumY2 += y * y
-	}
-	num := nf*sumXY - sumX*sumY
-	denX := nf*sumX2 - sumX*sumX
-	denY := nf*sumY2 - sumY*sumY
-	if denX <= 0 || denY <= 0 {
-		return 0
-	}
-	return num / math.Sqrt(denX*denY)
+	fmt.Printf("\rProgress: %.1f%% (%d/%d)", percent*100, curr, total)
 }
 ```
 

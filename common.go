@@ -10,30 +10,23 @@ import (
 // --- Shared Configuration ---
 
 const (
-	// Ryzen 9 7900X: 12 Cores / 24 Threads.
 	CPUThreads = 24
 	BaseDir    = "data"
 
-	// Binary Layout Constants (GNC-v2)
+	// Input Data Layout (GNC-v2)
 	PxScale = 100_000_000.0
 	QtScale = 100_000_000.0
 
-	// GNC Chunking
-	GNCChunkSize = 65536
-
-	// Magic Headers
+	GNCChunkSize  = 65536
 	GNCMagic      = "GNC2"
 	GNCHeaderSize = 32
 	IdxMagic      = "QIDX"
 	IdxVersion    = 1
 
-	// Feature layout on disk (13 Canonical Atoms)
-	FeatDims     = 13
-	FeatBytes    = 4
-	FeatRowBytes = FeatDims * FeatBytes
+	// Output File Magic (V4 Self-Describing)
+	AtomHeaderMagic = "ATM4"
 )
 
-// Intern the symbol to keep it in L3 cache.
 var SymbolHandle = unique.Make("ETHUSDT")
 
 func Symbol() string { return SymbolHandle.Value() }
@@ -41,28 +34,23 @@ func Symbol() string { return SymbolHandle.Value() }
 // --- OPTIMIZED DATA SCHEMA (SoA) ---
 
 type DayColumns struct {
-	Count   int
-	Times   []int64   // epoch ms
-	Prices  []float64 // scaled
-	Qtys    []float64 // scaled
-	Sides   []int8    // 1, -1
-	Matches []uint16  // M_t
-
-	// Internal scratch buffers to prevent allocations during inflate
+	Count               int
+	Times               []int64
+	Prices              []float64
+	Qtys                []float64
+	Sides               []int8
+	Matches             []uint16
 	ScratchQtyDict      []float64
 	ScratchChunkOffsets []uint32
 }
 
 func (c *DayColumns) Reset() {
 	c.Count = 0
-	// We do not release memory, just reset length to 0
 	c.Times = c.Times[:0]
 	c.Prices = c.Prices[:0]
 	c.Qtys = c.Qtys[:0]
 	c.Sides = c.Sides[:0]
 	c.Matches = c.Matches[:0]
-
-	// Reset scratch buffers
 	c.ScratchQtyDict = c.ScratchQtyDict[:0]
 	c.ScratchChunkOffsets = c.ScratchChunkOffsets[:0]
 }
@@ -97,7 +85,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		return 0, true
 	}
 
-	// 1. Ensure Capacity (One-time allocation check)
 	if cap(cols.Times) < totalRows {
 		cols.Times = make([]int64, 0, totalRows)
 	}
@@ -114,7 +101,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		cols.Matches = make([]uint16, 0, totalRows)
 	}
 
-	// 2. Parse Footer for Dictionary and Chunk Offsets
 	footerOffset := binary.LittleEndian.Uint64(rawBlob[24:32])
 	if footerOffset >= uint64(len(rawBlob)) {
 		return 0, false
@@ -132,7 +118,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		return 0, false
 	}
 
-	// Use Scratch Buffer for Dictionary (No Alloc)
 	if cap(cols.ScratchQtyDict) < int(dictCount) {
 		cols.ScratchQtyDict = make([]float64, 0, int(dictCount))
 	}
@@ -154,7 +139,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		return 0, false
 	}
 
-	// Use Scratch Buffer for Offsets (No Alloc)
 	if cap(cols.ScratchChunkOffsets) < int(chunkCount) {
 		cols.ScratchChunkOffsets = make([]uint32, 0, int(chunkCount))
 	}
@@ -165,7 +149,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		ptr += 4
 	}
 
-	// 3. Process Chunks
 	for _, off := range chunkOffsets {
 		if uint64(off)+18 > uint64(len(rawBlob)) {
 			return 0, false
@@ -175,14 +158,12 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		baseT := int64(binary.LittleEndian.Uint64(chunk[2:10]))
 		baseP := int64(binary.LittleEndian.Uint64(chunk[10:18]))
 
-		// Offsets in chunk
 		pTime := 18
 		pPrice := pTime + n*4
-		pQty := pPrice + n*8 // int64 price deltas
+		pQty := pPrice + n*8
 		pMatches := pQty + n*2
 		pSide := pMatches + n*2
 
-		// Backward compatibility
 		hasMatches := true
 		if pSide > len(chunk) {
 			pSideLegacy := pQty + n*2
@@ -194,7 +175,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 			}
 		}
 
-		// Unsafe slicing to avoid copying data from the blob
 		tDeltas := unsafe.Slice((*int32)(unsafe.Pointer(&chunk[pTime])), n)
 		pDeltas := unsafe.Slice((*int64)(unsafe.Pointer(&chunk[pPrice])), n)
 		qIDs := unsafe.Slice((*uint16)(unsafe.Pointer(&chunk[pQty])), n)
@@ -212,7 +192,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 		lastT := baseT
 		lastP := baseP
 
-		// Hot loop: Unroll or keep simple for bounds-check elimination
 		for i := 0; i < n; i++ {
 			lastT += int64(tDeltas[i])
 			lastP += pDeltas[i]
@@ -221,7 +200,6 @@ func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
 			cols.Prices = append(cols.Prices, float64(lastP)/PxScale)
 
 			qID := int(qIDs[i])
-			// Bounds check elimination hint: dict is fixed
 			if qID < len(qtyDict) {
 				cols.Qtys = append(cols.Qtys, qtyDict[qID])
 			} else {
