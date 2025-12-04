@@ -12,9 +12,8 @@ func main() {
 	// Use all 7900X hardware threads.
 	runtime.GOMAXPROCS(CPUThreads)
 
-	// Hard memory limit: ~30GB heap.
-	// This is a guardrail on top of GOGC=200, not a replacement.
-	const ramLimit = 30 * 1024 * 1024 * 1024
+	// Hard memory limit: 24GB.
+	const ramLimit = 24 * 1024 * 1024 * 1024
 	debug.SetMemoryLimit(ramLimit)
 
 	if len(os.Args) < 2 {
@@ -24,11 +23,13 @@ func main() {
 
 	start := time.Now()
 
-	fmt.Printf("Go 1.25.4 | Env: %s/%s | Threads: %d | RAM Limit: 30GB | GOGC: %s | AMD64: %s\n",
+	fmt.Printf("%s | Env: %s/%s | Threads: %d | RAM Limit: 24GB | GOGC: %s | GOAMD64: %s\n",
+		runtime.Version(),
 		runtime.GOOS, runtime.GOARCH,
 		runtime.GOMAXPROCS(0),
 		os.Getenv("GOGC"),
-		os.Getenv("GOAMD64"))
+		os.Getenv("GOAMD64"),
+	)
 
 	cmd := os.Args[1]
 
@@ -41,6 +42,8 @@ func main() {
 		runStudy()
 	case "sanity":
 		runSanity()
+	case "bench":
+		runBench()
 	default:
 		fmt.Printf("Unknown command: %s\n", cmd)
 		printHelp()
@@ -53,9 +56,10 @@ func main() {
 func printHelp() {
 	fmt.Println("Usage: quant.exe [command]")
 	fmt.Println("  data   - Download raw aggTrades")
-	fmt.Println("  build  - Run Hawkes/Adaptive/EMA models -> features")
+	fmt.Println("  build  - Run TFI Primitives (RWVI, VAI, etc) -> features")
 	fmt.Println("  study  - Run IS/OOS backtest on features")
 	fmt.Println("  sanity - Check data integrity")
+	fmt.Println("  bench  - Run decode benchmark + inline pprof summaries")
 }
 
 func getMemUsage() string {
