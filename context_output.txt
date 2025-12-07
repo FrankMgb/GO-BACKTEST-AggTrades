@@ -1,664 +1,724 @@
+PS Z:\AggTrade-GO> go run . test
+>>> CONTINUOUS-TIME ALGO DISCOVERY (OOS REPORT) <<<
+   Workers: 22 | Models: 4
+Done. Processed 2167 days in 1m39.3798874s. OOS report saved to Continuous_Algo_Report_OOS.txt
+PS Z:\AggTrade-GO> go run . probe
+>>> GNC DATA PROBE <<<
+BaseDir: Z:\DATA\data
+
+SYMBOL     IDX_DAYS  SAMPLED  OK  FAIL  FIRST_DAY   LAST_DAY    MIN_ROWS  MAX_ROWS  AVG_ROWS   
+------     --------  -------  --  ----  ---------   --------    --------  --------  --------   
+ASTERUSDT  79        16       16  0     2025-09-19  2025-12-06  295050    3300036   1007964    
+BNBUSDT    2127      16       16  0     2020-02-10  2025-12-06  29604     1470641   321734     
+BTCUSDT    2167      16       16  0     2020-01-01  2025-12-06  71359     3143146   1304226    
+DOGEUSDT   1976      16       16  0     2020-07-10  2025-12-06  27516     1538948   355863     
+ETHUSDT    2167      16       16  0     2020-01-01  2025-12-06  24671     4050677   1128213    
+HYPEUSDT   191       16       16  0     2025-05-30  2025-12-06  156754    744158    461923     
+SOLUSDT    1910      16       16  0     2020-09-14  2025-12-06  51575     2017706   613836     
+XRPUSDT    2162      16       16  0     2020-01-06  2025-12-06  24898     1062084   283625     
+
+[probe] Finished in 2.3450962s
+PS Z:\AggTrade-GO>
+
+
+PS Z:\AggTrade-GO> go run . test
+>>> CONTINUOUS-TIME ALGO DISCOVERY (OOS REPORT) <<<
+   Workers: 22 | Models: 4
+Done. Processed 2167 days in 1m39.3798874s. OOS report saved to Continuous_Algo_Report_OOS.txt
+PS Z:\AggTrade-GO> go run . probe
+>>> GNC DATA PROBE <<<
+BaseDir: Z:\DATA\data
+
+SYMBOL     IDX_DAYS  SAMPLED  OK  FAIL  FIRST_DAY   LAST_DAY    MIN_ROWS  MAX_ROWS  AVG_ROWS
+------     --------  -------  --  ----  ---------   --------    --------  --------  --------
+ASTERUSDT  79        16       16  0     2025-09-19  2025-12-06  295050    3300036   1007964
+BNBUSDT    2127      16       16  0     2020-02-10  2025-12-06  29604     1470641   321734
+BTCUSDT    2167      16       16  0     2020-01-01  2025-12-06  71359     3143146   1304226
+DOGEUSDT   1976      16       16  0     2020-07-10  2025-12-06  27516     1538948   355863
+ETHUSDT    2167      16       16  0     2020-01-01  2025-12-06  24671     4050677   1128213
+HYPEUSDT   191       16       16  0     2025-05-30  2025-12-06  156754    744158    461923     
+SOLUSDT    1910      16       16  0     2020-09-14  2025-12-06  51575     2017706   613836     
+XRPUSDT    2162      16       16  0     2020-01-06  2025-12-06  24898     1062084   283625     
+
+[probe] Finished in 2.3450962s
+PS Z:\AggTrade-GO> 
+
+MODEL            HORIZON TrainN  TestN  PearsonIC SpearmanIC  HitRate HitZ  Sharpe Spread(bps) TopDecile(bps) BotDecile(bps)  MI(bits) NMI   ΔLogLoss
+-----            ------- ------  -----  --------- ----------- ------- ----  ------ ----------- -------------- --------------- -------- ---   --------
+Hawkes_Intensity 15m     2091642 896419 0.0126    0.0030      0.502   3.92  0.004  +0.6        +0.7           +0.1            0.050    0.015 0.0000
+Hawkes_Intensity 30m     2091642 896419 0.0128    0.0052      0.504   7.18  0.006  +1.0        +1.3           +0.3            0.045    0.014 0.0000
+Hawkes_Intensity 1h      2091642 896419 0.0120    0.0070      0.508   15.67 0.009  +1.3        +1.8           +0.5            0.040    0.012 0.0000
+
+Hawkes_OFI 15m 2091642 896419 -0.0135 -0.0421 0.482 -33.93 -0.013 -1.0 -0.3 +0.8 0.037 0.011 0.0005
+Hawkes_OFI 30m 2091642 896419 -0.0105 -0.0355 0.486 -25.75 -0.010 -1.1 -0.1 +1.0 0.033 0.010 0.0002
+Hawkes_OFI 1h  2091642 896419 -0.0142 -0.0352 0.486 -26.90 -0.011 -2.2 -0.4 +1.8 0.029 0.009 0.0004
+
+Sig_LevyArea 15m 2091642 896419 0.0169 0.0066 0.502 3.95  0.004 +0.4 +0.6 +0.2 0.110 0.033 0.0000
+Sig_LevyArea 30m 2091642 896419 0.0193 0.0080 0.504 7.17  0.006 +0.5 +0.9 +0.5 0.102 0.031 0.0000
+Sig_LevyArea 1h  2091642 896419 0.0209 0.0102 0.508 15.64 0.009 +0.4 +1.5 +1.0 0.091 0.027 0.0000
+
+Hilbert_Phase 15m 2091642 896419 -0.0096 -0.0299 0.483 -31.75 -0.009 -0.5 -0.1 +0.4 0.002 0.001 0.0003
+Hilbert_Phase 30m 2091642 896419 -0.0047 -0.0249 0.486 -26.74 -0.005 -0.4 +0.2 +0.6 0.001 0.000 0.0000
+Hilbert_Phase 1h  2091642 896419 -0.0081 -0.0251 0.485 -27.67 -0.008 -0.8 +0.2 +1.0 0.001 0.000 0.0003
+
+
+
+# Rolling OOS metrics (test segment only)
+MODEL            HORIZON WIN Count  PearsonIC SpearmanIC  HitRate Sharpe
+-----            ------- --- -----  --------- ----------- ------- ------
+Hawkes_Intensity 15m     0   112052 0.0143    0.0135      0.508   0.009
+Hawkes_Intensity 15m     1   112052 0.0050    -0.0102     0.501   -0.006
+Hawkes_Intensity 15m     2   112052 0.0100    0.0113      0.505   0.011
+Hawkes_Intensity 15m     3   112052 0.0217    0.0127      0.506   0.019
+Hawkes_Intensity 15m     4   112052 0.0043    -0.0108     0.495   -0.012
+Hawkes_Intensity 15m     5   112052 0.0090    0.0074      0.504   0.019
+Hawkes_Intensity 15m     6   112052 0.0117    -0.0074     0.500   0.010
+Hawkes_Intensity 15m     7   112055 0.0266    -0.0008     0.497   -0.010
+Hawkes_Intensity 30m     0   112052 0.0104    0.0080      0.510   0.013
+Hawkes_Intensity 30m     1   112052 0.0156    -0.0062     0.503   -0.009
+Hawkes_Intensity 30m     2   112052 0.0108    0.0110      0.502   0.016
+Hawkes_Intensity 30m     3   112052 0.0281    0.0216      0.509   0.026
+Hawkes_Intensity 30m     4   112052 -0.0006   -0.0105     0.496   -0.017
+Hawkes_Intensity 30m     5   112052 0.0107    0.0123      0.509   0.028
+Hawkes_Intensity 30m     6   112052 0.0042    -0.0031     0.507   0.013
+Hawkes_Intensity 30m     7   112055 0.0180    0.0018      0.495   -0.014
+Hawkes_Intensity 1h      0   112052 0.0007    0.0066      0.515   0.020
+Hawkes_Intensity 1h      1   112052 0.0183    -0.0134     0.503   -0.014
+Hawkes_Intensity 1h      2   112052 0.0023    0.0100      0.509   0.021
+Hawkes_Intensity 1h      3   112052 0.0318    0.0269      0.519   0.036
+Hawkes_Intensity 1h      4   112052 0.0084    0.0018      0.499   -0.020
+Hawkes_Intensity 1h      5   112052 0.0095    0.0199      0.515   0.039
+Hawkes_Intensity 1h      6   112052 0.0005    -0.0088     0.506   0.018
+Hawkes_Intensity 1h      7   112055 0.0233    0.0021      0.500   -0.020
+
+Hawkes_OFI 15m 0 112052 -0.0104 -0.0445 0.479 -0.003
+Hawkes_OFI 15m 1 112052 -0.0313 -0.0605 0.473 -0.027
+Hawkes_OFI 15m 2 112052 -0.0133 -0.0412 0.483 -0.014
+Hawkes_OFI 15m 3 112052 -0.0003 -0.0282 0.489 -0.006
+Hawkes_OFI 15m 4 112052 -0.0137 -0.0449 0.482 -0.017
+Hawkes_OFI 15m 5 112052 -0.0156 -0.0390 0.482 -0.015
+Hawkes_OFI 15m 6 112052 -0.0096 -0.0447 0.483 -0.021
+Hawkes_OFI 15m 7 112055 -0.0191 -0.0341 0.486 -0.009
+Hawkes_OFI 30m 0 112052 -0.0044 -0.0317 0.487 -0.001
+Hawkes_OFI 30m 1 112052 -0.0210 -0.0451 0.479 -0.015
+Hawkes_OFI 30m 2 112052 -0.0164 -0.0292 0.492 -0.005
+Hawkes_OFI 30m 3 112052 0.0095  -0.0362 0.489 -0.005
+Hawkes_OFI 30m 4 112052 -0.0299 -0.0304 0.486 -0.014
+Hawkes_OFI 30m 5 112052 -0.0118 -0.0390 0.484 -0.018
+Hawkes_OFI 30m 6 112052 -0.0070 -0.0485 0.485 -0.027
+Hawkes_OFI 30m 7 112055 -0.0095 -0.0318 0.489 -0.008
+Hawkes_OFI 1h  0 112052 -0.0126 -0.0458 0.480 -0.014
+Hawkes_OFI 1h  1 112052 -0.0276 -0.0436 0.480 -0.015
+Hawkes_OFI 1h  2 112052 -0.0236 -0.0342 0.492 -0.008
+Hawkes_OFI 1h  3 112052 0.0036  -0.0330 0.484 -0.005
+Hawkes_OFI 1h  4 112052 -0.0216 -0.0287 0.491 -0.007
+Hawkes_OFI 1h  5 112052 -0.0165 -0.0392 0.483 -0.027
+Hawkes_OFI 1h  6 112052 0.0030  -0.0263 0.489 -0.012
+Hawkes_OFI 1h  7 112055 -0.0175 -0.0290 0.488 -0.008
+
+Sig_LevyArea 15m 0 112052 -0.0033 0.0115  0.507 0.008
+Sig_LevyArea 15m 1 112052 0.0159  -0.0024 0.501 -0.006
+Sig_LevyArea 15m 2 112052 0.0231  0.0233  0.505 0.011
+Sig_LevyArea 15m 3 112052 0.0426  0.0135  0.506 0.019
+Sig_LevyArea 15m 4 112052 -0.0043 -0.0139 0.495 -0.012
+Sig_LevyArea 15m 5 112052 0.0166  0.0163  0.504 0.019
+Sig_LevyArea 15m 6 112052 0.0125  -0.0018 0.500 0.010
+Sig_LevyArea 15m 7 112055 0.0498  0.0011  0.497 -0.010
+Sig_LevyArea 30m 0 112052 -0.0136 0.0057  0.509 0.013
+Sig_LevyArea 30m 1 112052 0.0200  -0.0060 0.503 -0.008
+Sig_LevyArea 30m 2 112052 0.0250  0.0245  0.502 0.016
+Sig_LevyArea 30m 3 112052 0.0562  0.0150  0.509 0.026
+Sig_LevyArea 30m 4 112052 -0.0034 -0.0126 0.496 -0.017
+Sig_LevyArea 30m 5 112052 0.0229  0.0251  0.509 0.027
+Sig_LevyArea 30m 6 112052 0.0136  0.0031  0.507 0.013
+Sig_LevyArea 30m 7 112055 0.0573  0.0053  0.495 -0.014
+Sig_LevyArea 1h  0 112052 -0.0081 0.0046  0.514 0.019
+Sig_LevyArea 1h  1 112052 0.0155  -0.0240 0.503 -0.014
+Sig_LevyArea 1h  2 112052 0.0141  0.0294  0.509 0.021
+Sig_LevyArea 1h  3 112052 0.0570  0.0165  0.519 0.036
+Sig_LevyArea 1h  4 112052 0.0168  -0.0002 0.500 -0.020
+Sig_LevyArea 1h  5 112052 0.0221  0.0355  0.515 0.039
+Sig_LevyArea 1h  6 112052 0.0079  -0.0010 0.506 0.018
+Sig_LevyArea 1h  7 112055 0.0431  0.0122  0.500 -0.020
+
+Hilbert_Phase 15m 0 112052 -0.0065 -0.0344 0.477 -0.005
+Hilbert_Phase 15m 1 112052 -0.0100 -0.0349 0.477 -0.012
+Hilbert_Phase 15m 2 112052 -0.0103 -0.0346 0.481 -0.010
+Hilbert_Phase 15m 3 112052 -0.0072 -0.0264 0.487 -0.006
+Hilbert_Phase 15m 4 112052 -0.0086 -0.0233 0.487 -0.007
+Hilbert_Phase 15m 5 112052 -0.0178 -0.0344 0.483 -0.019
+Hilbert_Phase 15m 6 112052 -0.0136 -0.0242 0.489 -0.013
+Hilbert_Phase 15m 7 112055 -0.0090 -0.0252 0.484 -0.008
+Hilbert_Phase 30m 0 112052 0.0061  -0.0172 0.489 0.007
+Hilbert_Phase 30m 1 112052 -0.0021 -0.0276 0.481 -0.003
+Hilbert_Phase 30m 2 112052 -0.0038 -0.0242 0.488 -0.004
+Hilbert_Phase 30m 3 112052 -0.0002 -0.0243 0.488 -0.001
+Hilbert_Phase 30m 4 112052 -0.0059 -0.0215 0.487 -0.003
+Hilbert_Phase 30m 5 112052 -0.0170 -0.0328 0.483 -0.018
+Hilbert_Phase 30m 6 112052 -0.0174 -0.0257 0.489 -0.017
+Hilbert_Phase 30m 7 112055 -0.0094 -0.0274 0.483 -0.011
+Hilbert_Phase 1h  0 112052 -0.0010 -0.0259 0.483 -0.002
+Hilbert_Phase 1h  1 112052 -0.0074 -0.0318 0.479 -0.008
+Hilbert_Phase 1h  2 112052 -0.0128 -0.0294 0.485 -0.015
+Hilbert_Phase 1h  3 112052 -0.0092 -0.0269 0.484 -0.010
+Hilbert_Phase 1h  4 112052 -0.0034 -0.0159 0.492 -0.000
+Hilbert_Phase 1h  5 112052 -0.0217 -0.0281 0.486 -0.023
+Hilbert_Phase 1h  6 112052 -0.0117 -0.0208 0.489 -0.010
+Hilbert_Phase 1h  7 112055 -0.0070 -0.0211 0.485 -0.006
+
+
+
+# Volatility regime OOS metrics (test segment only)
+MODEL            HORIZON REGIME  Count  PearsonIC SpearmanIC  HitRate Sharpe
+-----            ------- ------  -----  --------- ----------- ------- ------
+Hawkes_Intensity 15m     VolLow  298807 0.0005    0.0006      0.498   -0.003
+Hawkes_Intensity 15m     VolMed  298806 0.0004    -0.0000     0.501   0.003
+Hawkes_Intensity 15m     VolHigh 298806 0.0155    0.0067      0.507   0.007
+Hawkes_Intensity 30m     VolLow  298807 0.0017    0.0037      0.499   -0.002
+Hawkes_Intensity 30m     VolMed  298806 0.0008    0.0008      0.503   0.007
+Hawkes_Intensity 30m     VolHigh 298806 0.0156    0.0094      0.510   0.009
+Hawkes_Intensity 1h      VolLow  298807 0.0019    -0.0004     0.502   0.005
+Hawkes_Intensity 1h      VolMed  298806 0.0018    0.0029      0.510   0.021
+Hawkes_Intensity 1h      VolHigh 298806 0.0148    0.0109      0.513   0.010
+
+Hawkes_OFI 15m VolLow  298807 -0.0201 -0.0270 0.490 -0.023
+Hawkes_OFI 15m VolMed  298806 -0.0453 -0.0542 0.477 -0.047
+Hawkes_OFI 15m VolHigh 298806 -0.0095 -0.0235 0.479 -0.009
+Hawkes_OFI 30m VolLow  298807 -0.0115 -0.0109 0.498 -0.005
+Hawkes_OFI 30m VolMed  298806 -0.0396 -0.0464 0.480 -0.041
+Hawkes_OFI 30m VolHigh 298806 -0.0069 -0.0189 0.481 -0.007
+Hawkes_OFI 1h  VolLow  298807 -0.0120 -0.0129 0.495 -0.011
+Hawkes_OFI 1h  VolMed  298806 -0.0431 -0.0484 0.480 -0.042
+Hawkes_OFI 1h  VolHigh 298806 -0.0114 -0.0193 0.483 -0.008
+
+Sig_LevyArea 15m VolLow  298807 0.0033  0.0050  0.498 -0.003
+Sig_LevyArea 15m VolMed  298806 0.0052  0.0066  0.501 0.003
+Sig_LevyArea 15m VolHigh 298806 0.0200  0.0054  0.507 0.007
+Sig_LevyArea 30m VolLow  298807 0.0053  0.0105  0.499 -0.002
+Sig_LevyArea 30m VolMed  298806 0.0045  0.0074  0.503 0.007
+Sig_LevyArea 30m VolHigh 298806 0.0228  0.0048  0.510 0.009
+Sig_LevyArea 1h  VolLow  298807 -0.0002 -0.0020 0.502 0.005
+Sig_LevyArea 1h  VolMed  298806 0.0059  0.0113  0.510 0.021
+Sig_LevyArea 1h  VolHigh 298806 0.0259  0.0053  0.513 0.009
+
+Hilbert_Phase 15m VolLow  298807 -0.0127 -0.0117 0.495 -0.013
+Hilbert_Phase 15m VolMed  298806 -0.0453 -0.0408 0.476 -0.049
+Hilbert_Phase 15m VolHigh 298806 -0.0039 -0.0155 0.479 -0.002
+Hilbert_Phase 30m VolLow  298807 -0.0101 -0.0098 0.495 -0.011
+Hilbert_Phase 30m VolMed  298806 -0.0359 -0.0337 0.481 -0.040
+Hilbert_Phase 30m VolHigh 298806 0.0021  -0.0100 0.482 0.003
+Hilbert_Phase 1h  VolLow  298807 -0.0094 -0.0088 0.494 -0.011
+Hilbert_Phase 1h  VolMed  298806 -0.0421 -0.0390 0.478 -0.045
+Hilbert_Phase 1h  VolHigh 298806 -0.0025 -0.0108 0.484 -0.002
+
+
+
+# Time-of-day regime OOS metrics (test segment only)
+MODEL            HORIZON REGIME    Count  PearsonIC SpearmanIC  HitRate Sharpe
+-----            ------- ------    -----  --------- ----------- ------- ------
+Hawkes_Intensity 15m     TOD_Early 311331 0.0067    0.0018      0.498   0.003
+Hawkes_Intensity 15m     TOD_Mid   312000 0.0134    0.0017      0.500   0.003
+Hawkes_Intensity 15m     TOD_Late  273088 0.0158    0.0062      0.509   0.007
+Hawkes_Intensity 30m     TOD_Early 311331 0.0087    0.0020      0.500   0.006
+Hawkes_Intensity 30m     TOD_Mid   312000 0.0150    0.0041      0.501   0.003
+Hawkes_Intensity 30m     TOD_Late  273088 0.0134    0.0101      0.511   0.010
+Hawkes_Intensity 1h      TOD_Early 311331 0.0056    0.0014      0.507   0.011
+Hawkes_Intensity 1h      TOD_Mid   312000 0.0151    0.0054      0.503   0.002
+Hawkes_Intensity 1h      TOD_Late  273088 0.0135    0.0159      0.515   0.014
+
+Hawkes_OFI 15m TOD_Early 311331 0.0087  -0.0378 0.486 -0.007
+Hawkes_OFI 15m TOD_Mid   312000 -0.0227 -0.0415 0.481 -0.018
+Hawkes_OFI 15m TOD_Late  273088 -0.0209 -0.0470 0.479 -0.014
+Hawkes_OFI 30m TOD_Early 311331 0.0176  -0.0341 0.487 -0.005
+Hawkes_OFI 30m TOD_Mid   312000 -0.0162 -0.0283 0.488 -0.013
+Hawkes_OFI 30m TOD_Late  273088 -0.0268 -0.0455 0.484 -0.012
+Hawkes_OFI 1h  TOD_Early 311331 0.0140  -0.0269 0.491 -0.004
+Hawkes_OFI 1h  TOD_Mid   312000 -0.0212 -0.0339 0.484 -0.016
+Hawkes_OFI 1h  TOD_Late  273088 -0.0295 -0.0450 0.482 -0.013
+
+Sig_LevyArea 15m TOD_Early 311331 0.0124 -0.0026 0.498 0.003
+Sig_LevyArea 15m TOD_Mid   312000 0.0134 0.0041  0.500 0.003
+Sig_LevyArea 15m TOD_Late  273088 0.0236 0.0175  0.509 0.007
+Sig_LevyArea 30m TOD_Early 311331 0.0126 -0.0038 0.500 0.006
+Sig_LevyArea 30m TOD_Mid   312000 0.0142 0.0042  0.501 0.003
+Sig_LevyArea 30m TOD_Late  273088 0.0292 0.0230  0.511 0.010
+Sig_LevyArea 1h  TOD_Early 311331 0.0061 -0.0061 0.507 0.011
+Sig_LevyArea 1h  TOD_Mid   312000 0.0238 0.0051  0.503 0.002
+Sig_LevyArea 1h  TOD_Late  273088 0.0290 0.0330  0.515 0.014
+
+Hilbert_Phase 15m TOD_Early 311331 -0.0071 -0.0298 0.485 -0.005
+Hilbert_Phase 15m TOD_Mid   312000 -0.0145 -0.0368 0.479 -0.015
+Hilbert_Phase 15m TOD_Late  273088 -0.0066 -0.0225 0.486 -0.006
+Hilbert_Phase 30m TOD_Early 311331 -0.0010 -0.0235 0.488 0.001
+Hilbert_Phase 30m TOD_Mid   312000 -0.0097 -0.0277 0.483 -0.011
+Hilbert_Phase 30m TOD_Late  273088 -0.0027 -0.0235 0.486 -0.004
+Hilbert_Phase 1h  TOD_Early 311331 -0.0023 -0.0226 0.487 -0.001
+Hilbert_Phase 1h  TOD_Mid   312000 -0.0108 -0.0251 0.485 -0.011
+Hilbert_Phase 1h  TOD_Late  273088 -0.0107 -0.0280 0.484 -0.012
+
+
+
+
 --- File Tree Structure ---
-|-- data/
-|-- atoms.go
-|-- bench.go
-|-- build.go
-|-- common.go
-|-- data.go
+|-- config.go
+|-- context.py
+|-- gnc.go
 |-- main.go
+|-- math.go
 |-- metrics.go
-|-- sanity.go
-|-- study.go
-    |-- BTCUSDT/
-    |-- ETHUSDT/
-    |-- features/
-        |-- 2020/
-        |-- 2021/
-        |-- 2022/
-        |-- 2023/
-        |-- 2024/
-        |-- 2025/
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-        |-- 2020/
-        |-- 2021/
-        |-- 2022/
-        |-- 2023/
-        |-- 2024/
-        |-- 2025/
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-            |-- [01..12]/ (12 month dirs)
-        |-- BTCUSDT/
-        |-- ETHUSDT/
-            |-- Atoms_v4/
-            |-- Atoms_v4/
+|-- probe.go
+|-- stream.go
+|-- test.go
 
-// --- File: atoms.go ---
-
-```go
-package main
-
-import "math"
-
-// --- Interface ---
-
-type Atom interface {
-	Name() string
-	Reset() // Clear state for new day
-	// Update calculates the feature value for the current trade.
-	Update(q, s, p, flow, dt float64) float64
-}
-
-// --- Constants ---
-
-const (
-	InputFlow = iota // Use q * s
-	InputSign        // Use s (Trade Continuation / Direction)
-)
-
-// --- Registry ---
-
-func GetActiveAtoms() []Atom {
-	return []Atom{
-		// --- Baseline ---
-		&RawOFI{},
-		&RawTCI{},
-
-		// --- Standard EMA (Baseline) ---
-		&EMAAtom{NameStr: "OFI_EMA_15s", Tau: 15.0, Input: InputFlow},
-		&EMAAtom{NameStr: "TCI_EMA_15s", Tau: 15.0, Input: InputSign}, // Added TCI variant
-
-		// --- Sniper Math (Lag Reduced) ---
-		&DEMAAtom{NameStr: "OFI_DEMA_15s", Tau: 15.0, Input: InputFlow},
-		&TEMAAtom{NameStr: "OFI_TEMA_15s", Tau: 15.0, Input: InputFlow},
-		&DEMAAtom{NameStr: "OFI_DEMA_5s", Tau: 5.0, Input: InputFlow},
-
-		// --- Sign-Based Sniper (New Capability!) ---
-		&DEMAAtom{NameStr: "TCI_DEMA_15s", Tau: 15.0, Input: InputSign},
-
-		// --- Advanced / Composite ---
-		&RSIAtom{NameStr: "OFI_RSI_15s", Tau: 15.0, Input: InputFlow},
-		&CubicAtom{NameStr: "OFI_Cubic_15s", Tau: 15.0, Input: InputFlow},
-
-		// --- Volatility / Force ---
-		&ImpulseAtom{NameStr: "Impulse_15s", Tau: 15.0, Input: InputFlow},  // Flow * Speed
-		&ForceAtom{NameStr: "Force_DEMA_15s", Tau: 15.0, Input: InputFlow}, // DEMA * Speed
-		&InstVelAtom{},
-
-		// --- Experimental ---
-		// Composite mixing TEMA and Cubic (both using InputFlow by default)
-		&CompositeAtom{
-			NameStr: "Sniper_Composite",
-			Tau:     15.0,
-			Input:   InputFlow,
-			WeightA: 0.5,
-			WeightB: 0.5,
-		},
-	}
-}
-
-// --- Helper ---
-
-// resolveInput centralizes the Flow vs Sign logic.
-// Inlined by compiler for zero overhead.
-func resolveInput(mode int, flow, s float64) float64 {
-	if mode == InputSign {
-		return s
-	}
-	return flow
-}
-
-// --- Implementations ---
-
-// 1. Raw OFI
-type RawOFI struct{}
-
-func (r *RawOFI) Name() string                             { return "OFI_Raw" }
-func (r *RawOFI) Reset()                                   {}
-func (r *RawOFI) Update(q, s, p, flow, dt float64) float64 { return flow }
-
-// 2. Raw TCI
-type RawTCI struct{}
-
-func (r *RawTCI) Name() string                             { return "TCI_Raw" }
-func (r *RawTCI) Reset()                                   {}
-func (r *RawTCI) Update(q, s, p, flow, dt float64) float64 { return s }
-
-// 3. Standard EMA
-type EMAAtom struct {
-	NameStr string
-	Tau     float64
-	Input   int
-	val     float64
-}
-
-func (a *EMAAtom) Name() string { return a.NameStr }
-func (a *EMAAtom) Reset()       { a.val = 0 }
-func (a *EMAAtom) Update(q, s, p, flow, dt float64) float64 {
-	x := resolveInput(a.Input, flow, s)
-	alpha := 1.0 - math.Exp(-dt/a.Tau)
-	a.val += alpha * (x - a.val)
-	return a.val
-}
-
-// 4. DEMA (Double EMA)
-type DEMAAtom struct {
-	NameStr string
-	Tau     float64
-	Input   int
-	e1, e2  float64
-}
-
-func (a *DEMAAtom) Name() string { return a.NameStr }
-func (a *DEMAAtom) Reset()       { a.e1 = 0; a.e2 = 0 }
-func (a *DEMAAtom) Update(q, s, p, flow, dt float64) float64 {
-	x := resolveInput(a.Input, flow, s)
-	alpha := 1.0 - math.Exp(-dt/a.Tau)
-	a.e1 += alpha * (x - a.e1)
-	a.e2 += alpha * (a.e1 - a.e2)
-	return 2*a.e1 - a.e2
-}
-
-// 5. TEMA (Triple EMA)
-type TEMAAtom struct {
-	NameStr    string
-	Tau        float64
-	Input      int
-	e1, e2, e3 float64
-}
-
-func (a *TEMAAtom) Name() string { return a.NameStr }
-func (a *TEMAAtom) Reset()       { a.e1 = 0; a.e2 = 0; a.e3 = 0 }
-func (a *TEMAAtom) Update(q, s, p, flow, dt float64) float64 {
-	x := resolveInput(a.Input, flow, s)
-	alpha := 1.0 - math.Exp(-dt/a.Tau)
-	a.e1 += alpha * (x - a.e1)
-	a.e2 += alpha * (a.e1 - a.e2)
-	a.e3 += alpha * (a.e2 - a.e3)
-	return 3*a.e1 - 3*a.e2 + a.e3
-}
-
-// 6. RSI (Relative Strength)
-type RSIAtom struct {
-	NameStr  string
-	Tau      float64
-	Input    int
-	up, down float64
-}
-
-func (a *RSIAtom) Name() string { return a.NameStr }
-func (a *RSIAtom) Reset()       { a.up = 0; a.down = 0 }
-func (a *RSIAtom) Update(q, s, p, flow, dt float64) float64 {
-	x := resolveInput(a.Input, flow, s)
-	alpha := 1.0 - math.Exp(-dt/a.Tau)
-
-	u, d := 0.0, 0.0
-	if x > 0 {
-		u = x
-	} else {
-		d = -x
-	}
-
-	a.up += alpha * (u - a.up)
-	a.down += alpha * (d - a.down)
-	sum := a.up + a.down
-
-	if sum < 1e-9 {
-		return 0.0
-	}
-	// Scaled -1 to 1
-	return 2.0*(a.up/sum) - 1.0
-}
-
-// 7. Cubic (Non-Linear)
-type CubicAtom struct {
-	NameStr string
-	Tau     float64
-	Input   int
-	val     float64
-}
-
-func (a *CubicAtom) Name() string { return a.NameStr }
-func (a *CubicAtom) Reset()       { a.val = 0 }
-func (a *CubicAtom) Update(q, s, p, flow, dt float64) float64 {
-	x := resolveInput(a.Input, flow, s)
-	alpha := 1.0 - math.Exp(-dt/a.Tau)
-
-	// Track EMA of Cube
-	x3 := x * x * x
-	a.val += alpha * (x3 - a.val)
-
-	// Return Cube Root to linearize scale for downstream tasks
-	if a.val > 0 {
-		return math.Cbrt(a.val)
-	}
-	return -math.Cbrt(-a.val)
-}
-
-// 8. Impulse (EMA * Speed)
-type ImpulseAtom struct {
-	NameStr string
-	Tau     float64
-	Input   int
-	val     float64
-}
-
-func (a *ImpulseAtom) Name() string { return a.NameStr }
-func (a *ImpulseAtom) Reset()       { a.val = 0 }
-func (a *ImpulseAtom) Update(q, s, p, flow, dt float64) float64 {
-	x := resolveInput(a.Input, flow, s)
-	alpha := 1.0 - math.Exp(-dt/a.Tau)
-	a.val += alpha * (x - a.val)
-
-	// Speed Cap
-	speed := 1.0 / dt // dt is guaranteed >= 1e-4 by build.go
-	if speed > 100 {
-		speed = 100
-	}
-
-	return a.val * speed
-}
-
-// 9. Force (DEMA * Speed)
-type ForceAtom struct {
-	NameStr string
-	Tau     float64
-	Input   int
-	e1, e2  float64
-}
-
-func (a *ForceAtom) Name() string { return a.NameStr }
-func (a *ForceAtom) Reset()       { a.e1 = 0; a.e2 = 0 }
-func (a *ForceAtom) Update(q, s, p, flow, dt float64) float64 {
-	x := resolveInput(a.Input, flow, s)
-	alpha := 1.0 - math.Exp(-dt/a.Tau)
-
-	a.e1 += alpha * (x - a.e1)
-	a.e2 += alpha * (a.e1 - a.e2)
-	dema := 2*a.e1 - a.e2
-
-	speed := 1.0 / dt
-	if speed > 100 {
-		speed = 100
-	}
-
-	return dema * speed
-}
-
-// 10. Instant Velocity
-type InstVelAtom struct{}
-
-func (a *InstVelAtom) Name() string { return "Vel_Inst" }
-func (a *InstVelAtom) Reset()       {}
-func (a *InstVelAtom) Update(q, s, p, flow, dt float64) float64 {
-	// Redundant check removed as requested
-	speed := 1.0 / dt
-	if speed > 100 {
-		speed = 100
-	}
-	return flow * speed
-}
-
-// 11. Composite (TEMA + Cubic)
-type CompositeAtom struct {
-	NameStr          string
-	Tau              float64
-	Input            int
-	WeightA, WeightB float64
-	tema             TEMAAtom
-	cubic            CubicAtom
-}
-
-func (a *CompositeAtom) Name() string { return a.NameStr }
-func (a *CompositeAtom) Reset() {
-	// Propagate configuration to children
-	a.tema.Tau = a.Tau
-	a.tema.Input = a.Input
-	a.tema.Reset()
-
-	a.cubic.Tau = a.Tau
-	a.cubic.Input = a.Input
-	a.cubic.Reset()
-}
-func (a *CompositeAtom) Update(q, s, p, flow, dt float64) float64 {
-	v1 := a.tema.Update(q, s, p, flow, dt)
-	v2 := a.cubic.Update(q, s, p, flow, dt)
-	return a.WeightA*v1 + a.WeightB*v2
-}
-```
-
-// --- End File: atoms.go ---
-
-// --- File: bench.go ---
+// --- File: config.go ---
 
 ```go
 package main
 
 import (
-	"fmt"
-	"os"
-	"os/exec"
-	"path/filepath"
 	"runtime"
-	"runtime/pprof"
-	"time"
+	"sort"
 )
 
-// benchStats holds per-benchmark summary for the study path.
-type benchStats struct {
-	Name            string
-	Iters           int
-	RowsPerIter     int // number of time steps (rows) per day
-	FeatPerIter     int // number of feature series per day (variants * dims)
-	BytesPerIter    int // approximate feature bytes read per day
-	Total           time.Duration
-	AllocBytesPerOp uint64
-	MallocsPerOp    uint64
+// This is the shared data root produced by the downloader project.
+// It MUST be the directory that directly contains BTCUSDT/, ETHUSDT/, etc.
+//
+//	Z:\DATA\data\BTCUSDT\2020\01\...
+//	Z:\DATA\data\ETHUSDT\2020\01\...
+const BaseDir = `Z:\DATA\data`
+
+// SamplingRateSec: How often we "snapshot" the continuous physics.
+const SamplingRateSec = 60
+
+// Horizon definitions for the regression targets.
+var HorizonLabels = []string{"15m", "30m", "1h"}
+var HorizonDelays = []int64{
+	15 * 60 * 1000, // 15 min in ms
+	30 * 60 * 1000, // 30 min in ms
+	60 * 60 * 1000, // 60 min in ms
 }
 
-// runBench is called from main when you do: go run . bench
-func runBench() {
-	fmt.Println("=== BENCHMARK: QuantDev STUDY (processStudyDay) ===")
-	fmt.Printf("Go: %s | GOOS/GOARCH: %s/%s | Threads: %d\n",
-		runtime.Version(),
-		runtime.GOOS, runtime.GOARCH,
-		runtime.GOMAXPROCS(0),
-	)
-
-	sym, dayInt, variants, featRoot, ok := findStudySample()
-	if !ok {
-		fmt.Printf("[bench] no feature sets found under %q\n", filepath.Join(BaseDir, "features"))
-		return
+// System tuning for Ryzen 9 7900X (leave 2 cores free for OS/other work).
+var CPUThreads = func() int {
+	n := runtime.GOMAXPROCS(0)
+	if n > 4 {
+		return n - 2
 	}
-	y := dayInt / 10000
-	m := (dayInt % 10000) / 100
-	d := dayInt % 100
+	return n
+}()
 
-	fmt.Printf("[bench] Sample symbol: %s | day: %04d-%02d-%02d\n", sym, y, m, d)
-	fmt.Printf("[bench] Variants: %v\n", variants)
-
-	featureBytes := featureBytesForDay(featRoot, variants, dayInt)
-	if featureBytes > 0 {
-		fmt.Printf("[bench] Approx feature bytes/day: %d\n", featureBytes)
+// Symbol selects which symbol to run research/OOS on.
+func Symbol() string {
+	// Preference order among discovered symbols.
+	preferred := []string{
+		"BTCUSDT",
+		"ETHUSDT",
+		"BNBUSDT",
+		"SOLUSDT",
+		"XRPUSDT",
+		"DOGEUSDT",
+		"HYPEUSDT",
+		"ASTERUSDT",
 	}
 
-	// --- Warm-up to decide iteration count ---
-	warmStats := benchStudy(sym, dayInt, variants, featRoot, 1)
-	warm := warmStats.Total
-	if warm <= 0 {
-		warm = 2 * time.Millisecond
-	}
-	target := 500 * time.Millisecond
-	iters := int(target / warm)
-	if iters < 3 {
-		iters = 3
-	} else if iters > 2000 {
-		iters = 2000
+	var symbols []string
+	symbolSet := make(map[string]struct{})
+
+	for sym := range discoverSymbols() {
+		symbols = append(symbols, sym)
+		symbolSet[sym] = struct{}{}
 	}
 
-	fmt.Printf("[bench] warm-up: %s per study, selecting %d iterations\n",
-		warmStats.Total, iters)
+	if len(symbols) == 0 {
+		// Hard fallback if directory scan fails.
+		return "BTCUSDT"
+	}
 
-	// --- CPU profile + real benchmark ---
-	var cpuFile *os.File
-	var err error
-	cpuFile, err = os.Create("bench_cpu.pprof")
-	if err != nil {
-		fmt.Printf("[bench] cannot create CPU profile: %v\n", err)
-	} else {
-		if err := pprof.StartCPUProfile(cpuFile); err != nil {
-			fmt.Printf("[bench] cannot start CPU profile: %v\n", err)
-			cpuFile.Close()
-			cpuFile = nil
-		} else {
-			fmt.Println("[bench] CPU profiling: ON")
+	// Try preferred list in order.
+	for _, p := range preferred {
+		if _, ok := symbolSet[p]; ok {
+			return p
 		}
 	}
 
-	stats := benchStudy(sym, dayInt, variants, featRoot, iters)
-	stats.BytesPerIter = featureBytes
-
-	if cpuFile != nil {
-		pprof.StopCPUProfile()
-		cpuFile.Close()
-		fmt.Println("[bench] CPU profile written to bench_cpu.pprof")
-	}
-
-	printBenchStats(stats)
-
-	// --- Heap profile snapshot ---
-	memFile, err := os.Create("bench_mem.pprof")
-	if err != nil {
-		fmt.Printf("[bench] cannot create heap profile: %v\n", err)
-	} else {
-		runtime.GC()
-		if err := pprof.WriteHeapProfile(memFile); err != nil {
-			fmt.Printf("[bench] cannot write heap profile: %v\n", err)
-		} else {
-			fmt.Println("[bench] Heap profile written to bench_mem.pprof")
-		}
-		memFile.Close()
-	}
-
-	runPprofTop("bench_cpu.pprof", "cpu")
-	runPprofTop("bench_mem.pprof", "heap")
-
-	fmt.Println("=== BENCHMARK COMPLETE ===")
-}
-
-// benchStudy repeatedly runs processStudyDay for one symbol/day
-func benchStudy(sym string, dayInt int, variants []string, featRoot string, iters int) benchStats {
-	stats := benchStats{
-		Name:  "StudyDay",
-		Iters: iters,
-	}
-
-	if iters <= 0 {
-		return stats
-	}
-
-	var sigBuf []float64
-	var fileBuf []byte
-	var retBuf []float64
-	retsPerHBuf := make([][]float64, len(TimeHorizonsMS))
-	var gncBuf []byte
-
-	runtime.GC()
-
-	var m0, m1 runtime.MemStats
-	runtime.ReadMemStats(&m0)
-
-	start := time.Now()
-	for i := 0; i < iters; i++ {
-		// FIXED: Removed doQuantiles bool argument
-		res := processStudyDay(
-			sym, dayInt, variants, featRoot,
-			&sigBuf, &fileBuf, &retBuf, &retsPerHBuf, &gncBuf,
-		)
-
-		if i == 0 {
-			rows := 0
-			// V3 DayResult just has Metrics map[string][]Moments
-			for _, momsSlice := range res.Metrics {
-				if len(momsSlice) > 0 {
-					rows = int(momsSlice[0].Count)
-					break
-				}
-			}
-			stats.RowsPerIter = rows
-			stats.FeatPerIter = len(res.Metrics)
-		}
-	}
-	stats.Total = time.Since(start)
-
-	runtime.ReadMemStats(&m1)
-	allocBytes := m1.TotalAlloc - m0.TotalAlloc
-	mallocs := m1.Mallocs - m0.Mallocs
-
-	if iters > 0 {
-		stats.AllocBytesPerOp = allocBytes / uint64(iters)
-		stats.MallocsPerOp = mallocs / uint64(iters)
-	}
-
-	return stats
-}
-
-func printBenchStats(bs benchStats) {
-	if bs.Iters <= 0 || bs.Total <= 0 {
-		fmt.Printf("[bench] %s: no data\n", bs.Name)
-		return
-	}
-
-	nsPerOp := float64(bs.Total.Nanoseconds()) / float64(bs.Iters)
-	totalRows := float64(bs.RowsPerIter * bs.Iters)
-	totalBytes := float64(bs.BytesPerIter * bs.Iters)
-	totalCells := totalRows * float64(bs.FeatPerIter)
-
-	secs := bs.Total.Seconds()
-	rowsPerSec := 0.0
-	bytesPerSec := 0.0
-	cellsPerSec := 0.0
-	if secs > 0 {
-		rowsPerSec = totalRows / secs
-		bytesPerSec = totalBytes / secs
-		cellsPerSec = totalCells / secs
-	}
-
-	fmt.Printf("\n[bench] %s\n", bs.Name)
-	fmt.Printf("  iters:         %d\n", bs.Iters)
-	fmt.Printf("  rows/iter:     %d\n", bs.RowsPerIter)
-	fmt.Printf("  features/iter: %d\n", bs.FeatPerIter)
-	if bs.BytesPerIter > 0 {
-		fmt.Printf("  bytes/iter:    %d (feature files)\n", bs.BytesPerIter)
-	}
-	fmt.Printf("  total time:    %s\n", bs.Total)
-	fmt.Printf("  ns/op:         %.0f\n", nsPerOp)
-
-	fmt.Printf("  throughput:    %.3f krows/s", rowsPerSec/1e3)
-	if bs.FeatPerIter > 0 {
-		fmt.Printf(", %.3f Mcells/s", cellsPerSec/1e6)
-	}
-	if bs.BytesPerIter > 0 {
-		fmt.Printf(", %.3f MB/s (features)\n", bytesPerSec/(1024*1024))
-	} else {
-		fmt.Println()
-	}
-
-	fmt.Printf("  allocs/op:     %d mallocs/op, %d B/op\n",
-		bs.MallocsPerOp, bs.AllocBytesPerOp)
-}
-
-func runPprofTop(profilePath, kind string) {
-	if _, err := os.Stat(profilePath); err != nil {
-		return
-	}
-	cmd := exec.Command("go", "tool", "pprof", "-top", profilePath)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		fmt.Printf("[bench] go tool pprof -top (%s) failed: %v\n", kind, err)
-		return
-	}
-	fmt.Printf("\n[pprof-%s] go tool pprof -top %s\n", kind, profilePath)
-	fmt.Println(string(out))
-}
-
-func findStudySample() (sym string, dayInt int, variants []string, featRoot string, ok bool) {
-	// Re-using common.go/study.go logic implicitly via shared package
-	// But we need to implement discovery here if not exported.
-	// Since we are in main package, we can use discoverFeatureSymbols from study.go if exported?
-	// No, discoverFeatureSymbols returns iter.Seq.
-	// We'll just do a quick manual scan.
-
-	featDir := filepath.Join(BaseDir, "features")
-	entries, err := os.ReadDir(featDir)
-	if err != nil {
-		return "", 0, nil, "", false
-	}
-
-	for _, e := range entries {
-		if !e.IsDir() || e.Name()[0] == '.' {
-			continue
-		}
-		s := e.Name()
-
-		featRoot = filepath.Join(featDir, s)
-		vEntries, err := os.ReadDir(featRoot)
-		if err != nil {
-			continue
-		}
-
-		var vs []string
-		for _, ve := range vEntries {
-			if ve.IsDir() && ve.Name()[0] != '.' {
-				vs = append(vs, ve.Name())
-			}
-		}
-		if len(vs) == 0 {
-			continue
-		}
-
-		// Find a day
-		vDir := filepath.Join(featRoot, vs[0])
-		files, _ := os.ReadDir(vDir)
-		for _, f := range files {
-			if len(f.Name()) > 4 && filepath.Ext(f.Name()) == ".bin" {
-				// 20200101.bin
-				base := f.Name()[:len(f.Name())-4]
-				if d, err := parseDateInt(base); err == nil {
-					return s, d, vs, featRoot, true
-				}
-			}
-		}
-	}
-	return "", 0, nil, "", false
-}
-
-func parseDateInt(s string) (int, error) {
-	var n int
-	for _, c := range s {
-		if c < '0' || c > '9' {
-			return 0, fmt.Errorf("bad int")
-		}
-		n = n*10 + int(c-'0')
-	}
-	return n, nil
-}
-
-// featureBytesForDay sums the sizes of all variant feature files for this day.
-func featureBytesForDay(featRoot string, variants []string, dayInt int) int {
-	y := dayInt / 10000
-	m := (dayInt % 10000) / 100
-	d := dayInt % 100
-	dStr := fmt.Sprintf("%04d%02d%02d", y, m, d)
-
-	total := 0
-	for _, v := range variants {
-		path := filepath.Join(featRoot, v, dStr+".bin")
-		fi, err := os.Stat(path)
-		if err != nil {
-			continue
-		}
-		if fi.Mode().IsRegular() {
-			if sz := fi.Size(); sz > 0 {
-				total += int(sz)
-			}
-		}
-	}
-	return total
+	// Fallback: alphabetical first.
+	sort.Strings(symbols)
+	return symbols[0]
 }
 ```
 
-// --- End File: bench.go ---
+// --- End File: config.go ---
 
-// --- File: build.go ---
+// --- File: context.py ---
+
+```python
+import os
+import sys
+import gzip
+from pathlib import Path
+
+# --- Configuration ---
+
+SCRIPT_FILENAME = os.path.basename(__file__)  # Name of this script
+OUTPUT_FILENAME = "context_output.txt"
+ROOT_DIR = "."
+
+# Directories to ignore
+IGNORE_DIRS = {".venv", ".git", "__pycache__"}
+IGNORE_FILE_PATTERNS = {"~", ".swp", ".DS_Store"}
+
+# Relevant Extensions
+PY_EXT = ".py"
+CSV_EXT = ".csv"
+CSV_GZ_EXT = ".csv.gz"
+PARQUET_EXT = ".parquet"
+YAML_EXT1 = ".yaml"
+YAML_EXT2 = ".yml"
+ENV_EXT = ".env"
+SAFETENSORS_EXT = ".safetensors"
+PT_EXT = ".pt"
+JSON_EXT = ".json"
+CU_EXT = ".cu"
+CUH_EXT = ".cuh"
+NPZ_EXT = ".npz"
+GO_EXT = ".go"
+
+# JSON truncation configuration
+LARGE_JSON_SIZE_BYTES = 256 * 1024      # JSON bigger than 256KB is "large"
+MAX_JSON_PREVIEW_CHARS = 8 * 1024      # preview at most 8KB of text
+MAX_JSON_PREVIEW_LINES = 80            # and at most 80 lines
+
+# Month directory names for collapsing tree output
+MONTH_DIRS = {f"{i:02d}" for i in range(1, 13)}
+
+
+# --- Helpers ---
+
+
+def is_date_subdir(path_str):
+    """
+    Checks if path is a date-based subdir under bars_* or btc_parquet_clean.
+    Matches logic: base starts with 'd=' and parent is 'bars_*' or 'btc_parquet_clean'.
+    """
+    path = Path(path_str)
+    base = path.name
+    if not base.startswith("d="):
+        return False
+    parent = path.parent.name
+    return parent.startswith("bars_") or parent == "btc_parquet_clean"
+
+
+def get_language_identifier(filename):
+    """Returns markdown language tag based on extension."""
+    lower = filename.lower()
+
+    # Handle .gz extension stripping
+    if lower.endswith(".gz"):
+        ext = os.path.splitext(os.path.splitext(lower)[0])[1]
+    else:
+        ext = os.path.splitext(lower)[1]
+
+    mapping = {
+        ".py": "python",
+        ".yaml": "yaml", ".yml": "yaml",
+        ".env": "bash",
+        ".csv": "csv",
+        ".go": "go",
+        ".js": "javascript",
+        ".ts": "typescript",
+        ".java": "java",
+        ".cpp": "cpp", ".cc": "cpp", ".cxx": "cpp",
+        ".c": "c",
+        ".cs": "csharp",
+        ".rb": "ruby",
+        ".php": "php",
+        ".swift": "swift",
+        ".rs": "rust",
+        ".sh": "bash",
+        ".sql": "sql",
+        ".json": "json",
+        ".xml": "xml",
+        ".html": "html",
+        ".css": "css",
+        ".md": "markdown",
+        ".cu": "cpp", ".cuh": "cpp",
+        ".npz": "text",
+    }
+    return mapping.get(ext, "")
+
+
+def get_file_content(path, full=True, n=0):
+    """
+    Reads file content. Handles .gz transparently.
+    Uses 'utf-8' with error replacement to avoid crashing on binary data.
+
+    If full=False, returns up to n lines and adds a small note if truncated or empty.
+    """
+    try:
+        lower = path.lower()
+        if lower.endswith(".gz"):
+            open_func = gzip.open
+        else:
+            open_func = open
+
+        with open_func(path, "rt", encoding="utf-8", errors="replace") as f:
+            if full:
+                return f.read()
+            else:
+                lines = []
+                line_count = 0
+                for line in f:
+                    if line_count >= n:
+                        break
+                    lines.append(line)
+                    line_count += 1
+
+                content = "".join(lines)
+                if line_count == 0:
+                    content += "# (File is empty or could not be read)\n"
+                elif line_count < n:
+                    content += f"# (File has only {line_count} lines)\n"
+                return content
+    except Exception as e:
+        return f"Error reading file: {e}"
+
+
+def get_large_json_preview(path, max_chars, max_lines):
+    """
+    Read only the first `max_lines` lines and up to `max_chars` characters
+    from a large JSON file, and mark it as truncated if we hit the limit.
+    """
+    try:
+        out = []
+        total_chars = 0
+        line_count = 0
+        truncated = False
+
+        with open(path, "rt", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                if line_count >= max_lines or total_chars >= max_chars:
+                    truncated = True
+                    break
+
+                remaining = max_chars - total_chars
+                if remaining <= 0:
+                    truncated = True
+                    break
+
+                # Clip line if it would exceed char budget
+                if len(line) > remaining:
+                    out.append(line[:remaining])
+                    total_chars += remaining
+                    truncated = True
+                    break
+                else:
+                    out.append(line)
+                    total_chars += len(line)
+                    line_count += 1
+
+        preview = "".join(out)
+        if truncated:
+            preview += (
+                "\n// (truncated JSON preview: showing first "
+                f"{line_count} lines / {total_chars} chars)\n"
+            )
+        else:
+            preview += "\n// (complete JSON file or small enough)\n"
+
+        return preview
+    except Exception as e:
+        return f"Error reading JSON file: {e}"
+
+
+def is_relevant_file(name):
+    """Determines if a file is relevant based on extension."""
+    lower = name.lower()
+
+    # Skip temp files and output file
+    if name == SCRIPT_FILENAME or name == OUTPUT_FILENAME:
+        return False
+
+    for pattern in IGNORE_FILE_PATTERNS:
+        if pattern in name:  # Simple substring check for temp files
+            return False
+
+    if lower.endswith(CSV_GZ_EXT):
+        return True
+
+    ext = os.path.splitext(lower)[1]
+    valid_exts = {
+        PY_EXT,
+        GO_EXT,
+        CSV_EXT,
+        PARQUET_EXT,
+        YAML_EXT1,
+        YAML_EXT2,
+        ENV_EXT,
+        SAFETENSORS_EXT,
+        PT_EXT,
+        JSON_EXT,
+        CU_EXT,
+        CUH_EXT,
+        NPZ_EXT,
+    }
+    return ext in valid_exts
+
+
+# --- Main ---
+
+
+def main():
+    print("Starting: building file tree and collecting relevant paths...", file=sys.stderr)
+
+    try:
+        outfile = open(OUTPUT_FILENAME, "w", encoding="utf-8")
+    except IOError as e:
+        print(f"Failed to create {OUTPUT_FILENAME}: {e}", file=sys.stderr)
+        return
+
+    relevant_paths = []
+
+    # 1. Build Tree
+    outfile.write("--- File Tree Structure ---\n")
+
+    # os.walk yields (dirpath, dirnames, filenames)
+    # We sort them to ensure deterministic output similar to file explorers
+    for root, dirs, files in os.walk(ROOT_DIR, topdown=True):
+        # Filter Directories in-place to stop os.walk from entering them
+        dirs[:] = [
+            d
+            for d in dirs
+            if d not in IGNORE_DIRS and not is_date_subdir(os.path.join(root, d))
+        ]
+        dirs.sort()
+        files.sort()
+
+        # Calculate depth for indentation
+        rel_path = os.path.relpath(root, ROOT_DIR)
+        if rel_path == ".":
+            depth = 0
+        else:
+            depth = rel_path.count(os.sep) + 1
+
+        # --- Directories in tree view ---
+        indent = "    " * depth + "|-- "
+
+        if dirs:
+            # If ALL child directories look like months (01..12), collapse them
+            all_months = all(d in MONTH_DIRS for d in dirs)
+            if all_months and len(dirs) > 3:
+                first = dirs[0]
+                last = dirs[-1]
+                outfile.write(f"{indent}[{first}..{last}]/ ({len(dirs)} month dirs)\n")
+            else:
+                for d in dirs:
+                    outfile.write(f"{indent}{d}/\n")
+
+        # --- Files in tree view ---
+        for f in files:
+            if f == SCRIPT_FILENAME or f == OUTPUT_FILENAME:
+                continue
+
+            # Skip temp files
+            is_temp = False
+            for pat in IGNORE_FILE_PATTERNS:
+                if f.endswith(pat):
+                    is_temp = True
+                    break
+            if is_temp:
+                continue
+
+            if is_relevant_file(f):
+                file_indent = "    " * depth + "|-- "
+                outfile.write(f"{file_indent}{f}\n")
+                full_path = os.path.join(root, f)
+                relevant_paths.append(full_path)
+
+    outfile.write("\n")
+    outfile.flush()
+
+    print(f"Tree build complete. Relevant files: {len(relevant_paths)}", file=sys.stderr)
+    print("Processing file contents for context...", file=sys.stderr)
+
+    # 2. Dump Content
+    for path in relevant_paths:
+        lower = path.lower()
+
+        # Skip content dump for large/binary formats
+        if (
+            lower.endswith(CSV_EXT)
+            or lower.endswith(CSV_GZ_EXT)
+            or lower.endswith(PARQUET_EXT)
+            or lower.endswith(NPZ_EXT)
+        ):
+            continue
+
+        is_json = lower.endswith(JSON_EXT)
+
+        # Detect large JSON files
+        is_large_json = False
+        if is_json:
+            try:
+                size_bytes = os.path.getsize(path)
+                if size_bytes > LARGE_JSON_SIZE_BYTES:
+                    is_large_json = True
+            except OSError:
+                is_large_json = False
+
+        # Decide to read full content
+        should_read_full = (
+            lower.endswith(PY_EXT)
+            or lower.endswith(GO_EXT)
+            or lower.endswith(YAML_EXT1)
+            or lower.endswith(YAML_EXT2)
+            or lower.endswith(ENV_EXT)
+            or lower.endswith(CU_EXT)
+            or lower.endswith(CUH_EXT)
+            or lower.endswith(SAFETENSORS_EXT)
+            or lower.endswith(PT_EXT)
+            or (is_json and not is_large_json)
+        )
+
+        # If it's not a large JSON and not in the full-read set, skip
+        if not should_read_full and not is_large_json:
+            continue
+
+        rel_path = os.path.relpath(path, ROOT_DIR)
+        lang_id = get_language_identifier(path)
+
+        print(f"Including file: {rel_path}", file=sys.stderr)
+
+        outfile.write(f"// --- File: {rel_path} ---\n\n")
+
+        # Use preview for large JSON, full content otherwise
+        if is_large_json:
+            content = get_large_json_preview(
+                path, MAX_JSON_PREVIEW_CHARS, MAX_JSON_PREVIEW_LINES
+            )
+        else:
+            content = get_file_content(path)
+
+        outfile.write(f"```{lang_id}\n")
+        outfile.write(content)
+        if content and not content.endswith("\n"):
+            outfile.write("\n")
+        outfile.write("```\n\n")
+
+        outfile.write(f"// --- End File: {rel_path} ---\n\n")
+        outfile.flush()
+
+    outfile.close()
+    print("File content collection complete.", file=sys.stderr)
+    print(f"Successfully wrote context to {OUTPUT_FILENAME}", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+// --- End File: context.py ---
+
+// --- File: gnc.go ---
 
 ```go
 package main
@@ -668,126 +728,367 @@ import (
 	"fmt"
 	"io"
 	"iter"
-	"math"
 	"os"
 	"path/filepath"
 	"strconv"
 	"sync"
-	"time"
+	"unsafe"
 )
 
-type ofiTask struct {
-	Y, M, D        int
-	Offset, Length int64
+// These constants MUST match the downloader project.
+const (
+	IdxMagic = "QIDX" // index.quantdev magic
+
+	TBMagic   = "TBV1" // trade-block magic
+	TBVersion = 1
+	TBHdrSize = 64
+
+	// Zen4 cache line size (and alignment unit for columns).
+	CacheLine = 64
+)
+
+// --- TBV1 header + zero-copy TradeBlock view ---
+
+type tbHeader struct {
+	Rows     uint64
+	OffAgg   uint32
+	OffPrice uint32
+	OffQty   uint32
+	OffFirst uint32
+	OffLast  uint32
+	OffTime  uint32
+	OffBits  uint32
+	BitWords uint64
 }
 
-func runBuild() {
-	start := time.Now()
-	found := false
-	for sym := range discoverSymbols() {
-		found = true
-		buildForSymbol(sym)
+// parseTBHeader validates header + bounds and returns layout info.
+func parseTBHeader(hdr []byte, blobLen uint64) (tbHeader, error) {
+	var h tbHeader
+	if len(hdr) < TBHdrSize {
+		return h, fmt.Errorf("header too short")
 	}
-	if !found {
-		fmt.Printf("[build] no symbols discovered under %q\n", filepath.Join(BaseDir))
+	if string(hdr[0:4]) != TBMagic {
+		return h, fmt.Errorf("magic mismatch")
 	}
-	fmt.Printf("[build] Complete in %s\n", time.Since(start))
-}
+	v := binary.LittleEndian.Uint32(hdr[4:8])
+	if v != TBVersion {
+		return h, fmt.Errorf("version mismatch: %d", v)
+	}
 
-func discoverSymbols() iter.Seq[string] {
-	return func(yield func(string) bool) {
-		entries, err := os.ReadDir(BaseDir)
-		if err != nil {
-			return
+	rows := binary.LittleEndian.Uint64(hdr[8:16])
+	if rows == 0 {
+		return h, fmt.Errorf("zero rows")
+	}
+	h.Rows = rows
+	h.OffAgg = binary.LittleEndian.Uint32(hdr[16:20])
+	h.OffPrice = binary.LittleEndian.Uint32(hdr[20:24])
+	h.OffQty = binary.LittleEndian.Uint32(hdr[24:28])
+	h.OffFirst = binary.LittleEndian.Uint32(hdr[28:32])
+	h.OffLast = binary.LittleEndian.Uint32(hdr[32:36])
+	h.OffTime = binary.LittleEndian.Uint32(hdr[36:40])
+	h.OffBits = binary.LittleEndian.Uint32(hdr[40:44])
+
+	if blobLen < uint64(TBHdrSize) {
+		return h, fmt.Errorf("blob too small")
+	}
+
+	offs := []uint32{
+		h.OffAgg, h.OffPrice, h.OffQty,
+		h.OffFirst, h.OffLast, h.OffTime, h.OffBits,
+	}
+	for _, off := range offs {
+		if off < TBHdrSize {
+			return h, fmt.Errorf("offset %d < header size", off)
 		}
-		for _, e := range entries {
-			if e.IsDir() && e.Name() != "features" && e.Name() != "common" && e.Name()[0] != '.' {
-				if !yield(e.Name()) {
-					return
-				}
-			}
+		// Enforce the intended 64-byte alignment for all columns.
+		if off%CacheLine != 0 {
+			return h, fmt.Errorf("offset %d not %d-byte aligned", off, CacheLine)
 		}
 	}
+
+	validateCol := func(off uint32, elemSize uint64) error {
+		end := uint64(off) + rows*elemSize
+		if end > blobLen {
+			return fmt.Errorf("column out of range (off=%d)", off)
+		}
+		return nil
+	}
+
+	if err := validateCol(h.OffAgg, 8); err != nil {
+		return h, err
+	}
+	if err := validateCol(h.OffPrice, 8); err != nil {
+		return h, err
+	}
+	if err := validateCol(h.OffQty, 8); err != nil {
+		return h, err
+	}
+	if err := validateCol(h.OffFirst, 8); err != nil {
+		return h, err
+	}
+	if err := validateCol(h.OffLast, 8); err != nil {
+		return h, err
+	}
+	if err := validateCol(h.OffTime, 8); err != nil {
+		return h, err
+	}
+
+	bitWords := (rows + 63) / 64
+	if bitWords == 0 {
+		return h, fmt.Errorf("invalid bitWords")
+	}
+	bitsEnd := uint64(h.OffBits) + bitWords*8
+	if bitsEnd > blobLen {
+		return h, fmt.Errorf("bitset out of range")
+	}
+	h.BitWords = bitWords
+	return h, nil
 }
 
-func buildForSymbol(sym string) {
-	fmt.Printf(">>> Building %s (Atoms v4: Modular)\n", sym)
-	featRoot := filepath.Join(BaseDir, "features", sym)
-	outDir := filepath.Join(featRoot, "Atoms_v4")
-	if err := os.MkdirAll(outDir, 0o755); err != nil {
-		fmt.Printf("[build] MkdirAll: %v\n", err)
+// TradeBlock is a zero-copy view over a TBV1 blob.
+type TradeBlock struct {
+	Count int
+
+	AggTradeIDs   []uint64
+	Prices        []float64
+	Quantities    []float64
+	FirstTradeIDs []uint64
+	LastTradeIDs  []uint64
+	Times         []int64
+
+	BuyerBits []uint64
+}
+
+// mapTradeBlock creates a view over raw blob without extra allocations.
+func mapTradeBlock(raw []byte) (*TradeBlock, error) {
+	h, err := parseTBHeader(raw, uint64(len(raw)))
+	if err != nil {
+		return nil, err
+	}
+	if len(raw) < TBHdrSize {
+		return nil, fmt.Errorf("short blob")
+	}
+
+	count := int(h.Rows)
+	if count < 0 {
+		return nil, fmt.Errorf("negative count")
+	}
+
+	tb := &TradeBlock{Count: count}
+	base := unsafe.Pointer(&raw[0])
+
+	tb.AggTradeIDs = unsafe.Slice((*uint64)(unsafe.Add(base, uintptr(h.OffAgg))), count)
+	tb.Prices = unsafe.Slice((*float64)(unsafe.Add(base, uintptr(h.OffPrice))), count)
+	tb.Quantities = unsafe.Slice((*float64)(unsafe.Add(base, uintptr(h.OffQty))), count)
+	tb.FirstTradeIDs = unsafe.Slice((*uint64)(unsafe.Add(base, uintptr(h.OffFirst))), count)
+	tb.LastTradeIDs = unsafe.Slice((*uint64)(unsafe.Add(base, uintptr(h.OffLast))), count)
+	tb.Times = unsafe.Slice((*int64)(unsafe.Add(base, uintptr(h.OffTime))), count)
+	tb.BuyerBits = unsafe.Slice((*uint64)(unsafe.Add(base, uintptr(h.OffBits))), int(h.BitWords))
+
+	return tb, nil
+}
+
+// IsBuyerMaker checks the boolean bitset efficiently.
+func (tb *TradeBlock) IsBuyerMaker(i int) bool {
+	if i < 0 || i >= tb.Count {
+		return false
+	}
+	wordIdx := i / 64
+	bitIdx := i % 64
+	return (tb.BuyerBits[wordIdx] & (1 << bitIdx)) != 0
+}
+
+// --- DayColumns (simple SoA view used by RunStream) ---
+
+// DayColumns is the SoA representation of a single day's trades,
+// used by the streaming feature engine. Right now we only need
+// time/price/quantity for the continuous models.
+type DayColumns struct {
+	Count  int
+	Times  []int64
+	Prices []float64
+	Qtys   []float64
+}
+
+// DayColumnPool reduces allocation pressure (critical for GOGC=200).
+var DayColumnPool = sync.Pool{
+	New: func() any {
+		// Pre-allocate for ~1.5M rows (typical busy day).
+		const initCap = 1_500_000
+		return &DayColumns{
+			Times:  make([]int64, 0, initCap),
+			Prices: make([]float64, 0, initCap),
+			Qtys:   make([]float64, 0, initCap),
+		}
+	},
+}
+
+// Reset clears the struct for reuse without freeing memory.
+func (c *DayColumns) Reset() {
+	c.Count = 0
+	c.Times = c.Times[:0]
+	c.Prices = c.Prices[:0]
+	c.Qtys = c.Qtys[:0]
+}
+
+// FillFromTradeBlock copies the TBV1 SoA into the DayColumns view.
+func (c *DayColumns) FillFromTradeBlock(tb *TradeBlock) {
+	c.Reset()
+	n := tb.Count
+	if n == 0 {
 		return
 	}
 
-	tasksCh := make(chan ofiTask, 1024)
-	var wg sync.WaitGroup
-
-	for i := 0; i < CPUThreads; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			var binBuf []byte
-			var gncBuf []byte
-			for t := range tasksCh {
-				processDynamicDay(sym, t, outDir, &binBuf, &gncBuf)
-			}
-		}()
+	if cap(c.Times) < n {
+		c.Times = make([]int64, n)
+		c.Prices = make([]float64, n)
+		c.Qtys = make([]float64, n)
+	} else {
+		c.Times = c.Times[:n]
+		c.Prices = c.Prices[:n]
+		c.Qtys = c.Qtys[:n]
 	}
 
-	for t := range discoverTasks(sym) {
-		tasksCh <- t
-	}
-	close(tasksCh)
-	wg.Wait()
+	copy(c.Times, tb.Times)
+	copy(c.Prices, tb.Prices)
+	copy(c.Qtys, tb.Quantities)
+
+	c.Count = n
 }
 
+// ofiTask identifies a single day (year, month, day) for one symbol.
+type ofiTask struct {
+	Year, Month, Day int
+}
+
+// LoadGNCFile locates and reads a single TBV1 blob for (sym, day) into buf.
+// Returns false on any error or if the day is not present in the index.
+//
+// NOTE: Name kept as LoadGNCFile for API compatibility with existing code;
+// it now actually loads a TBV1 trade-block blob.
+func LoadGNCFile(baseDir, sym string, t ofiTask, buf *[]byte) bool {
+	dir := filepath.Join(baseDir, sym, sprintfYear(t.Year), sprintfMonth(t.Month))
+	idxPath := filepath.Join(dir, "index.quantdev")
+	dataPath := filepath.Join(dir, "data.quantdev")
+
+	offset, length := findBlobOffset(idxPath, t.Day)
+	if length == 0 {
+		return false
+	}
+
+	// Safety check: prevent panic if index is corrupted and length is massive.
+	// 512MB is a reasonable upper bound for a single day's blob.
+	if length > 512*1024*1024 {
+		return false
+	}
+
+	f, err := os.Open(dataPath)
+	if err != nil {
+		return false
+	}
+	defer f.Close()
+
+	if cap(*buf) < int(length) {
+		*buf = make([]byte, length)
+	}
+	*buf = (*buf)[:length]
+
+	if _, err := f.Seek(int64(offset), io.SeekStart); err != nil {
+		return false
+	}
+	if _, err := io.ReadFull(f, *buf); err != nil {
+		return false
+	}
+	return true
+}
+
+// InflateGNC decodes a TBV1 blob into DayColumns by mapping the TradeBlock
+// and copying just the SoA slices we care about (time, price, qty).
+//
+// Signature is kept as (int, error) for compatibility with the previous code.
+func InflateGNC(rawBlob []byte, cols *DayColumns) (int, error) {
+	cols.Reset()
+
+	tb, err := mapTradeBlock(rawBlob)
+	if err != nil {
+		return 0, err
+	}
+	if tb.Count == 0 {
+		return 0, nil
+	}
+
+	cols.FillFromTradeBlock(tb)
+	return cols.Count, nil
+}
+
+// --- Discovery helpers over the TBV1 index tree ---
+
+// discoverSymbols yields all symbols (top-level dirs) under BaseDir.
+func discoverSymbols() iter.Seq[string] {
+	return func(yield func(string) bool) {
+		entries, _ := os.ReadDir(BaseDir)
+		for _, e := range entries {
+			if !e.IsDir() {
+				continue
+			}
+			name := e.Name()
+			if len(name) == 0 || name[0] == '.' || name == "features" {
+				continue
+			}
+			if !yield(name) {
+				return
+			}
+		}
+	}
+}
+
+// discoverTasks yields all (year, month, day) tasks for a symbol.
+// Reads 26-byte index rows: Day[2] + Offset[8] + Length[8] + Checksum[8].
 func discoverTasks(sym string) iter.Seq[ofiTask] {
 	return func(yield func(ofiTask) bool) {
 		root := filepath.Join(BaseDir, sym)
-		years, _ := os.ReadDir(root)
-		for _, yDir := range years {
-			if !yDir.IsDir() {
+		years, err := os.ReadDir(root)
+		if err != nil {
+			return
+		}
+		for _, y := range years {
+			if !y.IsDir() || len(y.Name()) != 4 {
 				continue
 			}
-			y, err := strconv.Atoi(yDir.Name())
+			year, err := strconv.Atoi(y.Name())
 			if err != nil {
 				continue
 			}
-			yearPath := filepath.Join(root, yDir.Name())
-			months, _ := os.ReadDir(yearPath)
-			for _, mDir := range months {
-				if !mDir.IsDir() {
+
+			months, err := os.ReadDir(filepath.Join(root, y.Name()))
+			if err != nil {
+				continue
+			}
+			for _, m := range months {
+				if !m.IsDir() || len(m.Name()) != 2 {
 					continue
 				}
-				m, err := strconv.Atoi(mDir.Name())
+				month, err := strconv.Atoi(m.Name())
 				if err != nil {
 					continue
 				}
-				idxPath := filepath.Join(yearPath, mDir.Name(), "index.quantdev")
+
+				idxPath := filepath.Join(root, y.Name(), m.Name(), "index.quantdev")
 				f, err := os.Open(idxPath)
 				if err != nil {
 					continue
 				}
+
 				var hdr [16]byte
-				if _, err := io.ReadFull(f, hdr[:]); err != nil {
-					f.Close()
-					continue
-				}
-				if string(hdr[0:4]) != IdxMagic {
-					f.Close()
-					continue
-				}
-				count := binary.LittleEndian.Uint64(hdr[8:])
-				var row [26]byte
-				for i := uint64(0); i < count; i++ {
-					if _, err := io.ReadFull(f, row[:]); err != nil {
-						break
-					}
-					d := int(binary.LittleEndian.Uint16(row[0:]))
-					offset := int64(binary.LittleEndian.Uint64(row[2:]))
-					length := int64(binary.LittleEndian.Uint64(row[10:]))
-					if length > 0 {
-						if !yield(ofiTask{Y: y, M: m, D: d, Offset: offset, Length: length}) {
+				if _, err := io.ReadFull(f, hdr[:]); err == nil && string(hdr[0:4]) == IdxMagic {
+					count := binary.LittleEndian.Uint64(hdr[8:16])
+					var row [26]byte
+					for i := uint64(0); i < count; i++ {
+						if _, err := io.ReadFull(f, row[:]); err != nil {
+							break
+						}
+						day := int(binary.LittleEndian.Uint16(row[0:2]))
+						if !yield(ofiTask{year, month, day}) {
 							f.Close()
 							return
 						}
@@ -799,1027 +1100,46 @@ func discoverTasks(sym string) iter.Seq[ofiTask] {
 	}
 }
 
-func processDynamicDay(sym string, t ofiTask, outDir string, binBuf, gncBuf *[]byte) {
-	// 1. Get Atoms
-	atoms := GetActiveAtoms()
-	numAtoms := len(atoms)
-	if numAtoms == 0 {
-		return
-	}
-
-	gncBlob, ok := loadRawGNC(sym, t, gncBuf)
-	if !ok {
-		return
-	}
-
-	colsAny := DayColumnPool.Get()
-	cols := colsAny.(*DayColumns)
-	cols.Reset()
-	defer DayColumnPool.Put(cols)
-
-	rowCount, ok := inflateGNCToColumns(gncBlob, cols)
-	if !ok || rowCount < 2 {
-		return
-	}
-
-	times := cols.Times
-	qtys := cols.Qtys
-	sides := cols.Sides
-	prices := cols.Prices
-
-	// 2. Prepare Header
-	// Magic(4) + Count(2) + [Len(1) + Str]...
-	var headerBuf []byte
-	headerBuf = append(headerBuf, AtomHeaderMagic...)
-	var scratch [2]byte
-	binary.LittleEndian.PutUint16(scratch[:], uint16(numAtoms))
-	headerBuf = append(headerBuf, scratch[:]...)
-
-	for _, a := range atoms {
-		name := a.Name()
-		if len(name) > 255 {
-			name = name[:255]
-		}
-		headerBuf = append(headerBuf, uint8(len(name)))
-		headerBuf = append(headerBuf, []byte(name)...)
-		a.Reset()
-	}
-
-	// 3. Alloc Buffer
-	rowBytes := numAtoms * 4
-	reqSize := len(headerBuf) + (rowCount * rowBytes)
-	if cap(*binBuf) < reqSize {
-		*binBuf = make([]byte, reqSize)
-	}
-	*binBuf = (*binBuf)[:reqSize]
-
-	// 4. Write Header
-	copy((*binBuf)[0:], headerBuf)
-	writePtr := len(headerBuf)
-
-	prevTime := times[0]
-
-	for i := 0; i < rowCount; i++ {
-		q := qtys[i]
-		s := float64(sides[i])
-		p := prices[i]
-		ts := times[i]
-		flow := q * s
-
-		dtSec := 0.0
-		if i > 0 {
-			dtMs := float64(ts - prevTime)
-			if dtMs < 0 {
-				dtMs = 0
-			}
-			dtSec = dtMs / 1000.0
-		}
-		if dtSec < 1e-4 {
-			dtSec = 1e-4
-		}
-
-		// Dynamic Update Loop
-		for _, atom := range atoms {
-			val := atom.Update(q, s, p, flow, dtSec)
-
-			// Clamp
-			if val > 50 {
-				val = 50
-			}
-			if val < -50 {
-				val = -50
-			}
-
-			// Inline Write
-			bits := math.Float32bits(float32(val))
-			(*binBuf)[writePtr] = byte(bits)
-			(*binBuf)[writePtr+1] = byte(bits >> 8)
-			(*binBuf)[writePtr+2] = byte(bits >> 16)
-			(*binBuf)[writePtr+3] = byte(bits >> 24)
-			writePtr += 4
-		}
-		prevTime = ts
-	}
-
-	dateStr := fmt.Sprintf("%04d%02d%02d", t.Y, t.M, t.D)
-	outPath := filepath.Join(outDir, dateStr+".bin")
-	if err := os.WriteFile(outPath, *binBuf, 0o644); err != nil {
-		fmt.Printf("[build] Write error: %v\n", err)
-	}
-}
-
-func loadRawGNC(sym string, t ofiTask, buf *[]byte) ([]byte, bool) {
-	path := filepath.Join(
-		BaseDir, sym,
-		fmt.Sprintf("%04d", t.Y), fmt.Sprintf("%02d", t.M),
-		"data.quantdev",
-	)
-	f, err := os.Open(path)
-	if err != nil {
-		return nil, false
-	}
-	defer f.Close()
-	if _, err := f.Seek(t.Offset, io.SeekStart); err != nil {
-		return nil, false
-	}
-	need := int(t.Length)
-	if cap(*buf) < need {
-		*buf = make([]byte, need)
-	}
-	b := (*buf)[:need]
-	if _, err := io.ReadFull(f, b); err != nil {
-		return nil, false
-	}
-	if string(b[0:4]) != GNCMagic {
-		return nil, false
-	}
-	return b, true
-}
-```
-
-// --- End File: build.go ---
-
-// --- File: common.go ---
-
-```go
-package main
-
-import (
-	"encoding/binary"
-	"sync"
-	"unique"
-	"unsafe"
-)
-
-// --- Shared Configuration ---
-
-const (
-	CPUThreads = 24
-	BaseDir    = "data"
-
-	// Input Data Layout (GNC-v2)
-	PxScale = 100_000_000.0
-	QtScale = 100_000_000.0
-
-	GNCChunkSize  = 65536
-	GNCMagic      = "GNC2"
-	GNCHeaderSize = 32
-	IdxMagic      = "QIDX"
-	IdxVersion    = 1
-
-	// Output File Magic (V4 Self-Describing)
-	AtomHeaderMagic = "ATM4"
-)
-
-var SymbolHandle = unique.Make("ETHUSDT")
-
-func Symbol() string { return SymbolHandle.Value() }
-
-// --- OPTIMIZED DATA SCHEMA (SoA) ---
-
-type DayColumns struct {
-	Count               int
-	Times               []int64
-	Prices              []float64
-	Qtys                []float64
-	Sides               []int8
-	Matches             []uint16
-	ScratchQtyDict      []float64
-	ScratchChunkOffsets []uint32
-}
-
-func (c *DayColumns) Reset() {
-	c.Count = 0
-	c.Times = c.Times[:0]
-	c.Prices = c.Prices[:0]
-	c.Qtys = c.Qtys[:0]
-	c.Sides = c.Sides[:0]
-	c.Matches = c.Matches[:0]
-	c.ScratchQtyDict = c.ScratchQtyDict[:0]
-	c.ScratchChunkOffsets = c.ScratchChunkOffsets[:0]
-}
-
-var DayColumnPool = sync.Pool{
-	New: func() any {
-		return &DayColumns{
-			Times:               make([]int64, 0, 65536),
-			Prices:              make([]float64, 0, 65536),
-			Qtys:                make([]float64, 0, 65536),
-			Sides:               make([]int8, 0, 65536),
-			Matches:             make([]uint16, 0, 65536),
-			ScratchQtyDict:      make([]float64, 0, 1024),
-			ScratchChunkOffsets: make([]uint32, 0, 128),
-		}
-	},
-}
-
-// --- Shared GNC Decoder ---
-
-func inflateGNCToColumns(rawBlob []byte, cols *DayColumns) (int, bool) {
-	if len(rawBlob) < GNCHeaderSize {
-		return 0, false
-	}
-	if string(rawBlob[0:4]) != GNCMagic {
-		return 0, false
-	}
-
-	totalRows := int(binary.LittleEndian.Uint32(rawBlob[4:8]))
-	if totalRows <= 0 {
-		cols.Reset()
-		return 0, true
-	}
-
-	if cap(cols.Times) < totalRows {
-		cols.Times = make([]int64, 0, totalRows)
-	}
-	if cap(cols.Prices) < totalRows {
-		cols.Prices = make([]float64, 0, totalRows)
-	}
-	if cap(cols.Qtys) < totalRows {
-		cols.Qtys = make([]float64, 0, totalRows)
-	}
-	if cap(cols.Sides) < totalRows {
-		cols.Sides = make([]int8, 0, totalRows)
-	}
-	if cap(cols.Matches) < totalRows {
-		cols.Matches = make([]uint16, 0, totalRows)
-	}
-
-	footerOffset := binary.LittleEndian.Uint64(rawBlob[24:32])
-	if footerOffset >= uint64(len(rawBlob)) {
-		return 0, false
-	}
-
-	dictBlob := rawBlob[footerOffset:]
-	if len(dictBlob) < 4 {
-		return 0, false
-	}
-
-	dictCount := binary.LittleEndian.Uint32(dictBlob[0:4])
-	ptr := 4
-
-	if uint64(ptr)+uint64(dictCount)*8+4 > uint64(len(dictBlob)) {
-		return 0, false
-	}
-
-	if cap(cols.ScratchQtyDict) < int(dictCount) {
-		cols.ScratchQtyDict = make([]float64, 0, int(dictCount))
-	}
-	qtyDict := cols.ScratchQtyDict[:dictCount]
-
-	for i := 0; i < int(dictCount); i++ {
-		qRaw := binary.LittleEndian.Uint64(dictBlob[ptr : ptr+8])
-		qtyDict[i] = float64(qRaw) / QtScale
-		ptr += 8
-	}
-
-	if len(dictBlob) < ptr+4 {
-		return 0, false
-	}
-	chunkCount := binary.LittleEndian.Uint32(dictBlob[ptr : ptr+4])
-	ptr += 4
-
-	if uint64(ptr)+uint64(chunkCount)*4 > uint64(len(dictBlob)) {
-		return 0, false
-	}
-
-	if cap(cols.ScratchChunkOffsets) < int(chunkCount) {
-		cols.ScratchChunkOffsets = make([]uint32, 0, int(chunkCount))
-	}
-	chunkOffsets := cols.ScratchChunkOffsets[:chunkCount]
-
-	for i := 0; i < int(chunkCount); i++ {
-		chunkOffsets[i] = binary.LittleEndian.Uint32(dictBlob[ptr : ptr+4])
-		ptr += 4
-	}
-
-	for _, off := range chunkOffsets {
-		if uint64(off)+18 > uint64(len(rawBlob)) {
-			return 0, false
-		}
-		chunk := rawBlob[off:]
-		n := int(binary.LittleEndian.Uint16(chunk[0:2]))
-		baseT := int64(binary.LittleEndian.Uint64(chunk[2:10]))
-		baseP := int64(binary.LittleEndian.Uint64(chunk[10:18]))
-
-		pTime := 18
-		pPrice := pTime + n*4
-		pQty := pPrice + n*8
-		pMatches := pQty + n*2
-		pSide := pMatches + n*2
-
-		hasMatches := true
-		if pSide > len(chunk) {
-			pSideLegacy := pQty + n*2
-			if pSideLegacy <= len(chunk) {
-				hasMatches = false
-				pSide = pSideLegacy
-			} else {
-				return 0, false
-			}
-		}
-
-		tDeltas := unsafe.Slice((*int32)(unsafe.Pointer(&chunk[pTime])), n)
-		pDeltas := unsafe.Slice((*int64)(unsafe.Pointer(&chunk[pPrice])), n)
-		qIDs := unsafe.Slice((*uint16)(unsafe.Pointer(&chunk[pQty])), n)
-
-		var ms []uint16
-		if hasMatches {
-			ms = unsafe.Slice((*uint16)(unsafe.Pointer(&chunk[pMatches])), n)
-		}
-
-		sideBits := chunk[pSide:]
-		if len(sideBits) < (n+7)/8 {
-			return 0, false
-		}
-
-		lastT := baseT
-		lastP := baseP
-
-		for i := 0; i < n; i++ {
-			lastT += int64(tDeltas[i])
-			lastP += pDeltas[i]
-
-			cols.Times = append(cols.Times, lastT)
-			cols.Prices = append(cols.Prices, float64(lastP)/PxScale)
-
-			qID := int(qIDs[i])
-			if qID < len(qtyDict) {
-				cols.Qtys = append(cols.Qtys, qtyDict[qID])
-			} else {
-				cols.Qtys = append(cols.Qtys, 0)
-			}
-
-			if hasMatches {
-				cols.Matches = append(cols.Matches, ms[i])
-			} else {
-				cols.Matches = append(cols.Matches, 1)
-			}
-
-			bitByte := sideBits[i/8]
-			isBuy := (bitByte & (1 << (i % 8))) != 0
-			side := int8(-1)
-			if isBuy {
-				side = 1
-			}
-			cols.Sides = append(cols.Sides, side)
-		}
-	}
-
-	cols.Count = len(cols.Prices)
-	return cols.Count, true
-}
-```
-
-// --- End File: common.go ---
-
-// --- File: data.go ---
-
-```go
-package main
-
-import (
-	"archive/zip"
-	"bufio"
-	"bytes"
-	"crypto/sha256"
-	"encoding/binary"
-	"fmt"
-	"io"
-	"net/http"
-	"os"
-	"os/signal"
-	"path/filepath"
-	"strings"
-	"sync"
-	"sync/atomic"
-	"time"
-	"unsafe"
-)
-
-const (
-	HostData   = "data.binance.vision"
-	S3Prefix   = "data/futures/um"
-	DataSet    = "aggTrades"
-	FallbackDt = "2020-01-01"
-)
-
-var (
-	httpClient *http.Client
-	stopEvent  atomic.Bool
-	dirLocks   sync.Map
-)
-
-var errNotFound = fmt.Errorf("404")
-
-// --- Ingestion Memory Pool ---
-
-type IngestBuffers struct {
-	Ts       []int64
-	Ps       []int64
-	Qs       []uint64
-	Ms       []uint16
-	Buys     []bool
-	TDeltas  []int32
-	PDeltas  []int64
-	QIDs     []uint16
-	SideBits []byte
-}
-
-var ingestBufferPool = sync.Pool{
-	New: func() any {
-		const cap = 1_000_000
-		return &IngestBuffers{
-			Ts:       make([]int64, 0, cap),
-			Ps:       make([]int64, 0, cap),
-			Qs:       make([]uint64, 0, cap),
-			Ms:       make([]uint16, 0, cap),
-			Buys:     make([]bool, 0, cap),
-			TDeltas:  make([]int32, GNCChunkSize),
-			PDeltas:  make([]int64, GNCChunkSize),
-			QIDs:     make([]uint16, GNCChunkSize),
-			SideBits: make([]byte, (GNCChunkSize+7)/8),
-		}
-	},
-}
-
-func (b *IngestBuffers) Reset() {
-	b.Ts = b.Ts[:0]
-	b.Ps = b.Ps[:0]
-	b.Qs = b.Qs[:0]
-	b.Ms = b.Ms[:0]
-	b.Buys = b.Buys[:0]
-}
-
-func init() {
-	tr := &http.Transport{
-		MaxIdleConns:        100,
-		MaxIdleConnsPerHost: 100,
-		IdleConnTimeout:     90 * time.Second,
-	}
-	httpClient = &http.Client{
-		Transport: tr,
-		Timeout:   30 * time.Second,
-	}
-}
-
-func runData() {
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, os.Interrupt)
-	go func() {
-		<-sigChan
-		stopEvent.Store(true)
-		fmt.Println("\n[warn] Stopping gracefully...")
-	}()
-
-	fmt.Printf("--- GNC-v2 Ingestion (Streaming) | Symbol: %s ---\n", Symbol())
-
-	start, err := time.Parse("2006-01-02", FallbackDt)
-	if err != nil {
-		fmt.Printf("[fatal] invalid FallbackDt: %v\n", err)
-		return
-	}
-
-	end := time.Now().UTC().AddDate(0, 0, -1)
-	var days []time.Time
-	for d := start; !d.After(end); d = d.AddDate(0, 0, 1) {
-		days = append(days, d)
-	}
-
-	fmt.Printf("[job] Processing %d days using %d threads.\n", len(days), CPUThreads)
-
-	jobs := make(chan time.Time, len(days))
-	results := make(chan string, len(days))
-	var wg sync.WaitGroup
-
-	for i := 0; i < CPUThreads; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			for d := range jobs {
-				if stopEvent.Load() {
-					return
-				}
-				results <- processDay(d)
-			}
-		}()
-	}
-
-	for _, d := range days {
-		jobs <- d
-	}
-	close(jobs)
-	wg.Wait()
-	close(results)
-
-	stats := make(map[string]int)
-	for r := range results {
-		key := strings.SplitN(r, " ", 2)[0]
-		stats[key]++
-	}
-	fmt.Printf("\n[done] %v\n", stats)
-}
-
-func processDay(d time.Time) string {
-	y, m, day := d.Year(), int(d.Month()), d.Day()
-
-	dirPath := filepath.Join(BaseDir, Symbol(), fmt.Sprintf("%04d", y), fmt.Sprintf("%02d", m))
-	idxPath := filepath.Join(dirPath, "index.quantdev")
-	dataPath := filepath.Join(dirPath, "data.quantdev")
-
-	muAny, _ := dirLocks.LoadOrStore(dirPath, &sync.Mutex{})
-	mu := muAny.(*sync.Mutex)
-
-	mu.Lock()
-	indexed := isIndexed(idxPath, day)
-	mu.Unlock()
-
-	if indexed {
-		return "skip"
-	}
-
-	sym := Symbol()
-	url := fmt.Sprintf("https://%s/%s/daily/%s/%s/%s-%s-%04d-%02d-%02d.zip",
-		HostData, S3Prefix, DataSet, sym, sym, DataSet, y, m, day)
-
-	// Download ZIP
-	zipBytes, err := download(url)
-	if err != nil {
-		if err == errNotFound {
-			return "missing"
-		}
-		return "error_dl"
-	}
-
-	// Stream Parse
-	bufs := ingestBufferPool.Get().(*IngestBuffers)
-	bufs.Reset()
-	defer ingestBufferPool.Put(bufs)
-
-	gncBlob, count, err := streamZipToGNCBlob(zipBytes, bufs)
-	if err != nil {
-		return "error_parse"
-	}
-	if count == 0 {
-		return "empty"
-	}
-
-	sum := sha256.Sum256(gncBlob)
-	cSum := binary.LittleEndian.Uint64(sum[:8])
-
-	mu.Lock()
-	defer mu.Unlock()
-
-	if isIndexed(idxPath, day) {
-		return "skip_race"
-	}
-
-	if err := os.MkdirAll(dirPath, 0755); err != nil {
-		return "error_mkdir"
-	}
-
-	fData, err := os.OpenFile(dataPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
-	if err != nil {
-		return "error_io"
-	}
-
-	stat, err := fData.Stat()
-	if err != nil {
-		fData.Close()
-		return "error_stat"
-	}
-	offset := stat.Size()
-
-	if _, err := fData.Write(gncBlob); err != nil {
-		fData.Close()
-		return "error_write"
-	}
-	fData.Close()
-
-	if err := updateIndex(idxPath, day, offset, len(gncBlob), cSum); err != nil {
-		return "error_idx"
-	}
-
-	return "ok"
-}
-
-// --- Streaming ZIP -> GNC Pipeline ---
-
-func streamZipToGNCBlob(zipData []byte, bufs *IngestBuffers) ([]byte, uint64, error) {
-	r, err := zip.NewReader(bytes.NewReader(zipData), int64(len(zipData)))
-	if err != nil {
-		return nil, 0, err
-	}
-
-	for _, f := range r.File {
-		if !strings.HasSuffix(f.Name, ".csv") {
-			continue
-		}
-
-		rc, err := f.Open()
-		if err != nil {
-			continue
-		}
-
-		// FIX: No defer inside loop. Explicit close after usage.
-		count, err := scanCSVToBuffers(rc, bufs)
-		rc.Close()
-
-		if err != nil {
-			return nil, 0, err
-		}
-
-		return encodeGNC(bufs, count)
-	}
-	return nil, 0, fmt.Errorf("no csv found")
-}
-
-func scanCSVToBuffers(r io.Reader, bufs *IngestBuffers) (int, error) {
-	scanner := bufio.NewScanner(r)
-	buf := make([]byte, 0, 64*1024)
-	scanner.Buffer(buf, 1024*1024)
-
-	var price int64
-	var ts int64
-	var qty uint64
-	var firstId, lastId int64
-	var isBuyerMaker bool
-
-	count := 0
-	firstLine := true
-
-	for scanner.Scan() {
-		line := scanner.Bytes()
-		if len(line) == 0 {
-			continue
-		}
-
-		if firstLine {
-			firstLine = false
-			if line[0] < '0' || line[0] > '9' {
-				continue
-			}
-		}
-
-		col := 0
-		start := 0
-
-		price = 0
-		qty = 0
-		ts = 0
-		firstId = 0
-		lastId = 0
-		isBuyerMaker = false
-
-		for i := 0; i <= len(line); i++ {
-			var c byte
-			if i < len(line) {
-				c = line[i]
-			} else {
-				c = ','
-			}
-
-			if c == ',' {
-				field := line[start:i]
-				switch col {
-				case 1:
-					price = fastParseFixed(field)
-				case 2:
-					qty = uint64(fastParseFixed(field))
-				case 3:
-					firstId = fastParseInt(field)
-				case 4:
-					lastId = fastParseInt(field)
-				case 5:
-					ts = fastParseInt(field)
-				case 6:
-					if len(field) > 0 && (field[0] == 't' || field[0] == 'T') {
-						isBuyerMaker = true
-					}
-				}
-				col++
-				start = i + 1
-			}
-		}
-
-		bufs.Ps = append(bufs.Ps, price)
-		bufs.Qs = append(bufs.Qs, qty)
-		bufs.Ts = append(bufs.Ts, ts)
-		bufs.Buys = append(bufs.Buys, !isBuyerMaker)
-
-		matches := int64(1)
-		if lastId >= firstId {
-			matches = lastId - firstId + 1
-		}
-		if matches > 65535 {
-			matches = 65535
-		}
-		bufs.Ms = append(bufs.Ms, uint16(matches))
-
-		count++
-	}
-
-	return count, scanner.Err()
-}
-
-// encodeGNC and encodeChunk ... (Standard GNC logic)
-func encodeGNC(bufs *IngestBuffers, count int) ([]byte, uint64, error) {
-	if count == 0 {
-		return nil, 0, nil
-	}
-
-	var buf bytes.Buffer
-	buf.Grow(count * 20)
-
-	baseTime := bufs.Ts[0]
-	basePrice := bufs.Ps[0]
-
-	buf.WriteString(GNCMagic)
-
-	var scratch [8]byte
-	binary.LittleEndian.PutUint32(scratch[:4], uint32(count))
-	buf.Write(scratch[:4])
-
-	binary.LittleEndian.PutUint64(scratch[:], uint64(baseTime))
-	buf.Write(scratch[:])
-
-	binary.LittleEndian.PutUint64(scratch[:], uint64(basePrice))
-	buf.Write(scratch[:])
-
-	footerOffsetPos := buf.Len()
-	binary.LittleEndian.PutUint64(scratch[:], 0)
-	buf.Write(scratch[:])
-
-	qtyDict := make(map[uint64]uint16, 1000)
-	var dictLog []uint64
-	chunkOffsets := make([]uint32, 0)
-
-	for i := 0; i < count; i += GNCChunkSize {
-		end := i + GNCChunkSize
-		if end > count {
-			end = count
-		}
-		chunkOffsets = append(chunkOffsets, uint32(buf.Len()))
-		if err := encodeChunk(&buf, bufs, i, end, qtyDict, &dictLog); err != nil {
-			return nil, 0, err
-		}
-	}
-
-	footerStart := buf.Len()
-
-	binary.LittleEndian.PutUint32(scratch[:4], uint32(len(dictLog)))
-	buf.Write(scratch[:4])
-	for _, q := range dictLog {
-		binary.LittleEndian.PutUint64(scratch[:], q)
-		buf.Write(scratch[:])
-	}
-
-	binary.LittleEndian.PutUint32(scratch[:4], uint32(len(chunkOffsets)))
-	buf.Write(scratch[:4])
-	for _, off := range chunkOffsets {
-		binary.LittleEndian.PutUint32(scratch[:4], off)
-		buf.Write(scratch[:4])
-	}
-
-	finalBytes := buf.Bytes()
-	binary.LittleEndian.PutUint64(finalBytes[footerOffsetPos:], uint64(footerStart))
-
-	return finalBytes, uint64(count), nil
-}
-
-func encodeChunk(w *bytes.Buffer, bufs *IngestBuffers, start, end int, dict map[uint64]uint16, log *[]uint64) error {
-	count := end - start
-	ts := bufs.Ts[start:end]
-	ps := bufs.Ps[start:end]
-	qs := bufs.Qs[start:end]
-	ms := bufs.Ms[start:end]
-	buys := bufs.Buys[start:end]
-
-	tDeltas := bufs.TDeltas[:count]
-	pDeltas := bufs.PDeltas[:count]
-	qIDs := bufs.QIDs[:count]
-	sideBits := bufs.SideBits[:(count+7)/8]
-
-	for k := range sideBits {
-		sideBits[k] = 0
-	}
-
-	chunkBaseT := ts[0]
-	chunkBaseP := ps[0]
-	var lastT, lastP int64 = chunkBaseT, chunkBaseP
-
-	tDeltas[0] = 0
-	pDeltas[0] = 0
-
-	id, ok := dict[qs[0]]
-	if !ok {
-		if len(*log) >= 65535 {
-			return fmt.Errorf("qty dict overflow")
-		}
-		id = uint16(len(*log))
-		dict[qs[0]] = id
-		*log = append(*log, qs[0])
-	}
-	qIDs[0] = id
-	if buys[0] {
-		sideBits[0] |= 1
-	}
-
-	for i := 1; i < count; i++ {
-		dt := ts[i] - lastT
-		dp := ps[i] - lastP
-
-		if dt > 2147483647 || dt < -2147483648 {
-			return fmt.Errorf("time delta overflow")
-		}
-
-		tDeltas[i] = int32(dt)
-		lastT = ts[i]
-		pDeltas[i] = dp
-		lastP = ps[i]
-
-		id, ok := dict[qs[i]]
-		if !ok {
-			if len(*log) >= 65535 {
-				return fmt.Errorf("qty dict overflow")
-			}
-			id = uint16(len(*log))
-			dict[qs[i]] = id
-			*log = append(*log, qs[i])
-		}
-		qIDs[i] = id
-
-		if buys[i] {
-			sideBits[i/8] |= (1 << (i % 8))
-		}
-	}
-
-	var head [18]byte
-	binary.LittleEndian.PutUint16(head[0:], uint16(count))
-	binary.LittleEndian.PutUint64(head[2:], uint64(chunkBaseT))
-	binary.LittleEndian.PutUint64(head[10:], uint64(chunkBaseP))
-	w.Write(head[:])
-
-	w.Write(unsafeBytes(tDeltas))
-	w.Write(unsafeBytes(pDeltas))
-	w.Write(unsafeBytes(qIDs))
-	w.Write(unsafeBytes(ms))
-	w.Write(sideBits)
-
-	return nil
-}
-
-func fastParseFixed(b []byte) int64 {
-	var num int64
-	var seenDot bool
-	var dec int
-	for _, c := range b {
-		if c == '.' {
-			seenDot = true
-			continue
-		}
-		if c < '0' || c > '9' {
-			continue
-		}
-		num = num*10 + int64(c-'0')
-		if seenDot {
-			dec++
-		}
-	}
-	for dec < 8 {
-		num *= 10
-		dec++
-	}
-	return num
-}
-
-func fastParseInt(b []byte) int64 {
-	var n int64
-	for _, c := range b {
-		if c < '0' || c > '9' {
-			continue
-		}
-		n = n*10 + int64(c-'0')
-	}
-	return n
-}
-
-func unsafeBytes[T any](s []T) []byte {
-	return unsafe.Slice((*byte)(unsafe.Pointer(unsafe.SliceData(s))), len(s)*int(unsafe.Sizeof(s[0])))
-}
-
-func download(url string) ([]byte, error) {
-	var lastErr error
-	for attempt := 0; attempt < 3; attempt++ {
-		resp, err := httpClient.Get(url)
-		if err != nil {
-			lastErr = err
-			time.Sleep(100 * time.Millisecond)
-			continue
-		}
-		if resp.StatusCode == 404 {
-			resp.Body.Close()
-			return nil, errNotFound
-		}
-		if resp.StatusCode != 200 {
-			resp.Body.Close()
-			lastErr = fmt.Errorf("status %d", resp.StatusCode)
-			time.Sleep(100 * time.Millisecond)
-			continue
-		}
-		data, err := io.ReadAll(resp.Body)
-		resp.Body.Close()
-		if err != nil {
-			lastErr = err
-			time.Sleep(100 * time.Millisecond)
-			continue
-		}
-		return data, nil
-	}
-	if lastErr == nil {
-		lastErr = fmt.Errorf("unknown dl error")
-	}
-	return nil, lastErr
-}
-
-func isIndexed(idxPath string, day int) bool {
+// findBlobOffset scans a single index.quantdev for a given day.
+func findBlobOffset(idxPath string, day int) (uint64, uint64) {
 	f, err := os.Open(idxPath)
 	if err != nil {
-		return false
+		return 0, 0
 	}
 	defer f.Close()
-	return checkIndex(f, day)
-}
 
-func checkIndex(f *os.File, day int) bool {
 	var hdr [16]byte
-	if _, err := io.ReadFull(f, hdr[:]); err != nil {
-		return false
+	if _, err := io.ReadFull(f, hdr[:]); err != nil || string(hdr[0:4]) != IdxMagic {
+		return 0, 0
 	}
-	if string(hdr[0:4]) != IdxMagic {
-		return false
-	}
-	count := binary.LittleEndian.Uint64(hdr[8:])
+	count := binary.LittleEndian.Uint64(hdr[8:16])
+
 	var row [26]byte
 	for i := uint64(0); i < count; i++ {
 		if _, err := io.ReadFull(f, row[:]); err != nil {
-			return false
+			return 0, 0
 		}
-		if int(binary.LittleEndian.Uint16(row[0:])) == day {
-			return true
+		if int(binary.LittleEndian.Uint16(row[0:2])) == day {
+			offset := binary.LittleEndian.Uint64(row[2:10])
+			length := binary.LittleEndian.Uint64(row[10:18])
+			return offset, length
 		}
 	}
-	return false
+	return 0, 0
 }
 
-func updateIndex(idxPath string, day int, offset int64, length int, csum uint64) error {
-	f, err := os.OpenFile(idxPath, os.O_CREATE|os.O_RDWR, 0644)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
+func sprintfYear(y int) string  { return strconv.Itoa(y) }
+func sprintfMonth(m int) string { return sprintf2(m) }
 
-	stat, err := f.Stat()
-	if err != nil {
-		return err
+func sprintf2(x int) string {
+	if x < 10 && x >= 0 {
+		return "0" + strconv.Itoa(x)
 	}
-	if stat.Size() == 0 {
-		var hdr [16]byte
-		copy(hdr[0:], IdxMagic)
-		binary.LittleEndian.PutUint32(hdr[4:], uint32(IdxVersion))
-		if _, err := f.Write(hdr[:]); err != nil {
-			return err
-		}
-	}
-
-	if _, err := f.Seek(8, io.SeekStart); err != nil {
-		return err
-	}
-	var count uint64
-	if err := binary.Read(f, binary.LittleEndian, &count); err != nil {
-		return err
-	}
-
-	if _, err := f.Seek(0, io.SeekEnd); err != nil {
-		return err
-	}
-	var row [26]byte
-	binary.LittleEndian.PutUint16(row[0:], uint16(day))
-	binary.LittleEndian.PutUint64(row[2:], uint64(offset))
-	binary.LittleEndian.PutUint64(row[10:], uint64(length))
-	binary.LittleEndian.PutUint64(row[18:], csum)
-	if _, err := f.Write(row[:]); err != nil {
-		return err
-	}
-
-	if _, err := f.Seek(8, io.SeekStart); err != nil {
-		return err
-	}
-	return binary.Write(f, binary.LittleEndian, count+1)
+	return strconv.Itoa(x)
 }
 ```
 
-// --- End File: data.go ---
+// --- End File: gnc.go ---
 
 // --- File: main.go ---
 
@@ -1829,73 +1149,240 @@ package main
 import (
 	"fmt"
 	"os"
-	"runtime"
 	"runtime/debug"
-	"time"
 )
 
 func main() {
-	// Use all 7900X hardware threads.
-	runtime.GOMAXPROCS(CPUThreads)
-
-	// Hard memory limit: 24GB.
-	const ramLimit = 24 * 1024 * 1024 * 1024
-	debug.SetMemoryLimit(ramLimit)
+	// Slightly laxer GC; this is CPU-heavy research code.
+	debug.SetGCPercent(200)
 
 	if len(os.Args) < 2 {
-		printHelp()
-		os.Exit(1)
+		fmt.Println("Usage: go run . [test|probe]")
+		return
 	}
 
-	start := time.Now()
-
-	fmt.Printf("%s | Env: %s/%s | Threads: %d | RAM Limit: 24GB | GOGC: %s | GOAMD64: %s\n",
-		runtime.Version(),
-		runtime.GOOS, runtime.GOARCH,
-		runtime.GOMAXPROCS(0),
-		os.Getenv("GOGC"),
-		os.Getenv("GOAMD64"),
-	)
-
-	cmd := os.Args[1]
-
-	switch cmd {
-	case "data":
-		runData()
-	case "build":
-		runBuild()
-	case "study":
-		runStudy()
-	case "sanity":
-		runSanity()
-	case "bench":
-		runBench()
+	switch os.Args[1] {
+	case "test":
+		// Full OOS research run (writes Continuous_Algo_Report_OOS.txt).
+		RunTest()
+	case "probe":
+		// Structural sanity check of data under BaseDir.
+		RunProbe()
 	default:
-		fmt.Printf("Unknown command: %s\n", cmd)
-		printHelp()
-		os.Exit(1)
+		fmt.Println("Unknown command. Use 'test' or 'probe'")
 	}
-
-	fmt.Printf("\n[sys] Execution Time: %s | Mem: %s\n", time.Since(start), getMemUsage())
-}
-
-func printHelp() {
-	fmt.Println("Usage: quant.exe [command]")
-	fmt.Println("  data   - Download raw aggTrades")
-	fmt.Println("  build  - Run TFI Primitives (RWVI, VAI, etc) -> features")
-	fmt.Println("  study  - Run IS/OOS backtest on features")
-	fmt.Println("  sanity - Check data integrity")
-	fmt.Println("  bench  - Run decode benchmark + inline pprof summaries")
-}
-
-func getMemUsage() string {
-	var m runtime.MemStats
-	runtime.ReadMemStats(&m)
-	return fmt.Sprintf("%d MB", m.Alloc/1024/1024)
 }
 ```
 
 // --- End File: main.go ---
+
+// --- File: math.go ---
+
+```go
+package main
+
+import (
+	"math"
+)
+
+// ContinuousModel defines a physics object that updates on dt/price/volume.
+type ContinuousModel interface {
+	Name() string
+	Reset()
+	Update(dt float64, p, v float64) float64
+}
+
+// ============================================================================
+// 1. Baseline Hawkes_Intensity (keep as-is; this is your proven baseline)
+// ============================================================================
+
+type ModelHawkesIntensity struct {
+	intensity float64
+	alpha     float64
+	beta      float64
+}
+
+func NewHawkesIntensity() *ModelHawkesIntensity {
+	// Original parameters that produced your baseline table.
+	return &ModelHawkesIntensity{alpha: 5.0, beta: 2.0}
+}
+
+func (m *ModelHawkesIntensity) Name() string { return "Hawkes_Intensity" }
+
+func (m *ModelHawkesIntensity) Reset() { m.intensity = 0 }
+
+func (m *ModelHawkesIntensity) Update(dt float64, p, v float64) float64 {
+	if dt > 0 {
+		m.intensity *= math.Exp(-m.beta * dt)
+	}
+	m.intensity += m.alpha * math.Log1p(v)
+	return m.intensity
+}
+
+// ============================================================================
+// 2. Hawkes_OFI: your new signed order-flow imbalance variant
+// ============================================================================
+
+type ModelHawkesOFI struct {
+	buyInt  float64
+	sellInt float64
+	beta    float64 // decay rate
+	lastP   float64
+	init    bool
+}
+
+func NewHawkesOFI() *ModelHawkesOFI {
+	// beta=0.002 -> half-life ~ 350s; longer memory than the baseline Hawkes.
+	return &ModelHawkesOFI{beta: 0.002}
+}
+
+func (m *ModelHawkesOFI) Name() string { return "Hawkes_OFI" }
+
+func (m *ModelHawkesOFI) Reset() {
+	m.buyInt, m.sellInt, m.lastP, m.init = 0, 0, 0, false
+}
+
+func (m *ModelHawkesOFI) Update(dt float64, p, v float64) float64 {
+	if !m.init {
+		m.lastP = p
+		m.init = true
+		return 0
+	}
+
+	if dt > 0 {
+		decay := math.Exp(-m.beta * dt)
+		m.buyInt *= decay
+		m.sellInt *= decay
+	}
+
+	impact := math.Log1p(v)
+
+	// Tick rule on trades (no quotes available).
+	if p > m.lastP {
+		m.buyInt += impact
+	} else if p < m.lastP {
+		m.sellInt += impact
+		// p == lastP is treated as neutral; only decay applies.
+	}
+
+	m.lastP = p
+	return m.buyInt - m.sellInt
+}
+
+// ============================================================================
+// 3. Streaming signature: Sig_LevyArea (with sign fix)
+// ============================================================================
+
+type ModelSignature struct {
+	area      float64
+	lastP     float64
+	lastV     float64
+	cumVol    float64
+	decayRate float64
+	init      bool
+}
+
+func NewSignature() *ModelSignature {
+	// decay=0.001 -> tau ~ 1000s (~16 minutes), as you suggested.
+	return &ModelSignature{decayRate: 0.001}
+}
+
+func (m *ModelSignature) Name() string { return "Sig_LevyArea" }
+
+func (m *ModelSignature) Reset() {
+	m.area, m.lastP, m.lastV, m.cumVol, m.init = 0, 0, 0, 0, false
+}
+
+func (m *ModelSignature) Update(dt float64, p, v float64) float64 {
+	if !m.init {
+		m.lastP, m.cumVol, m.lastV, m.init = p, v, v, true
+		return 0
+	}
+	m.cumVol += v
+
+	// Lead-lag area increment (same structure as before).
+	inc := (p-m.lastP)*m.cumVol - (m.cumVol-m.lastV)*m.lastP
+
+	if dt > 0 {
+		m.area *= math.Exp(-m.decayRate * dt)
+	}
+	m.area += inc
+
+	m.lastP = p
+	m.lastV = m.cumVol
+
+	// IMPORTANT: flip sign to correct the observed systematic anti-signal.
+	return -m.area
+}
+
+// ============================================================================
+// 4. Hilbert_Phase: robust, symplectic oscillator implementation
+// ============================================================================
+
+type ModelHilbert struct {
+	x1, x2 float64 // x1: smoothed price, x2: velocity
+	r, h   float64 // r: natural frequency, h: damping ratio
+	init   bool
+}
+
+func NewHilbert() *ModelHilbert {
+	// r=0.005 -> T ≈ 2π/r ≈ 21 minutes; good coarse-grained cycle.
+	// h=1.0   -> critical damping (stable, non-oscillatory).
+	return &ModelHilbert{r: 0.005, h: 1.0}
+}
+
+// Keep the original name so reports remain on the same row label.
+func (m *ModelHilbert) Name() string { return "Hilbert_Phase" }
+
+func (m *ModelHilbert) Reset() { m.x1, m.x2, m.init = 0, 0, false }
+
+func (m *ModelHilbert) Update(dt float64, p, v float64) float64 {
+	if !m.init {
+		m.x1, m.init = p, true
+		return 0
+	}
+	if dt <= 0 {
+		// Return current phase estimate if no time passed.
+		// Use the same real/imag decomposition as below.
+		re := p - m.x1
+		im := m.x2 / m.r
+		return math.Atan2(im, re)
+	}
+
+	// x'' + 2*h*r*x' + r^2*(x - p) = 0
+	err := m.x1 - p
+	acc := -m.r*m.r*err - 2.0*m.r*m.h*m.x2
+
+	// Symplectic Euler (semi-implicit) for stability.
+	m.x2 += acc * dt
+	m.x1 += m.x2 * dt
+
+	re := p - m.x1
+	im := m.x2 / m.r
+
+	phase := math.Atan2(im, re)
+	if math.IsNaN(phase) || math.IsInf(phase, 0) {
+		// Safety clamp: if something goes wrong numerically, don’t poison the series.
+		return 0
+	}
+	return phase
+}
+
+// ============================================================================
+// 5. Model registry
+// ============================================================================
+
+func GetContinuousModels() []ContinuousModel {
+	return []ContinuousModel{
+		NewHawkesIntensity(), // baseline, proven positive
+		NewHawkesOFI(),       // your new OFI-based variant
+		NewSignature(),       // sign-corrected signature
+		NewHilbert(),         // robust Hilbert_Phase
+	}
+}
+```
+
+// --- End File: math.go ---
 
 // --- File: metrics.go ---
 
@@ -1904,1236 +1391,1522 @@ package main
 
 import (
 	"math"
-	"slices"
+	"sort"
 )
 
-type MetricStats struct {
-	Count        int
-	ICPearson    float64
-	IC_TStat     float64
+// Consolidated OOS statistics for a single (model, horizon) pair.
+type ReportStats struct {
+	TrainCount int
+	TestCount  int
+
+	// Correlation / IC (OOS, test-only)
+	PearsonIC  float64
+	SpearmanIC float64
+
+	// Directional accuracy (OOS)
+	HitRate  float64 // fraction of non-zero returns where sign(signal) == sign(return)
+	HitRateZ float64 // z-score vs 50% baseline (binomial approximation)
+
+	// Conditional return curve (deciles, OOS)
+	DecileMean         []float64 // length 10, in raw return units
+	TopDecileRetBps    float64
+	BottomDecileRetBps float64
+	SpreadBps          float64 // TopDecile - BottomDecile (bps)
+
+	// Information theoretic (OOS)
+	MutualInfo   float64 // bits
+	NormalizedMI float64 // MI / H(Y)
+
+	// Probabilistic forecast quality (train on train, evaluate on test)
+	BaselineLogLoss float64
+	SignalLogLoss   float64
+	DeltaLogLoss    float64 // Baseline - Signal; >0 is better
+
+	// Economic / risk metrics for sign(signal) strategy (OOS)
 	Sharpe       float64
-	HitRate      float64
-	BreakevenBps float64
-	AutoCorr     float64
-	AutoCorrAbs  float64
-	AvgSegLen    float64
-	MaxSegLen    float64
+	MaxDrawdown  float64
+	AvgTrade     float64
+	AvgWin       float64
+	AvgLoss      float64
+	WinLossRatio float64
 }
 
-type Moments struct {
-	Count          float64
-	SumSig         float64
-	SumRet         float64
-	SumProd        float64
-	SumSqSig       float64
-	SumSqRet       float64
-	SumPnL         float64
-	SumSqPnL       float64
-	Hits           float64
-	ValidHits      float64
-	SumAbsDeltaSig float64
-	SumProdLag     float64
-	SumAbsSig      float64
-	SumAbsProdLag  float64
-	SegCount       float64
-	SegLenTotal    float64
-	SegLenMax      float64
-}
-
-func (m *Moments) Add(m2 Moments) {
-	m.Count += m2.Count
-	m.SumSig += m2.SumSig
-	m.SumRet += m2.SumRet
-	m.SumProd += m2.SumProd
-	m.SumSqSig += m2.SumSqSig
-	m.SumSqRet += m2.SumSqRet
-	m.SumPnL += m2.SumPnL
-	m.SumSqPnL += m2.SumSqPnL
-	m.Hits += m2.Hits
-	m.ValidHits += m2.ValidHits
-	m.SumAbsDeltaSig += m2.SumAbsDeltaSig
-	m.SumProdLag += m2.SumProdLag
-	m.SumAbsSig += m2.SumAbsSig
-	m.SumAbsProdLag += m2.SumAbsProdLag
-	m.SegCount += m2.SegCount
-	m.SegLenTotal += m2.SegLenTotal
-	if m2.SegLenMax > m.SegLenMax {
-		m.SegLenMax = m2.SegLenMax
-	}
-}
-
-// CalcMomentsVectors is split into two loops to enable AVX-512 vectorization
-// for the pure math portion, while isolating the branching logic.
-func CalcMomentsVectors(sigs, rets []float64) Moments {
-	var m Moments
-	n := len(sigs)
-	if n == 0 {
-		return m
-	}
-
-	// --- LOOP 1: Pure Math (Vectorization Candidate) ---
-	// Local accumulators to encourage register usage
-	var sumSig, sumRet, sumProd, sumSqSig, sumSqRet, sumPnL, sumSqPnL, sumAbsSig float64
-
-	// Bounds check elimination
-	_ = rets[n-1]
-	_ = sigs[n-1]
-
-	for i := 0; i < n; i++ {
-		s := sigs[i]
-		r := rets[i]
-
-		sumSig += s
-		sumRet += r
-		sumProd += s * r
-		sumSqSig += s * s
-		sumSqRet += r * r
-
-		pnl := s * r
-		sumPnL += pnl
-		sumSqPnL += pnl * pnl
-
-		// Branchless Abs for vectorization
-		// Go 1.25 compiler recognizes this pattern for float abs
-		absS := s
-		if s < 0 {
-			absS = -s
-		}
-		sumAbsSig += absS
-	}
-
-	m.Count = float64(n)
-	m.SumSig = sumSig
-	m.SumRet = sumRet
-	m.SumProd = sumProd
-	m.SumSqSig = sumSqSig
-	m.SumSqRet = sumSqRet
-	m.SumPnL = sumPnL
-	m.SumSqPnL = sumSqPnL
-	m.SumAbsSig = sumAbsSig
-
-	// --- LOOP 2: Logic & Dependencies (Scalar/Branchy) ---
-	var prevSig float64
-	var prevSign float64
-	var curSegLen float64
-
-	var hits, validHits, sumAbsDelta, sumProdLag, sumAbsProdLag float64
-	var segCount, segLenTotal, segLenMax float64
-
-	for i := 0; i < n; i++ {
-		s := sigs[i]
-		r := rets[i]
-
-		// Hit Logic
-		if s != 0 && r != 0 {
-			validHits++
-			if (s > 0 && r > 0) || (s < 0 && r < 0) {
-				hits++
-			}
-		}
-
-		// Lag Logic
-		if i > 0 {
-			d := s - prevSig
-			if d < 0 {
-				d = -d
-			}
-			sumAbsDelta += d
-			sumProdLag += s * prevSig
-
-			absPrev := prevSig
-			if absPrev < 0 {
-				absPrev = -absPrev
-			}
-			absS := s
-			if absS < 0 {
-				absS = -absS
-			}
-			sumAbsProdLag += absS * absPrev
-		}
-
-		// Segmentation Logic
-		sign := 0.0
-		if s > 0 {
-			sign = 1.0
-		} else if s < 0 {
-			sign = -1.0
-		}
-
-		if sign != 0 {
-			if prevSign == sign {
-				curSegLen++
-			} else {
-				if curSegLen > 0 {
-					segCount++
-					segLenTotal += curSegLen
-					if curSegLen > segLenMax {
-						segLenMax = curSegLen
-					}
-				}
-				curSegLen = 1
-			}
-		} else {
-			if curSegLen > 0 {
-				segCount++
-				segLenTotal += curSegLen
-				if curSegLen > segLenMax {
-					segLenMax = curSegLen
-				}
-				curSegLen = 0
-			}
-		}
-		prevSig = s
-		prevSign = sign
-	}
-
-	// Final segment close
-	if curSegLen > 0 {
-		segCount++
-		segLenTotal += curSegLen
-		if curSegLen > segLenMax {
-			segLenMax = curSegLen
-		}
-	}
-
-	m.Hits = hits
-	m.ValidHits = validHits
-	m.SumAbsDeltaSig = sumAbsDelta
-	m.SumProdLag = sumProdLag
-	m.SumAbsProdLag = sumAbsProdLag
-	m.SegCount = segCount
-	m.SegLenTotal = segLenTotal
-	m.SegLenMax = segLenMax
-
-	return m
-}
-
-func FinalizeMetrics(m Moments, dailyICs []float64) MetricStats {
-	if m.Count <= 1 {
-		return MetricStats{Count: int(m.Count)}
-	}
-	ms := MetricStats{Count: int(m.Count)}
-
-	num := m.Count*m.SumProd - m.SumSig*m.SumRet
-	denX := m.Count*m.SumSqSig - m.SumSig*m.SumSig
-	denY := m.Count*m.SumSqRet - m.SumRet*m.SumRet
-	if denX > 0 && denY > 0 {
-		ms.ICPearson = num / math.Sqrt(denX*denY)
-	}
-
-	meanPnL := m.SumPnL / m.Count
-	varPnL := (m.SumSqPnL / m.Count) - meanPnL*meanPnL
-	if varPnL > 1e-18 {
-		ms.Sharpe = meanPnL / math.Sqrt(varPnL)
-	}
-
-	if m.ValidHits > 0 {
-		ms.HitRate = m.Hits / m.ValidHits
-	}
-	if m.SumAbsDeltaSig > 1e-18 {
-		ms.BreakevenBps = (m.SumPnL / m.SumAbsDeltaSig) * 10000.0
-	}
-
-	meanSig := m.SumSig / m.Count
-	covLag := (m.SumProdLag / m.Count) - meanSig*meanSig
-	varSig := (m.SumSqSig / m.Count) - meanSig*meanSig
-	if varSig > 1e-18 {
-		ms.AutoCorr = covLag / varSig
-	}
-
-	if m.Count > 0 {
-		meanAbs := m.SumAbsSig / m.Count
-		covAbs := (m.SumAbsProdLag / m.Count) - meanAbs*meanAbs
-		varAbs := (m.SumSqSig / m.Count) - meanAbs*meanAbs
-		if varAbs > 1e-18 {
-			ms.AutoCorrAbs = covAbs / varAbs
-		}
-	}
-
-	if m.SegCount > 0 {
-		ms.AvgSegLen = m.SegLenTotal / m.SegCount
-	}
-	ms.MaxSegLen = m.SegLenMax
-
-	if len(dailyICs) > 1 {
-		var sum, sumSq float64
-		n := float64(len(dailyICs))
-		for _, v := range dailyICs {
-			sum += v
-			sumSq += v * v
-		}
-		mean := sum / n
-		variance := (sumSq / n) - mean*mean
-		if variance > 1e-18 {
-			stdDev := math.Sqrt(variance)
-			ms.IC_TStat = mean / (stdDev / math.Sqrt(n))
-		}
-	}
-	return ms
-}
-
-type BucketResult struct {
-	ID        int
-	AvgSig    float64
-	AvgRetBps float64
+// OOS rolling-window metrics on the test segment.
+type WindowMetrics struct {
+	StartTime float64
+	EndTime   float64
 	Count     int
+
+	PearsonIC  float64
+	SpearmanIC float64
+	HitRate    float64
+	Sharpe     float64
 }
 
-func ComputeQuantilesStrided(sigs, rets []float64, numBuckets, stride int) []BucketResult {
-	n := len(sigs)
-	if n == 0 || numBuckets <= 0 {
+// OOS regime metrics (volatility or time-of-day on test segment).
+type RegimeMetrics struct {
+	Name  string
+	Count int
+
+	PearsonIC  float64
+	SpearmanIC float64
+	HitRate    float64
+	Sharpe     float64
+}
+
+// internal helper for chronological train/test split
+type trainTestSplit struct {
+	TrainF []float64
+	TrainR []float64
+
+	TestT []float64
+	TestF []float64
+	TestR []float64
+}
+
+// AnalyzeFullSuiteOOS computes all core metrics OOS, with a single chronological
+// train/test split for a given (model, horizon) signal.
+func AnalyzeFullSuiteOOS(times, feats, returns []float64, trainFrac float64) ReportStats {
+	s := splitTrainTest(times, feats, returns, trainFrac)
+	trainN := len(s.TrainF)
+	testN := len(s.TestF)
+
+	stats := ReportStats{
+		TrainCount: trainN,
+		TestCount:  testN,
+		DecileMean: make([]float64, 10),
+	}
+	if testN < 30 {
+		// Too little test data to say anything meaningful.
+		return stats
+	}
+
+	// 1. ICs (test-only)
+	stats.PearsonIC = Pearson(s.TestF, s.TestR)
+	stats.SpearmanIC = Spearman(s.TestF, s.TestR)
+
+	// 2. Hit rate vs 50% baseline (test-only)
+	stats.HitRate, stats.HitRateZ = HitRateStats(s.TestF, s.TestR)
+
+	// 3. Conditional return curve (deciles, test-only)
+	stats.DecileMean, stats.BottomDecileRetBps, stats.TopDecileRetBps, stats.SpreadBps =
+		DecileCurve(s.TestF, s.TestR)
+
+	// 4. Mutual information + NMI (test-only)
+	stats.MutualInfo, stats.NormalizedMI = CalcMutualInfo(s.TestF, s.TestR, 10)
+
+	// 5. Δ Log-loss vs baseline:
+	//    - baseline LL uses test labels only
+	//    - logistic parameters fit on train, LL evaluated on test
+	stats.BaselineLogLoss, stats.SignalLogLoss, stats.DeltaLogLoss =
+		LogLossImprovementTrainTest(s.TrainF, s.TrainR, s.TestF, s.TestR)
+
+	// 6. Sharpe + basic risk profile (test-only)
+	stats.Sharpe, stats.MaxDrawdown, stats.AvgTrade, stats.AvgWin, stats.AvgLoss, stats.WinLossRatio =
+		StrategyRiskStats(s.TestF, s.TestR)
+
+	return stats
+}
+
+// RollingWindowMetricsOOS computes OOS metrics over multiple contiguous time
+// windows on the test segment (after the same train/test split).
+func RollingWindowMetricsOOS(times, feats, returns []float64, trainFrac float64, windows int) []WindowMetrics {
+	s := splitTrainTest(times, feats, returns, trainFrac)
+	n := len(s.TestF)
+	if n < 60 || windows <= 0 {
 		return nil
 	}
 
-	estSize := n / stride
-	type pair struct{ s, r float64 }
-	pairs := make([]pair, 0, estSize)
-
-	for i := 0; i < n; i += stride {
-		pairs = append(pairs, pair{s: sigs[i], r: rets[i]})
+	// Require at least ~20 points per window.
+	if windows > n/20 {
+		windows = n / 20
+	}
+	if windows < 1 {
+		windows = 1
 	}
 
-	if len(pairs) == 0 {
+	wSize := n / windows
+	var out []WindowMetrics
+
+	for w := 0; w < windows; w++ {
+		start := w * wSize
+		end := (w + 1) * wSize
+		if w == windows-1 {
+			end = n
+		}
+		if end-start < 20 {
+			continue
+		}
+
+		sig := s.TestF[start:end]
+		ret := s.TestR[start:end]
+		tStart := s.TestT[start]
+		tEnd := s.TestT[end-1]
+
+		hit, _ := HitRateStats(sig, ret)
+		sh, _, _, _, _, _ := StrategyRiskStats(sig, ret)
+
+		out = append(out, WindowMetrics{
+			StartTime:  tStart,
+			EndTime:    tEnd,
+			Count:      len(sig),
+			PearsonIC:  Pearson(sig, ret),
+			SpearmanIC: Spearman(sig, ret),
+			HitRate:    hit,
+			Sharpe:     sh,
+		})
+	}
+	return out
+}
+
+// VolRegimeMetricsOOS computes OOS metrics across volatility regimes
+// (low/medium/high), based on |return| within the test segment.
+func VolRegimeMetricsOOS(times, feats, returns []float64, trainFrac float64) []RegimeMetrics {
+	s := splitTrainTest(times, feats, returns, trainFrac)
+	n := len(s.TestR)
+	if n < 60 {
 		return nil
 	}
 
-	slices.SortFunc(pairs, func(a, b pair) int {
-		if a.s < b.s {
-			return -1
+	vols := make([]float64, n)
+	for i := 0; i < n; i++ {
+		vols[i] = math.Abs(s.TestR[i])
+	}
+
+	sorted := make([]float64, n)
+	copy(sorted, vols)
+	sort.Float64s(sorted)
+
+	q1 := sorted[n/3]
+	q2 := sorted[2*n/3]
+
+	var idxLow, idxMed, idxHigh []int
+	for i := 0; i < n; i++ {
+		v := vols[i]
+		switch {
+		case v <= q1:
+			idxLow = append(idxLow, i)
+		case v <= q2:
+			idxMed = append(idxMed, i)
+		default:
+			idxHigh = append(idxHigh, i)
 		}
-		if a.s > b.s {
-			return 1
+	}
+
+	makeRegime := func(name string, idxs []int) RegimeMetrics {
+		if len(idxs) < 20 {
+			return RegimeMetrics{Name: name, Count: len(idxs)}
 		}
+		sig := make([]float64, len(idxs))
+		ret := make([]float64, len(idxs))
+		for j, i := range idxs {
+			sig[j] = s.TestF[i]
+			ret[j] = s.TestR[i]
+		}
+		hit, _ := HitRateStats(sig, ret)
+		sh, _, _, _, _, _ := StrategyRiskStats(sig, ret)
+		return RegimeMetrics{
+			Name:       name,
+			Count:      len(idxs),
+			PearsonIC:  Pearson(sig, ret),
+			SpearmanIC: Spearman(sig, ret),
+			HitRate:    hit,
+			Sharpe:     sh,
+		}
+	}
+
+	return []RegimeMetrics{
+		makeRegime("VolLow", idxLow),
+		makeRegime("VolMed", idxMed),
+		makeRegime("VolHigh", idxHigh),
+	}
+}
+
+// TimeOfDayRegimeMetricsOOS computes OOS metrics across time-of-day regimes
+// (early / mid / late) on the test segment, using ms-of-day from timestamps.
+func TimeOfDayRegimeMetricsOOS(times, feats, returns []float64, trainFrac float64) []RegimeMetrics {
+	s := splitTrainTest(times, feats, returns, trainFrac)
+	n := len(s.TestT)
+	if n < 60 {
+		return nil
+	}
+
+	const dayMillis = 24 * 60 * 60 * 1000.0
+	third := dayMillis / 3.0
+
+	var earlyIdx, midIdx, lateIdx []int
+	for i := 0; i < n; i++ {
+		tod := math.Mod(s.TestT[i], dayMillis)
+		switch {
+		case tod < third:
+			earlyIdx = append(earlyIdx, i)
+		case tod < 2*third:
+			midIdx = append(midIdx, i)
+		default:
+			lateIdx = append(lateIdx, i)
+		}
+	}
+
+	makeRegime := func(name string, idxs []int) RegimeMetrics {
+		if len(idxs) < 20 {
+			return RegimeMetrics{Name: name, Count: len(idxs)}
+		}
+		sig := make([]float64, len(idxs))
+		ret := make([]float64, len(idxs))
+		for j, i := range idxs {
+			sig[j] = s.TestF[i]
+			ret[j] = s.TestR[i]
+		}
+		hit, _ := HitRateStats(sig, ret)
+		sh, _, _, _, _, _ := StrategyRiskStats(sig, ret)
+		return RegimeMetrics{
+			Name:       name,
+			Count:      len(idxs),
+			PearsonIC:  Pearson(sig, ret),
+			SpearmanIC: Spearman(sig, ret),
+			HitRate:    hit,
+			Sharpe:     sh,
+		}
+	}
+
+	return []RegimeMetrics{
+		makeRegime("TOD_Early", earlyIdx),
+		makeRegime("TOD_Mid", midIdx),
+		makeRegime("TOD_Late", lateIdx),
+	}
+}
+
+// ---------------------- shared train/test split ----------------------
+
+type parallelSorter struct {
+	times, feats, rets []float64
+}
+
+func (p parallelSorter) Len() int { return len(p.times) }
+
+func (p parallelSorter) Swap(i, j int) {
+	p.times[i], p.times[j] = p.times[j], p.times[i]
+	p.feats[i], p.feats[j] = p.feats[j], p.feats[i]
+	p.rets[i], p.rets[j] = p.rets[j], p.rets[i]
+}
+
+func (p parallelSorter) Less(i, j int) bool {
+	return p.times[i] < p.times[j]
+}
+
+func splitTrainTest(times, feats, returns []float64, trainFrac float64) trainTestSplit {
+	n := len(feats)
+	if n == 0 || n != len(returns) || n != len(times) {
+		return trainTestSplit{}
+	}
+	if trainFrac <= 0 || trainFrac >= 1 {
+		trainFrac = 0.7
+	}
+
+	// Sort all three slices chronologically by time in place.
+	sort.Sort(parallelSorter{times: times, feats: feats, rets: returns})
+
+	trainN := int(trainFrac * float64(n))
+	if trainN < 20 {
+		trainN = 20
+	}
+	if trainN > n-30 {
+		trainN = n - 30
+	}
+	if trainN <= 0 || trainN >= n {
+		trainN = n / 2
+	}
+	testN := n - trainN
+	if testN <= 0 {
+		return trainTestSplit{}
+	}
+
+	return trainTestSplit{
+		TrainF: feats[:trainN],
+		TrainR: returns[:trainN],
+
+		TestT: times[trainN:],
+		TestF: feats[trainN:],
+		TestR: returns[trainN:],
+	}
+}
+
+// ---------------------- Correlation / IC ----------------------
+
+// Pearson returns the Pearson correlation coefficient between x and y.
+func Pearson(x, y []float64) float64 {
+	n := len(x)
+	if n == 0 || n != len(y) {
 		return 0
-	})
+	}
+	var sx, sy, sxx, syy, sxy float64
+	for i := 0; i < n; i++ {
+		xi := x[i]
+		yi := y[i]
+		sx += xi
+		sy += yi
+		sxx += xi * xi
+		syy += yi * yi
+		sxy += xi * yi
+	}
+	nf := float64(n)
+	num := sxy - sx*sy/nf
+	denx := sxx - sx*sx/nf
+	deny := syy - sy*sy/nf
+	if denx <= 0 || deny <= 0 {
+		return 0
+	}
+	return num / math.Sqrt(denx*deny)
+}
 
-	subN := len(pairs)
-	results := make([]BucketResult, numBuckets)
-	bucketSize := subN / numBuckets
-	if bucketSize == 0 {
-		bucketSize = 1
+// Spearman rank correlation: Pearson over rank-transformed inputs.
+func Spearman(x, y []float64) float64 {
+	n := len(x)
+	if n == 0 || n != len(y) {
+		return 0
 	}
 
-	for b := 0; b < numBuckets; b++ {
-		start := b * bucketSize
-		end := start + bucketSize
-		if b == numBuckets-1 || end > subN {
-			end = subN
-		}
+	rx := rankify(x)
+	ry := rankify(y)
+	return Pearson(rx, ry)
+}
 
-		var sumS, sumR float64
-		count := 0
-		for i := start; i < end; i++ {
-			sumS += pairs[i].s
-			sumR += pairs[i].r
-			count++
+// rankify converts values to average ranks (1..n). Ties get averaged ranks.
+func rankify(vals []float64) []float64 {
+	n := len(vals)
+	type kv struct {
+		v float64
+		i int
+	}
+	tmp := make([]kv, n)
+	for i, v := range vals {
+		tmp[i] = kv{v: v, i: i}
+	}
+	sort.Slice(tmp, func(i, j int) bool { return tmp[i].v < tmp[j].v })
+
+	ranks := make([]float64, n)
+	var i int
+	for i < n {
+		j := i + 1
+		for j < n && tmp[j].v == tmp[i].v {
+			j++
 		}
-		if count > 0 {
-			results[b] = BucketResult{
-				ID:        b + 1,
-				AvgSig:    sumS / float64(count),
-				AvgRetBps: (sumR / float64(count)) * 10000.0,
-				Count:     count * stride,
+		// average rank of [i, j)
+		rank := 0.5*float64(i+j-1) + 1.0
+		for k := i; k < j; k++ {
+			ranks[tmp[k].i] = rank
+		}
+		i = j
+	}
+	return ranks
+}
+
+// ---------------------- Hit rate / sign accuracy ----------------------
+
+// HitRateStats computes:
+//   - hit rate on non-zero returns where sign(signal) == sign(return)
+//   - z-score vs 50% null hypothesis (binomial approximation).
+func HitRateStats(signal, ret []float64) (hitRate, z float64) {
+	n := len(signal)
+	if n == 0 || n != len(ret) {
+		return 0, 0
+	}
+
+	var hits, trials int
+	for i := 0; i < n; i++ {
+		r := ret[i]
+		s := signal[i]
+		if r == 0 || s == 0 {
+			continue
+		}
+		trials++
+		if (r > 0 && s > 0) || (r < 0 && s < 0) {
+			hits++
+		}
+	}
+	if trials == 0 {
+		return 0, 0
+	}
+	hitRate = float64(hits) / float64(trials)
+
+	// Binomial z vs p0 = 0.5
+	p0 := 0.5
+	variance := p0 * (1 - p0) / float64(trials)
+	if variance <= 0 {
+		return hitRate, 0
+	}
+	z = (hitRate - p0) / math.Sqrt(variance)
+	return hitRate, z
+}
+
+// ---------------------- Decile curve ----------------------
+
+// DecileCurve builds a conditional return curve by signal decile.
+// Returns:
+//
+//	decMeans[10]       - average raw return per decile
+//	bottomBps, topBps  - decile 0 and 9 in basis points
+//	spreadBps          - top - bottom in basis points
+func DecileCurve(signal, ret []float64) (decMeans []float64, bottomBps, topBps, spreadBps float64) {
+	n := len(signal)
+	if n == 0 || n != len(ret) {
+		return make([]float64, 10), 0, 0, 0
+	}
+
+	type pair struct {
+		s float64
+		r float64
+	}
+	data := make([]pair, 0, n)
+	for i := 0; i < n; i++ {
+		data = append(data, pair{s: signal[i], r: ret[i]})
+	}
+	sort.Slice(data, func(i, j int) bool { return data[i].s < data[j].s })
+
+	decMeans = make([]float64, 10)
+	counts := make([]int, 10)
+	if n < 10 {
+		// not enough to split meaningfully
+		for i := range data {
+			decMeans[0] += data[i].r
+			counts[0]++
+		}
+		if counts[0] > 0 {
+			decMeans[0] /= float64(counts[0])
+		}
+		return decMeans, decMeans[0] * 1e4, decMeans[0] * 1e4, 0
+	}
+
+	for i := 0; i < n; i++ {
+		dec := int(float64(i) / float64(n) * 10.0)
+		if dec == 10 {
+			dec = 9
+		}
+		decMeans[dec] += data[i].r
+		counts[dec]++
+	}
+	for d := 0; d < 10; d++ {
+		if counts[d] > 0 {
+			decMeans[d] /= float64(counts[d])
+		}
+	}
+	bottom := decMeans[0]
+	top := decMeans[9]
+	bottomBps = bottom * 1e4
+	topBps = top * 1e4
+	spreadBps = (top - bottom) * 1e4
+	return decMeans, bottomBps, topBps, spreadBps
+}
+
+// ---------------------- Mutual information ----------------------
+
+// CalcMutualInfo estimates MI(signal, return) in bits using a simple
+// equal-frequency binning scheme. Bins must be >= 2.
+func CalcMutualInfo(signal, ret []float64, bins int) (miBits, nmi float64) {
+	n := len(signal)
+	if n == 0 || n != len(ret) || bins < 2 {
+		return 0, 0
+	}
+
+	// Quantile-based bins for signal and returns separately.
+	sBin := quantileBins(signal, bins)
+	rBin := quantileBins(ret, bins)
+
+	// Joint and marginals.
+	joint := make([][]float64, bins)
+	for i := range joint {
+		joint[i] = make([]float64, bins)
+	}
+	margS := make([]float64, bins)
+	margR := make([]float64, bins)
+
+	for i := 0; i < n; i++ {
+		sb := sBin[i]
+		rb := rBin[i]
+		if sb < 0 || sb >= bins || rb < 0 || rb >= bins {
+			continue
+		}
+		joint[sb][rb]++
+		margS[sb]++
+		margR[rb]++
+	}
+
+	nf := float64(n)
+	for i := 0; i < bins; i++ {
+		margS[i] /= nf
+		margR[i] /= nf
+		for j := 0; j < bins; j++ {
+			joint[i][j] /= nf
+		}
+	}
+
+	// Mutual information in bits.
+	var mi float64
+	for i := 0; i < bins; i++ {
+		for j := 0; j < bins; j++ {
+			p := joint[i][j]
+			if p <= 0 {
+				continue
+			}
+			px := margS[i]
+			py := margR[j]
+			if px <= 0 || py <= 0 {
+				continue
+			}
+			mi += p * math.Log2(p/(px*py))
+		}
+	}
+
+	// Entropy of Y (returns).
+	var hy float64
+	for j := 0; j < bins; j++ {
+		p := margR[j]
+		if p > 0 {
+			hy -= p * math.Log2(p)
+		}
+	}
+	if hy > 0 {
+		nmi = mi / hy
+	}
+	return mi, nmi
+}
+
+// quantileBins assigns each value to a [0,bins) bin with equal counts as much
+// as possible.
+func quantileBins(vals []float64, bins int) []int {
+	n := len(vals)
+	type kv struct {
+		v float64
+		i int
+	}
+	tmp := make([]kv, n)
+	for i, v := range vals {
+		tmp[i] = kv{v: v, i: i}
+	}
+	sort.Slice(tmp, func(i, j int) bool { return tmp[i].v < tmp[j].v })
+
+	out := make([]int, n)
+	if n == 0 {
+		return out
+	}
+	for i := 0; i < n; i++ {
+		b := int(float64(i) / float64(n) * float64(bins))
+		if b == bins {
+			b = bins - 1
+		}
+		out[tmp[i].i] = b
+	}
+	return out
+}
+
+// ---------------------- Log-loss / logistic improvement ----------------------
+
+// LogLossImprovementTrainTest fits a simple 1D logistic model on train
+//
+//	p(y>0 | f) = sigmoid(a + b * f)
+//
+// and compares its log-loss on test vs a constant-probability baseline.
+func LogLossImprovementTrainTest(trainF, trainR, testF, testR []float64) (baseLL, signalLL, delta float64) {
+	// Convert returns to binary labels: y = 1 if r > 0 else 0.
+	toLabels := func(r []float64) []float64 {
+		y := make([]float64, len(r))
+		for i, v := range r {
+			if v > 0 {
+				y[i] = 1
+			} else {
+				y[i] = 0
 			}
 		}
+		return y
 	}
-	return results
+	yTrain := toLabels(trainR)
+	yTest := toLabels(testR)
+
+	if len(yTrain) == 0 || len(yTest) == 0 {
+		return 0, 0, 0
+	}
+
+	// Baseline: constant probability = mean of test labels.
+	var sumY float64
+	for _, v := range yTest {
+		sumY += v
+	}
+	p0 := sumY / float64(len(yTest))
+	if p0 <= 0 {
+		p0 = 1e-6
+	}
+	if p0 >= 1 {
+		p0 = 1 - 1e-6
+	}
+	baseLL = avgLogLossConst(yTest, p0)
+
+	// Fit 1D logistic regression on train.
+	a, b := fitLogistic1D(trainF, yTrain)
+	signalLL = avgLogLossLogistic(testF, yTest, a, b)
+
+	delta = baseLL - signalLL
+	return baseLL, signalLL, delta
 }
 
-type BucketAgg struct {
-	Count     int
-	SumSig    float64
-	SumRetBps float64
+func avgLogLossConst(y []float64, p float64) float64 {
+	ll := 0.0
+	for _, t := range y {
+		if p <= 0 {
+			p = 1e-6
+		}
+		if p >= 1 {
+			p = 1 - 1e-6
+		}
+		if t > 0.5 {
+			ll -= math.Log(p)
+		} else {
+			ll -= math.Log(1 - p)
+		}
+	}
+	return ll / float64(len(y))
 }
 
-func (ba *BucketAgg) Add(br BucketResult) {
-	if br.Count <= 0 {
-		return
+func avgLogLossLogistic(f, y []float64, a, b float64) float64 {
+	n := len(f)
+	if n == 0 || n != len(y) {
+		return 0
 	}
-	ba.Count += br.Count
-	ba.SumSig += br.AvgSig * float64(br.Count)
-	ba.SumRetBps += br.AvgRetBps * float64(br.Count)
+	ll := 0.0
+	for i := 0; i < n; i++ {
+		z := a + b*f[i]
+		p := 1.0 / (1.0 + math.Exp(-z))
+		if p <= 0 {
+			p = 1e-6
+		}
+		if p >= 1 {
+			p = 1 - 1e-6
+		}
+		if y[i] > 0.5 {
+			ll -= math.Log(p)
+		} else {
+			ll -= math.Log(1 - p)
+		}
+	}
+	return ll / float64(n)
 }
 
-func (ba BucketAgg) Finalize(id int) BucketResult {
-	if ba.Count == 0 {
-		return BucketResult{ID: id}
+// fitLogistic1D does a crude Newton-Raphson fit for a 1D logistic model.
+// It is intentionally simple; we're not trying to be perfect here.
+func fitLogistic1D(f, y []float64) (a, b float64) {
+	n := len(f)
+	if n == 0 || n != len(y) {
+		return 0, 0
 	}
-	den := float64(ba.Count)
-	return BucketResult{
-		ID:        id,
-		AvgSig:    ba.SumSig / den,
-		AvgRetBps: ba.SumRetBps / den,
-		Count:     ba.Count,
+
+	// Standardize features to improve conditioning.
+	var meanF, varF float64
+	for _, v := range f {
+		meanF += v
 	}
+	meanF /= float64(n)
+	for _, v := range f {
+		d := v - meanF
+		varF += d * d
+	}
+	if varF <= 0 {
+		varF = 1
+	}
+	stdF := math.Sqrt(varF / float64(n))
+	if stdF == 0 {
+		stdF = 1
+	}
+
+	fn := make([]float64, n)
+	for i := 0; i < n; i++ {
+		fn[i] = (f[i] - meanF) / stdF
+	}
+
+	// Initialize params.
+	a, b = 0.0, 0.0
+	const iters = 25
+
+	for iter := 0; iter < iters; iter++ {
+		var g0, g1, h00, h01, h11 float64
+		for i := 0; i < n; i++ {
+			z := a + b*fn[i]
+			p := 1.0 / (1.0 + math.Exp(-z))
+			wi := p * (1 - p) // variance
+			yi := y[i]
+
+			g0 += (p - yi)
+			g1 += (p - yi) * fn[i]
+
+			h00 += wi
+			h01 += wi * fn[i]
+			h11 += wi * fn[i] * fn[i]
+		}
+		// Solve 2x2 system H * delta = -g
+		det := h00*h11 - h01*h01
+		if det == 0 {
+			break
+		}
+		da := (-g0*h11 + g1*h01) / det
+		db := (-g1*h00 + g0*h01) / det
+
+		// Dampen updates.
+		a += 0.5 * da
+		b += 0.5 * db
+
+		if math.Abs(da) < 1e-6 && math.Abs(db) < 1e-6 {
+			break
+		}
+	}
+
+	// Map back to original feature scale:
+	//   z = a + b * ((f - meanF)/stdF) = (a - b*meanF/stdF) + (b/stdF)*f
+	// so newA = a - b*meanF/stdF, newB = b/stdF.
+	newA := a - b*meanF/stdF
+	newB := b / stdF
+	return newA, newB
+}
+
+// ---------------------- Strategy risk / Sharpe ----------------------
+
+// StrategyRiskStats computes returns of a naive sign(signal) strategy:
+//
+//	r_strat = sign(signal) * return
+//
+// and then Sharpe, max drawdown, and simple trade stats.
+func StrategyRiskStats(signal, ret []float64) (sharpe, maxDD, avgTrade, avgWin, avgLoss, winLoss float64) {
+	n := len(signal)
+	if n == 0 || n != len(ret) {
+		return 0, 0, 0, 0, 0, 0
+	}
+
+	var trades []float64
+	trades = trades[:0]
+
+	for i := 0; i < n; i++ {
+		s := signal[i]
+		r := ret[i]
+		if s == 0 || r == 0 {
+			continue
+		}
+		var sign float64
+		if s > 0 {
+			sign = 1
+		} else {
+			sign = -1
+		}
+		trades = append(trades, sign*r)
+	}
+
+	m := len(trades)
+	if m == 0 {
+		return 0, 0, 0, 0, 0, 0
+	}
+
+	// Basic stats.
+	var mean, m2 float64
+	for _, x := range trades {
+		mean += x
+		m2 += x * x
+	}
+	mean /= float64(m)
+	variance := m2/float64(m) - mean*mean
+	if variance < 0 {
+		variance = 0
+	}
+	std := math.Sqrt(variance)
+	if std > 0 {
+		sharpe = mean / std
+	}
+
+	avgTrade = mean
+
+	// Win/loss stats + max drawdown
+	var winSum, lossSum float64
+	var winCount, lossCount int
+
+	equity := 0.0
+	peak := 0.0
+	maxDrawdown := 0.0
+
+	for _, x := range trades {
+		if x > 0 {
+			winSum += x
+			winCount++
+		} else if x < 0 {
+			lossSum += x
+			lossCount++
+		}
+
+		equity += x
+		if equity > peak {
+			peak = equity
+		}
+		dd := equity - peak
+		if dd < maxDrawdown {
+			maxDrawdown = dd
+		}
+	}
+
+	if winCount > 0 {
+		avgWin = winSum / float64(winCount)
+	}
+	if lossCount > 0 {
+		avgLoss = lossSum / float64(lossCount)
+	}
+	if avgLoss != 0 {
+		winLoss = math.Abs(avgWin / avgLoss)
+	}
+
+	// maxDrawdown is negative; return positive magnitude.
+	return sharpe, -maxDrawdown, avgTrade, avgWin, avgLoss, winLoss
 }
 ```
 
 // --- End File: metrics.go ---
 
-// --- File: sanity.go ---
+// --- File: probe.go ---
 
 ```go
 package main
 
 import (
-	"crypto/sha256"
-	"encoding/binary"
 	"fmt"
-	"io"
 	"os"
-	"path/filepath"
 	"sort"
-	"sync"
 	"text/tabwriter"
 	"time"
 )
 
-// Global Report Accumulator
-type SanityReport struct {
-	Mu           sync.Mutex
-	TotalMonths  int
-	TotalDays    int
-	TotalTrades  int64
-	TotalBytes   int64
-	CorruptFiles int
-	MissingDays  []string // List of "YYYY-MM-DD" gaps
-	Errors       []string
-}
-
-var report SanityReport
-
-func runSanity() {
+// RunProbe performs a fast diagnostic over all symbols under BaseDir.
+// It samples up to 16 days per symbol, runs LoadGNCFile + InflateGNC,
+// and reports which symbols have healthy blobs.
+func RunProbe() {
 	start := time.Now()
-	root := filepath.Join(BaseDir, Symbol())
-	dirs, err := os.ReadDir(root)
-	if err != nil {
-		fmt.Printf("[sanity] ReadDir(%s): %v\n", root, err)
+
+	fmt.Println(">>> GNC DATA PROBE <<<")
+	fmt.Printf("BaseDir: %s\n\n", BaseDir)
+
+	// Discover symbols from filesystem.
+	var symbols []string
+	for sym := range discoverSymbols() {
+		symbols = append(symbols, sym)
+	}
+	if len(symbols) == 0 {
+		fmt.Println("No symbols discovered under BaseDir.")
 		return
 	}
-
-	var tasks []string
-	// Discover all Month directories
-	for _, y := range dirs {
-		if !y.IsDir() {
-			continue
-		}
-		yearPath := filepath.Join(root, y.Name())
-		months, err := os.ReadDir(yearPath)
-		if err != nil {
-			fmt.Printf("[sanity] ReadDir(%s): %v\n", yearPath, err)
-			continue
-		}
-		for _, m := range months {
-			if m.IsDir() {
-				tasks = append(tasks, filepath.Join(root, y.Name(), m.Name()))
-			}
-		}
-	}
-
-	fmt.Printf("--- SANITY CHECK: %s | %d Months Found ---\n", Symbol(), len(tasks))
-
-	// Reset Report
-	report = SanityReport{MissingDays: make([]string, 0), Errors: make([]string, 0)}
-	report.TotalMonths = len(tasks)
-
-	var wg sync.WaitGroup
-	jobs := make(chan string, len(tasks))
-
-	// Workers
-	for i := 0; i < CPUThreads; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			for path := range jobs {
-				validateMonth(path)
-			}
-		}()
-	}
-
-	for _, t := range tasks {
-		jobs <- t
-	}
-	close(jobs)
-	wg.Wait()
-
-	printSummary(time.Since(start))
-}
-
-func validateMonth(dirPath string) {
-	// Parse Year/Month from path for gap detection
-	// Path ends in .../YYYY/MM
-	_, mStr := filepath.Split(dirPath)
-	yStr := filepath.Base(filepath.Dir(dirPath))
-	year := fastAtoi(yStr)
-	month := fastAtoi(mStr)
-
-	idxPath := filepath.Join(dirPath, "index.quantdev")
-	dataPath := filepath.Join(dirPath, "data.quantdev")
-
-	// Local accumulators to minimize locking
-	var lTrades int64
-	var lBytes int64
-	var lDays int
-	var lCorrupt int
-	lErrors := make([]string, 0)
-	presentDays := make(map[int]bool)
-
-	// 1. Check Files Exist
-	fIdx, err := os.Open(idxPath)
-	if err != nil {
-		report.Mu.Lock()
-		report.Errors = append(report.Errors, fmt.Sprintf("MISSING IDX: %s", dirPath))
-		report.Mu.Unlock()
-		return
-	}
-	defer fIdx.Close()
-
-	fData, err := os.Open(dataPath)
-	if err != nil {
-		report.Mu.Lock()
-		report.Errors = append(report.Errors, fmt.Sprintf("MISSING DATA: %s", dirPath))
-		report.Mu.Unlock()
-		return
-	}
-	defer fData.Close()
-
-	dstat, err := fData.Stat()
-	if err != nil {
-		report.Mu.Lock()
-		report.Errors = append(report.Errors, fmt.Sprintf("STAT FAIL: %s (%v)", dataPath, err))
-		report.Mu.Unlock()
-		return
-	}
-
-	// 2. Validate Index Header
-	var hdr [16]byte
-	if _, err := io.ReadFull(fIdx, hdr[:]); err != nil {
-		lErrors = append(lErrors, fmt.Sprintf("BAD IDX HDR: %s", dirPath))
-		mergeReport(lTrades, lBytes, lDays, lCorrupt, lErrors, nil)
-		return
-	}
-	if string(hdr[:4]) != IdxMagic {
-		lErrors = append(lErrors, fmt.Sprintf("BAD MAGIC: %s", dirPath))
-		mergeReport(lTrades, lBytes, lDays, lCorrupt, lErrors, nil)
-		return
-	}
-
-	count := binary.LittleEndian.Uint64(hdr[8:])
-
-	// 3. Iterate Days
-	var row [26]byte
-	for i := uint64(0); i < count; i++ {
-		if _, err := io.ReadFull(fIdx, row[:]); err != nil {
-			lErrors = append(lErrors, fmt.Sprintf("IDX TRUNCATED: %s", dirPath))
-			break
-		}
-
-		day := int(binary.LittleEndian.Uint16(row[0:]))
-		offset := int64(binary.LittleEndian.Uint64(row[2:]))
-		length := int64(binary.LittleEndian.Uint64(row[10:]))
-		expSum := binary.LittleEndian.Uint64(row[18:])
-
-		presentDays[day] = true
-		lDays++
-		lBytes += length
-
-		// Validate Data Blob
-		if length < 32 {
-			lCorrupt++
-			lErrors = append(lErrors, fmt.Sprintf("Corrupt Blob (Len<32): %s Day %d", dirPath, day))
-			continue
-		}
-
-		if offset < 0 || length < 0 || offset+length > dstat.Size() {
-			lCorrupt++
-			lErrors = append(lErrors, fmt.Sprintf("Blob exceeds file size: %s Day %d", dirPath, day))
-			continue
-		}
-
-		if _, err := fData.Seek(offset, io.SeekStart); err != nil {
-			lCorrupt++
-			continue
-		}
-
-		// Read Header only first to check magic/count
-		var blobHeader [32]byte
-		if _, err := io.ReadFull(fData, blobHeader[:]); err != nil {
-			lCorrupt++
-			lErrors = append(lErrors, fmt.Sprintf("Read Fail: %s Day %d", dirPath, day))
-			continue
-		}
-
-		if string(blobHeader[0:4]) != GNCMagic {
-			lCorrupt++
-			lErrors = append(lErrors, fmt.Sprintf("Bad GNC Magic: %s Day %d", dirPath, day))
-			continue
-		}
-
-		tradeCount := binary.LittleEndian.Uint32(blobHeader[4:8])
-		lTrades += int64(tradeCount)
-
-		// Full Checksum (Expensive but necessary for 'Sanity')
-		// Rewind to read full blob
-		if _, err := fData.Seek(offset, io.SeekStart); err != nil {
-			lCorrupt++
-			continue
-		}
-
-		// Safety check on length alloc
-		if length > 256*1024*1024 { // Cap at 256MB per day chunk for sanity
-			lCorrupt++
-			lErrors = append(lErrors, fmt.Sprintf("Huge Blob (%d MB): %s Day %d", length/1024/1024, dirPath, day))
-			continue
-		}
-
-		blob := make([]byte, int(length))
-		if _, err := io.ReadFull(fData, blob); err != nil {
-			lCorrupt++
-			continue
-		}
-
-		sum := sha256.Sum256(blob)
-		if binary.LittleEndian.Uint64(sum[:8]) != expSum {
-			lCorrupt++
-			lErrors = append(lErrors, fmt.Sprintf("Checksum Mismatch: %s Day %d", dirPath, day))
-		}
-	}
-
-	// 4. Gap Detection
-	// Calculate valid days for this specific month/year
-	expectedDays := daysInMonth(year, month)
-	var missing []string
-
-	// Don't check gaps for the current (incomplete) month if it matches today's month
-	now := time.Now()
-	isCurrentMonth := (now.Year() == year && int(now.Month()) == month)
-
-	limit := expectedDays
-	if isCurrentMonth {
-		limit = now.Day() - 1 // Expect up to yesterday
-	}
-
-	for d := 1; d <= limit; d++ {
-		if !presentDays[d] {
-			missing = append(missing, fmt.Sprintf("%04d-%02d-%02d", year, month, d))
-		}
-	}
-
-	mergeReport(lTrades, lBytes, lDays, lCorrupt, lErrors, missing)
-}
-
-func mergeReport(trades, bytes int64, days, corrupt int, errs []string, missing []string) {
-	report.Mu.Lock()
-	defer report.Mu.Unlock()
-
-	report.TotalTrades += trades
-	report.TotalBytes += bytes
-	report.TotalDays += days
-	report.CorruptFiles += corrupt
-	if len(errs) > 0 {
-		report.Errors = append(report.Errors, errs...)
-	}
-	if len(missing) > 0 {
-		report.MissingDays = append(report.MissingDays, missing...)
-	}
-}
-
-// --- Helpers ---
-
-func daysInMonth(year, month int) int {
-	// Days in month lookup
-	if month == 2 {
-		if isLeap(year) {
-			return 29
-		}
-		return 28
-	}
-	if month == 4 || month == 6 || month == 9 || month == 11 {
-		return 30
-	}
-	return 31
-}
-
-func isLeap(year int) bool {
-	return year%4 == 0 && (year%100 != 0 || year%400 == 0)
-}
-
-func printSummary(duration time.Duration) {
-	fmt.Println("\n=======================================================")
-	fmt.Printf("   DATA INTEGRITY REPORT (%s)   \n", Symbol())
-	fmt.Println("=======================================================")
+	sort.Strings(symbols)
 
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
-	fmt.Fprintf(w, "Scan Duration:\t%s\n", duration)
-	fmt.Fprintf(w, "Months Scanned:\t%d\n", report.TotalMonths)
-	fmt.Fprintf(w, "Total Days:\t%d\n", report.TotalDays)
-	fmt.Fprintf(w, "Total Trades:\t%s\n", fmtHumanInt(report.TotalTrades))
-	fmt.Fprintf(w, "Total Size:\t%s\n", fmtHumanBytes(report.TotalBytes))
-	fmt.Fprintf(w, "Corrupt files:\t%d\n", report.CorruptFiles)
+	fmt.Fprintln(w, "SYMBOL\tIDX_DAYS\tSAMPLED\tOK\tFAIL\tFIRST_DAY\tLAST_DAY\tMIN_ROWS\tMAX_ROWS\tAVG_ROWS")
+	fmt.Fprintln(w, "------\t--------\t-------\t--\t----\t---------\t--------\t--------\t--------\t--------")
 
-	gapCount := len(report.MissingDays)
-	fmt.Fprintf(w, "Missing Days:\t%d\n", gapCount)
+	const samplePerSymbol = 16
+
+	for _, sym := range symbols {
+		// Collect all tasks (days) for this symbol.
+		var tasks []ofiTask
+		for t := range discoverTasks(sym) {
+			tasks = append(tasks, t)
+		}
+		if len(tasks) == 0 {
+			fmt.Fprintf(w, "%-8s\t0\t0\t0\t0\t-\t-\t0\t0\t0\n", sym)
+			continue
+		}
+
+		// Sort tasks chronologically to get true FIRST_DAY / LAST_DAY.
+		sort.Slice(tasks, func(i, j int) bool {
+			if tasks[i].Year != tasks[j].Year {
+				return tasks[i].Year < tasks[j].Year
+			}
+			if tasks[i].Month != tasks[j].Month {
+				return tasks[i].Month < tasks[j].Month
+			}
+			return tasks[i].Day < tasks[j].Day
+		})
+
+		idxDays := len(tasks)
+		first := tasks[0]
+		last := tasks[len(tasks)-1]
+
+		// Determine which indices to sample (spread across the history).
+		sampled := samplePerSymbol
+		if idxDays < sampled {
+			sampled = idxDays
+		}
+		var sampleIdxs []int
+		if sampled > 0 {
+			step := idxDays / sampled
+			if step < 1 {
+				step = 1
+			}
+			for i, count := 0, 0; i < idxDays && count < sampled; i += step {
+				sampleIdxs = append(sampleIdxs, i)
+				count++
+			}
+			if len(sampleIdxs) == 0 {
+				sampleIdxs = []int{0}
+				sampled = 1
+			} else {
+				sampled = len(sampleIdxs)
+			}
+		}
+
+		cols := DayColumnPool.Get().(*DayColumns)
+		cols.Reset()
+		var buf []byte
+
+		okCount := 0
+		failCount := 0
+		var minRows, maxRows, totalRows int
+
+		for _, idx := range sampleIdxs {
+			t := tasks[idx]
+
+			if !LoadGNCFile(BaseDir, sym, t, &buf) {
+				failCount++
+				fmt.Printf(
+					"  [%s] %04d-%02d-%02d  STATUS=LOAD_FAIL   rows=0 reason=missing_or_unreadable_blob\n",
+					sym, t.Year, t.Month, t.Day,
+				)
+				continue
+			}
+			rows, err := InflateGNC(buf, cols)
+			if err != nil || rows <= 0 {
+				failCount++
+				fmt.Printf(
+					"  [%s] %04d-%02d-%02d  STATUS=DECODE_FAIL rows=%d reason=%v\n",
+					sym, t.Year, t.Month, t.Day, rows, err,
+				)
+				continue
+			}
+
+			okCount++
+			if okCount == 1 {
+				minRows, maxRows = rows, rows
+			} else {
+				if rows < minRows {
+					minRows = rows
+				}
+				if rows > maxRows {
+					maxRows = rows
+				}
+			}
+			totalRows += rows
+		}
+
+		DayColumnPool.Put(cols)
+
+		avgRows := 0
+		if okCount > 0 {
+			avgRows = totalRows / okCount
+		}
+
+		firstStr := fmt.Sprintf("%04d-%02d-%02d", first.Year, first.Month, first.Day)
+		lastStr := fmt.Sprintf("%04d-%02d-%02d", last.Year, last.Month, last.Day)
+
+		fmt.Fprintf(
+			w,
+			"%-8s\t%d\t%d\t%d\t%d\t%s\t%s\t%d\t%d\t%d\n",
+			sym,
+			idxDays,
+			sampled,
+			okCount,
+			failCount,
+			firstStr,
+			lastStr,
+			minRows,
+			maxRows,
+			avgRows,
+		)
+	}
 
 	w.Flush()
-	fmt.Println("-------------------------------------------------------")
-
-	if gapCount > 0 {
-		fmt.Println("GAPS FOUND (First 10):")
-		sort.Strings(report.MissingDays)
-		for i, gap := range report.MissingDays {
-			if i >= 10 {
-				fmt.Printf("... and %d more\n", gapCount-10)
-				break
-			}
-			fmt.Printf(" - [MISSING] %s\n", gap)
-		}
-		fmt.Println("-------------------------------------------------------")
-	}
-
-	if len(report.Errors) > 0 {
-		fmt.Println("CRITICAL ERRORS (First 10):")
-		for i, err := range report.Errors {
-			if i >= 10 {
-				fmt.Printf("... and %d more\n", len(report.Errors)-10)
-				break
-			}
-			fmt.Printf(" - [FAIL] %s\n", err)
-		}
-	} else if report.CorruptFiles == 0 && gapCount == 0 {
-		fmt.Println(">> STATUS: GREEN (100% Integrity) <<")
-	} else {
-		fmt.Println(">> STATUS: AMBER (Gaps or Corruption Detected) <<")
-	}
-	fmt.Println("=======================================================")
-}
-
-func fmtHumanInt(n int64) string {
-	s := fmt.Sprintf("%d", n)
-	if n < 1000 {
-		return s
-	}
-	// Simple comma insertion
-	var res []byte
-	for i, c := range s {
-		if i > 0 && (len(s)-i)%3 == 0 {
-			res = append(res, ',')
-		}
-		res = append(res, byte(c))
-	}
-	return string(res)
-}
-
-func fmtHumanBytes(b int64) string {
-	const unit = 1024
-	if b < unit {
-		return fmt.Sprintf("%d B", b)
-	}
-	div, exp := int64(unit), 0
-	for n := b / unit; n >= unit; n /= unit {
-		div *= unit
-		exp++
-	}
-	return fmt.Sprintf("%.2f %cB", float64(b)/float64(div), "KMGTPE"[exp])
+	fmt.Printf("\n[probe] Finished in %s\n", time.Since(start))
 }
 ```
 
-// --- End File: sanity.go ---
+// --- End File: probe.go ---
 
-// --- File: study.go ---
+// --- File: stream.go ---
 
 ```go
 package main
 
 import (
-	"encoding/binary"
-	"fmt"
-	"io"
-	"iter"
 	"math"
-	"os"
-	"path/filepath"
 	"sort"
-	"strings"
+)
+
+type StreamResult struct {
+	Times       []int64   // [sample]
+	Prices      []float64 // [sample]
+	Features    []float64 // [sample * numModels]
+	Targets     []float64 // [sample * numHorizons]
+	NumModels   int
+	NumHorizons int
+}
+
+func RunStream(cols *DayColumns, models []ContinuousModel) StreamResult {
+	n := cols.Count
+	if n < 100 {
+		return StreamResult{}
+	}
+
+	numModels := len(models)
+	numHorizons := len(HorizonDelays)
+
+	for _, m := range models {
+		m.Reset()
+	}
+
+	// Rough capacity estimate: one sample per minute.
+	estSamples := n / 60
+	if estSamples < 1 {
+		estSamples = 1
+	}
+
+	res := StreamResult{
+		Times:       make([]int64, 0, estSamples),
+		Prices:      make([]float64, 0, estSamples),
+		Features:    make([]float64, 0, estSamples*numModels),
+		Targets:     nil, // filled after labeling
+		NumModels:   numModels,
+		NumHorizons: numHorizons,
+	}
+
+	// Scratch slice reused per tick to hold model outputs.
+	currFeats := make([]float64, numModels)
+
+	lastT := cols.Times[0]
+	nextSampleT := lastT + (SamplingRateSec * 1000)
+
+	for i := 0; i < n; i++ {
+		t := cols.Times[i]
+		p := cols.Prices[i]
+		v := cols.Qtys[i]
+
+		dt := float64(t-lastT) / 1000.0
+		if dt < 0 {
+			dt = 0
+		}
+		lastT = t
+
+		for j, m := range models {
+			currFeats[j] = m.Update(dt, p, v)
+		}
+
+		if t >= nextSampleT {
+			// Append one sample row.
+			res.Times = append(res.Times, t)
+			res.Prices = append(res.Prices, p)
+			res.Features = append(res.Features, currFeats...)
+
+			for t >= nextSampleT {
+				nextSampleT += (SamplingRateSec * 1000)
+			}
+		}
+	}
+
+	sampleCount := len(res.Times)
+	if sampleCount == 0 {
+		return StreamResult{}
+	}
+
+	// Lookahead labeling on the flat arrays.
+	maxTime := cols.Times[n-1]
+	res.Targets = make([]float64, sampleCount*numHorizons)
+
+	validCount := 0
+	ticksTimes := cols.Times
+	ticksPrices := cols.Prices
+
+	for i := 0; i < sampleCount; i++ {
+		basePrice := res.Prices[i]
+		sampleT := res.Times[i]
+
+		valid := true
+		baseTarg := validCount * numHorizons
+
+		for hIdx, delay := range HorizonDelays {
+			targetT := sampleT + delay
+			if targetT > maxTime {
+				valid = false
+				break
+			}
+
+			// Binary search for first tick with time >= targetT.
+			idx := sort.Search(n, func(k int) bool {
+				return ticksTimes[k] >= targetT
+			})
+			if idx == n {
+				valid = false
+				break
+			}
+			foundP := ticksPrices[idx]
+			if foundP <= 0 {
+				valid = false
+				break
+			}
+
+			res.Targets[baseTarg+hIdx] = math.Log(foundP / basePrice)
+		}
+
+		if !valid {
+			continue
+		}
+
+		// Pack valid rows to the front (Times, Prices, Features).
+		if validCount != i {
+			res.Times[validCount] = sampleT
+			res.Prices[validCount] = basePrice
+
+			srcFeat := i * numModels
+			dstFeat := validCount * numModels
+			copy(res.Features[dstFeat:dstFeat+numModels], res.Features[srcFeat:srcFeat+numModels])
+		}
+
+		validCount++
+	}
+
+	if validCount == 0 {
+		return StreamResult{}
+	}
+
+	res.Times = res.Times[:validCount]
+	res.Prices = res.Prices[:validCount]
+	res.Features = res.Features[:validCount*numModels]
+	res.Targets = res.Targets[:validCount*numHorizons]
+
+	return res
+}
+```
+
+// --- End File: stream.go ---
+
+// --- File: test.go ---
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+	"sort"
 	"sync"
 	"sync/atomic"
 	"text/tabwriter"
 	"time"
-	"unsafe"
 )
 
-const (
-	OOSDateStr = "2024-01-01"
-)
-
-var TimeHorizonsMS = []int{
-	500,   // 0.5s - Sniper
-	1000,  // 1s
-	2000,  // 2s
-	5000,  // 5s
-	10000, // 10s
+type ResultContainer struct {
+	Times []float64
+	Feats []float64
+	Targs []float64
 }
 
-var oosBoundaryYMD int
-
-func init() {
-	oosBoundaryYMD = parseOOSBoundary(OOSDateStr)
+// Per-worker storage: [horizon][model] -> ResultContainer
+type WorkerResults struct {
+	Data [][]*ResultContainer
 }
 
-type DayResult struct {
-	YMD     int
-	Metrics map[string][]Moments
-}
+func RunTest() {
+	start := time.Now()
 
-func runStudy() {
-	startT := time.Now()
-	found := false
-	for sym := range discoverFeatureSymbols() {
-		found = true
-		studySymbol(sym)
+	models := GetContinuousModels()
+	modelNames := make([]string, len(models))
+	for i, m := range models {
+		modelNames[i] = m.Name()
 	}
-	if !found {
-		fmt.Printf("[study] No features found in %s/features\n", BaseDir)
-	} else {
-		fmt.Printf("[study] ALL COMPLETE in %s\n", time.Since(startT))
-	}
-}
 
-func discoverFeatureSymbols() iter.Seq[string] {
-	return func(yield func(string) bool) {
-		featDir := filepath.Join(BaseDir, "features")
-		entries, err := os.ReadDir(featDir)
-		if err != nil {
-			return
-		}
-		for _, e := range entries {
-			if e.IsDir() && !strings.HasPrefix(e.Name(), ".") {
-				if !yield(e.Name()) {
-					return
-				}
-			}
+	fmt.Printf(">>> CONTINUOUS-TIME ALGO DISCOVERY (OOS REPORT) <<<\n")
+	fmt.Printf("   Workers: %d | Models: %d\n", CPUThreads, len(models))
+
+	// Global results[horizon][model].
+	results := make([][]*ResultContainer, len(HorizonLabels))
+	for h := range results {
+		results[h] = make([]*ResultContainer, len(models))
+		for m := range results[h] {
+			results[h][m] = &ResultContainer{}
 		}
 	}
-}
 
-func studySymbol(sym string) {
-	fmt.Printf("\n>>> STUDY: %s <<<\n", sym)
-	featRoot := filepath.Join(BaseDir, "features", sym)
-	entries, _ := os.ReadDir(featRoot)
-	var variants []string
-	for _, e := range entries {
-		if e.IsDir() && !strings.HasPrefix(e.Name(), ".") {
-			variants = append(variants, e.Name())
-		}
+	// Collect all (year,month,day) tasks for the chosen symbol.
+	tasks := make([]ofiTask, 0)
+	sym := Symbol()
+	for t := range discoverTasks(sym) {
+		tasks = append(tasks, t)
 	}
-	if len(variants) == 0 {
+
+	if len(tasks) == 0 {
+		fmt.Println("No tasks discovered; nothing to do.")
 		return
 	}
 
-	// Discovery
-	var tasks []int
-	for d := range discoverStudyDays(filepath.Join(featRoot, variants[0])) {
-		tasks = append(tasks, d)
+	// Sort tasks chronologically so workers process days in a sensible order.
+	sort.Slice(tasks, func(i, j int) bool {
+		if tasks[i].Year != tasks[j].Year {
+			return tasks[i].Year < tasks[j].Year
+		}
+		if tasks[i].Month != tasks[j].Month {
+			return tasks[i].Month < tasks[j].Month
+		}
+		return tasks[i].Day < tasks[j].Day
+	})
+
+	// Per-worker result storage.
+	workerResults := make([]*WorkerResults, CPUThreads)
+	for i := 0; i < CPUThreads; i++ {
+		wr := &WorkerResults{
+			Data: make([][]*ResultContainer, len(HorizonLabels)),
+		}
+		for h := range wr.Data {
+			wr.Data[h] = make([]*ResultContainer, len(models))
+			for m := range wr.Data[h] {
+				wr.Data[h][m] = &ResultContainer{}
+			}
+		}
+		workerResults[i] = wr
 	}
-	totalTasks := len(tasks)
-	fmt.Printf("Variants: %d | Days: %d\n", len(variants), totalTasks)
 
-	isAcc := make(map[string][]Moments)
-	oosAcc := make(map[string][]Moments)
-	var accMu sync.Mutex
+	// Task channel and worker pool.
+	taskCh := make(chan ofiTask, len(tasks))
+	for _, t := range tasks {
+		taskCh <- t
+	}
+	close(taskCh)
 
-	resultsChan := make(chan DayResult, 64)
-	jobsChan := make(chan int, len(tasks))
 	var wg sync.WaitGroup
-	var completed atomic.Int64
-	doneChan := make(chan bool)
+	var processed atomic.Int64
 
-	go func() {
-		ticker := time.NewTicker(1000 * time.Millisecond)
-		defer ticker.Stop()
-		for {
-			select {
-			case <-doneChan:
-				return
-			case <-ticker.C:
-				printProgress(int(completed.Load()), totalTasks)
-			}
-		}
-	}()
-
-	for i := 0; i < 24; i++ {
+	for wID := 0; wID < CPUThreads; wID++ {
 		wg.Add(1)
-		go func() {
+		go func(id int) {
 			defer wg.Done()
-			var sigBuf []float64
-			var fileBuf []byte
-			var retBuf []float64
-			retsPerHBuf := make([][]float64, len(TimeHorizonsMS))
-			var gncBuf []byte
-			for idx := range jobsChan {
-				dayInt := tasks[idx]
-				res := processStudyDay(sym, dayInt, variants, featRoot, &sigBuf, &fileBuf, &retBuf, &retsPerHBuf, &gncBuf)
-				resultsChan <- res
-				completed.Add(1)
-			}
-		}()
-	}
 
-	for i := range tasks {
-		jobsChan <- i
-	}
-	close(jobsChan)
+			localStore := workerResults[id]
+			localModels := GetContinuousModels()
 
-	go func() {
-		wg.Wait()
-		close(resultsChan)
-		close(doneChan)
-	}()
+			cols := DayColumnPool.Get().(*DayColumns)
+			defer DayColumnPool.Put(cols)
 
-	for res := range resultsChan {
-		isOOS := res.YMD >= oosBoundaryYMD
-		accMu.Lock()
-		for vName, moms := range res.Metrics {
-			if _, ok := isAcc[vName]; !ok {
-				isAcc[vName] = make([]Moments, len(TimeHorizonsMS))
-				oosAcc[vName] = make([]Moments, len(TimeHorizonsMS))
-			}
-			target := isAcc[vName]
-			if isOOS {
-				target = oosAcc[vName]
-			}
-			for hIdx := range TimeHorizonsMS {
-				target[hIdx].Add(moms[hIdx])
-			}
-		}
-		accMu.Unlock()
-	}
+			var buf []byte
 
-	var finalKeys []string
-	for k := range isAcc {
-		finalKeys = append(finalKeys, k)
-	}
-	sort.Strings(finalKeys)
-
-	for hIdx, ms := range TimeHorizonsMS {
-		printHorizonTable(ms, finalKeys, isAcc, oosAcc, hIdx)
-	}
-}
-
-func processStudyDay(
-	sym string, dayInt int, variants []string, featRoot string,
-	sigBuf *[]float64, fileBuf *[]byte, retBuf *[]float64,
-	retsPerH *[][]float64, gncBuf *[]byte,
-) DayResult {
-	y, m, d := dayInt/10000, (dayInt%10000)/100, dayInt%100
-	res := DayResult{
-		YMD:     dayInt,
-		Metrics: make(map[string][]Moments),
-	}
-
-	colsAny := DayColumnPool.Get()
-	cols := colsAny.(*DayColumns)
-	cols.Reset()
-	defer DayColumnPool.Put(cols)
-
-	rowCount, ok := loadDayColumns(sym, y, m, d, cols, gncBuf)
-	if !ok || rowCount == 0 {
-		return res
-	}
-	n := rowCount
-
-	p, tm := cols.Prices, cols.Times
-	dStr := fmt.Sprintf("%04d%02d%02d", y, m, d)
-
-	for hIdx, ms := range TimeHorizonsMS {
-		computeReturns(p, tm, n, ms, retBuf)
-		target := (*retsPerH)[hIdx]
-		if cap(target) < n {
-			target = make([]float64, n+n/4)
-			(*retsPerH)[hIdx] = target
-		}
-		target = target[:n]
-		copy(target, (*retBuf)[:n])
-	}
-
-	for _, v := range variants {
-		sigPath := filepath.Join(featRoot, v, dStr+".bin")
-		rawSigs, byteSize, ok := fastLoadBytes(sigPath, fileBuf)
-		if !ok || byteSize == 0 {
-			continue
-		}
-
-		// --- HEADER PARSING ---
-		if len(rawSigs) < 6 || string(rawSigs[0:4]) != AtomHeaderMagic {
-			continue // wrong magic
-		}
-
-		ptr := 4
-		numFeats := int(binary.LittleEndian.Uint16(rawSigs[ptr:]))
-		ptr += 2
-
-		featureNames := make([]string, numFeats)
-		for i := 0; i < numFeats; i++ {
-			if ptr >= len(rawSigs) {
-				break
-			}
-			nameLen := int(rawSigs[ptr])
-			ptr++
-			if ptr+nameLen > len(rawSigs) {
-				break
-			}
-			featureNames[i] = string(rawSigs[ptr : ptr+nameLen])
-			ptr += nameLen
-		}
-
-		// Data starts at ptr
-		dataBlob := rawSigs[ptr:]
-		dims := numFeats
-
-		if n > cap(*sigBuf) {
-			*sigBuf = make([]float64, n+n/4)
-		}
-
-		for dim := 0; dim < dims; dim++ {
-			target := (*sigBuf)[:n]
-			decodeFeatureDim(dataBlob, n, dims, dim, target)
-
-			key := v
-			if dim < len(featureNames) {
-				key = featureNames[dim]
-			}
-			moms := make([]Moments, len(TimeHorizonsMS))
-			for hIdx := range TimeHorizonsMS {
-				moms[hIdx] = CalcMomentsVectors(target, (*retsPerH)[hIdx][:n])
-			}
-			res.Metrics[key] = moms
-		}
-	}
-	return res
-}
-
-func printHorizonTable(hMS int, keys []string, isAcc, oosAcc map[string][]Moments, hIdx int) {
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
-	sec := float64(hMS) / 1000.0
-	fmt.Fprintf(w, "\n== Horizon %.3fs ==\n", sec)
-	fmt.Fprintln(w, "FEATURE\tIS_IC\tOOS_IC\tIS_BPS\tOOS_BPS")
-	for _, k := range keys {
-		mIS := isAcc[k][hIdx]
-		mOOS := oosAcc[k][hIdx]
-
-		icIS, icOOS := 0.0, 0.0
-		if mIS.Count > 0 {
-			num := mIS.Count*mIS.SumProd - mIS.SumSig*mIS.SumRet
-			den := math.Sqrt((mIS.Count*mIS.SumSqSig - mIS.SumSig*mIS.SumSig) * (mIS.Count*mIS.SumSqRet - mIS.SumRet*mIS.SumRet))
-			if den > 0 {
-				icIS = num / den
-			}
-		}
-		if mOOS.Count > 0 {
-			num := mOOS.Count*mOOS.SumProd - mOOS.SumSig*mOOS.SumRet
-			den := math.Sqrt((mOOS.Count*mOOS.SumSqSig - mOOS.SumSig*mOOS.SumSig) * (mOOS.Count*mOOS.SumSqRet - mOOS.SumRet*mOOS.SumRet))
-			if den > 0 {
-				icOOS = num / den
-			}
-		}
-
-		bpsIS := 0.0
-		if mIS.SumAbsDeltaSig > 0 {
-			bpsIS = (mIS.SumPnL / mIS.SumAbsDeltaSig) * 10000.0
-		}
-		bpsOOS := 0.0
-		if mOOS.SumAbsDeltaSig > 0 {
-			bpsOOS = (mOOS.SumPnL / mOOS.SumAbsDeltaSig) * 10000.0
-		}
-
-		fmt.Fprintf(w, "%s\t%.4f\t%.4f\t%.2f\t%.2f\n", k, icIS, icOOS, bpsIS, bpsOOS)
-	}
-	w.Flush()
-}
-
-// --- HELPERS ---
-
-func discoverStudyDays(vDir string) iter.Seq[int] {
-	return func(yield func(int) bool) {
-		files, err := os.ReadDir(vDir)
-		if err != nil {
-			return
-		}
-		var days []int
-		for _, f := range files {
-			if strings.HasSuffix(f.Name(), ".bin") {
-				if val := fastAtoi(strings.TrimSuffix(f.Name(), ".bin")); val > 0 {
-					days = append(days, val)
+			for task := range taskCh {
+				if !LoadGNCFile(BaseDir, sym, task, &buf) {
+					continue
 				}
+				if _, err := InflateGNC(buf, cols); err != nil {
+					continue
+				}
+
+				streamRes := RunStream(cols, localModels)
+				if len(streamRes.Times) == 0 {
+					continue
+				}
+
+				numSamples := len(streamRes.Times)
+				numModels := streamRes.NumModels
+				numHorizons := streamRes.NumHorizons
+
+				// Append into thread-local storage.
+				for s := 0; s < numSamples; s++ {
+					t := float64(streamRes.Times[s])
+
+					featBase := s * numModels
+					targBase := s * numHorizons
+
+					for mIdx := 0; mIdx < numModels; mIdx++ {
+						featVal := streamRes.Features[featBase+mIdx]
+						for hIdx := 0; hIdx < numHorizons; hIdx++ {
+							targVal := streamRes.Targets[targBase+hIdx]
+
+							rc := localStore.Data[hIdx][mIdx]
+							rc.Times = append(rc.Times, t)
+							rc.Feats = append(rc.Feats, featVal)
+							rc.Targs = append(rc.Targs, targVal)
+						}
+					}
+				}
+
+				processed.Add(1)
+			}
+		}(wID)
+	}
+	wg.Wait()
+
+	// Merge worker-local results into global results.
+	for wID := 0; wID < CPUThreads; wID++ {
+		wr := workerResults[wID]
+		for hIdx := range HorizonLabels {
+			for mIdx := range models {
+				src := wr.Data[hIdx][mIdx]
+				dst := results[hIdx][mIdx]
+
+				if len(src.Times) == 0 {
+					continue
+				}
+
+				dst.Times = append(dst.Times, src.Times...)
+				dst.Feats = append(dst.Feats, src.Feats...)
+				dst.Targs = append(dst.Targs, src.Targs...)
 			}
 		}
-		sort.Ints(days)
-		for _, d := range days {
-			if !yield(d) {
-				return
+	}
+
+	// ---------------------------------------------------------------------
+	// Reporting phase
+	// ---------------------------------------------------------------------
+
+	f, _ := os.Create("Continuous_Algo_Report_OOS.txt")
+	defer f.Close()
+	w := tabwriter.NewWriter(f, 0, 0, 1, ' ', 0)
+
+	const trainFrac = 0.7 // 70% earliest samples train, 30% latest samples test
+
+	// 1) Core OOS summary, per model × horizon
+	fmt.Fprintf(w, "MODEL\tHORIZON\tTrainN\tTestN\tPearsonIC\tSpearmanIC\tHitRate\tHitZ\tSharpe\tSpread(bps)\tTopDecile(bps)\tBotDecile(bps)\tMI(bits)\tNMI\tΔLogLoss\n")
+	fmt.Fprintf(w, "-----\t-------\t------\t-----\t---------\t-----------\t-------\t----\t------\t-----------\t--------------\t---------------\t--------\t---\t--------\n")
+
+	for mIdx, name := range modelNames {
+		for hIdx, hName := range HorizonLabels {
+			data := results[hIdx][mIdx]
+			if len(data.Feats) == 0 {
+				continue
+			}
+
+			stats := AnalyzeFullSuiteOOS(data.Times, data.Feats, data.Targs, trainFrac)
+			if stats.TestCount == 0 {
+				continue
+			}
+
+			fmt.Fprintf(
+				w,
+				"%s\t%s\t%d\t%d\t%.4f\t%.4f\t%.3f\t%.2f\t%.3f\t%+.1f\t%+.1f\t%+.1f\t%.3f\t%.3f\t%.4f\n",
+				name,
+				hName,
+				stats.TrainCount,
+				stats.TestCount,
+				stats.PearsonIC,
+				stats.SpearmanIC,
+				stats.HitRate,
+				stats.HitRateZ,
+				stats.Sharpe,
+				stats.SpreadBps,
+				stats.TopDecileRetBps,
+				stats.BottomDecileRetBps,
+				stats.MutualInfo,
+				stats.NormalizedMI,
+				stats.DeltaLogLoss,
+			)
+		}
+		fmt.Fprintf(w, "\n")
+	}
+
+	// 2) Rolling OOS metrics on the test segment
+	fmt.Fprintf(w, "\n\n# Rolling OOS metrics (test segment only)\n")
+	fmt.Fprintf(w, "MODEL\tHORIZON\tWIN\tCount\tPearsonIC\tSpearmanIC\tHitRate\tSharpe\n")
+	fmt.Fprintf(w, "-----\t-------\t---\t-----\t---------\t-----------\t-------\t------\n")
+
+	const rollingWindows = 8
+
+	for mIdx, name := range modelNames {
+		for hIdx, hName := range HorizonLabels {
+			data := results[hIdx][mIdx]
+			if len(data.Feats) == 0 {
+				continue
+			}
+			wins := RollingWindowMetricsOOS(data.Times, data.Feats, data.Targs, trainFrac, rollingWindows)
+			for winIdx, wm := range wins {
+				if wm.Count == 0 {
+					continue
+				}
+				fmt.Fprintf(
+					w,
+					"%s\t%s\t%d\t%d\t%.4f\t%.4f\t%.3f\t%.3f\n",
+					name,
+					hName,
+					winIdx,
+					wm.Count,
+					wm.PearsonIC,
+					wm.SpearmanIC,
+					wm.HitRate,
+					wm.Sharpe,
+				)
 			}
 		}
+		fmt.Fprintf(w, "\n")
 	}
-}
 
-func loadDayColumns(sym string, y, m, d int, cols *DayColumns, gncBuf *[]byte) (int, bool) {
-	dir := filepath.Join(BaseDir, sym, fmt.Sprintf("%04d", y), fmt.Sprintf("%02d", m))
-	idxPath := filepath.Join(dir, "index.quantdev")
-	dataPath := filepath.Join(dir, "data.quantdev")
-	offset, length := findBlobOffset(idxPath, d)
-	if length == 0 {
-		return 0, false
-	}
-	f, err := os.Open(dataPath)
-	if err != nil {
-		return 0, false
-	}
-	defer f.Close()
-	stat, err := f.Stat()
-	if err != nil {
-		return 0, false
-	}
-	off64 := int64(offset)
-	len64 := int64(length)
-	if off64 < 0 || len64 <= 0 || off64+len64 > stat.Size() {
-		return 0, false
-	}
-	if len64 > 512*1024*1024 {
-		return 0, false
-	}
-	need := int(len64)
-	if cap(*gncBuf) < need {
-		*gncBuf = make([]byte, need)
-	}
-	raw := (*gncBuf)[:need]
-	if _, err := f.Seek(off64, io.SeekStart); err != nil {
-		return 0, false
-	}
-	if _, err := io.ReadFull(f, raw); err != nil {
-		return 0, false
-	}
-	return inflateGNCToColumns(raw, cols)
-}
+	// 3) Volatility regime OOS metrics
+	fmt.Fprintf(w, "\n\n# Volatility regime OOS metrics (test segment only)\n")
+	fmt.Fprintf(w, "MODEL\tHORIZON\tREGIME\tCount\tPearsonIC\tSpearmanIC\tHitRate\tSharpe\n")
+	fmt.Fprintf(w, "-----\t-------\t------\t-----\t---------\t-----------\t-------\t------\n")
 
-func findBlobOffset(idxPath string, day int) (uint64, uint64) {
-	f, err := os.Open(idxPath)
-	if err != nil {
-		return 0, 0
-	}
-	defer f.Close()
-	var hdr [16]byte
-	if _, err := io.ReadFull(f, hdr[:]); err != nil {
-		return 0, 0
-	}
-	if string(hdr[0:4]) != IdxMagic {
-		return 0, 0
-	}
-	count := binary.LittleEndian.Uint64(hdr[8:])
-	var row [26]byte
-	for i := uint64(0); i < count; i++ {
-		if _, err := io.ReadFull(f, row[:]); err != nil {
-			break
-		}
-		if int(binary.LittleEndian.Uint16(row[0:])) == day {
-			return binary.LittleEndian.Uint64(row[2:]), binary.LittleEndian.Uint64(row[10:])
-		}
-	}
-	return 0, 0
-}
-
-func fastLoadBytes(path string, fileBuf *[]byte) ([]byte, int, bool) {
-	f, err := os.Open(path)
-	if err != nil {
-		return nil, 0, false
-	}
-	defer f.Close()
-	fi, err := f.Stat()
-	if err != nil {
-		return nil, 0, false
-	}
-	size := int(fi.Size())
-	if size == 0 {
-		return nil, 0, false
-	}
-	if cap(*fileBuf) < size {
-		*fileBuf = make([]byte, size)
-	}
-	buf := (*fileBuf)[:size]
-	if _, err := io.ReadFull(f, buf); err != nil {
-		return nil, 0, false
-	}
-	return buf, size, true
-}
-
-func decodeFeatureDim(raw []byte, n, dims, dim int, out []float64) {
-	// Re-using same logic, simplified for self-contained file
-	minBytes := n * dims * 4
-	if len(raw) < minBytes || dim < 0 || dim >= dims {
-		for i := 0; i < n; i++ {
-			out[i] = 0
-		}
-		return
-	}
-	f32s := unsafe.Slice((*float32)(unsafe.Pointer(&raw[0])), len(raw)/4)
-	for i := 0; i < n; i++ {
-		out[i] = float64(f32s[i*dims+dim])
-	}
-}
-
-func computeReturns(p []float64, tm []int64, n int, horizonMS int, outBuf *[]float64) {
-	if n > cap(*outBuf) {
-		*outBuf = make([]float64, n+n/4)
-	}
-	outSlice := (*outBuf)[:n]
-	hVal := int64(horizonMS)
-	right := 0
-	for left := 0; left < n; left++ {
-		targetTime := tm[left] + hVal
-		if right < left {
-			right = left
-		}
-		for right < n && tm[right] < targetTime {
-			right++
-		}
-		if right >= n {
-			for k := left; k < n; k++ {
-				outSlice[k] = 0
+	for mIdx, name := range modelNames {
+		for hIdx, hName := range HorizonLabels {
+			data := results[hIdx][mIdx]
+			if len(data.Feats) == 0 {
+				continue
 			}
-			return
+			regs := VolRegimeMetricsOOS(data.Times, data.Feats, data.Targs, trainFrac)
+			for _, rm := range regs {
+				if rm.Count == 0 {
+					continue
+				}
+				fmt.Fprintf(
+					w,
+					"%s\t%s\t%s\t%d\t%.4f\t%.4f\t%.3f\t%.3f\n",
+					name,
+					hName,
+					rm.Name,
+					rm.Count,
+					rm.PearsonIC,
+					rm.SpearmanIC,
+					rm.HitRate,
+					rm.Sharpe,
+				)
+			}
 		}
-		pStart := p[left]
-		pEnd := p[right]
-		if pStart > 0 {
-			outSlice[left] = (pEnd - pStart) / pStart
-		} else {
-			outSlice[left] = 0
+		fmt.Fprintf(w, "\n")
+	}
+
+	// 4) Time-of-day regime OOS metrics
+	fmt.Fprintf(w, "\n\n# Time-of-day regime OOS metrics (test segment only)\n")
+	fmt.Fprintf(w, "MODEL\tHORIZON\tREGIME\tCount\tPearsonIC\tSpearmanIC\tHitRate\tSharpe\n")
+	fmt.Fprintf(w, "-----\t-------\t------\t-----\t---------\t-----------\t-------\t------\n")
+
+	for mIdx, name := range modelNames {
+		for hIdx, hName := range HorizonLabels {
+			data := results[hIdx][mIdx]
+			if len(data.Feats) == 0 {
+				continue
+			}
+			regs := TimeOfDayRegimeMetricsOOS(data.Times, data.Feats, data.Targs, trainFrac)
+			for _, rm := range regs {
+				if rm.Count == 0 {
+					continue
+				}
+				fmt.Fprintf(
+					w,
+					"%s\t%s\t%s\t%d\t%.4f\t%.4f\t%.3f\t%.3f\n",
+					name,
+					hName,
+					rm.Name,
+					rm.Count,
+					rm.PearsonIC,
+					rm.SpearmanIC,
+					rm.HitRate,
+					rm.Sharpe,
+				)
+			}
 		}
+		fmt.Fprintf(w, "\n")
 	}
-}
 
-func parseOOSBoundary(d string) int {
-	return fastAtoi(d[0:4])*10000 + fastAtoi(d[5:7])*100 + fastAtoi(d[8:10])
-}
-
-func fastAtoi(s string) int {
-	n := 0
-	for i := 0; i < len(s); i++ {
-		c := s[i]
-		if c >= '0' && c <= '9' {
-			n = n*10 + int(c-'0')
-		}
-	}
-	return n
-}
-
-func printProgress(curr, total int) {
-	if total == 0 {
-		return
-	}
-	percent := float64(curr) / float64(total)
-	fmt.Printf("\rProgress: %.1f%% (%d/%d)", percent*100, curr, total)
+	w.Flush()
+	fmt.Printf("Done. Processed %d days in %s. OOS report saved to Continuous_Algo_Report_OOS.txt\n", processed.Load(), time.Since(start))
 }
 ```
 
-// --- End File: study.go ---
+// --- End File: test.go ---
 

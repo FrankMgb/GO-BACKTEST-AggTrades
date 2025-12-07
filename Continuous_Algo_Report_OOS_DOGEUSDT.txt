@@ -1,0 +1,213 @@
+MODEL            HORIZON TrainN  TestN  PearsonIC SpearmanIC  HitRate HitZ Sharpe Spread(bps) TopDecile(bps) BotDecile(bps)  MI(bits) NMI   ΔLogLoss
+-----            ------- ------  -----  --------- ----------- ------- ---- ------ ----------- -------------- --------------- -------- ---   --------
+Hawkes_Intensity 15m     1894794 812055 0.0198    0.0027      0.501   2.56 -0.000 +1.1        +1.1           -0.0            0.055    0.017 -0.0000
+Hawkes_Intensity 30m     1894794 812055 0.0205    0.0048      0.502   3.38 -0.001 +2.6        +2.4           -0.2            0.051    0.015 0.0000
+Hawkes_Intensity 1h      1894794 812055 0.0252    0.0070      0.504   7.91 -0.002 +6.5        +6.1           -0.3            0.044    0.013 -0.0000
+
+Hawkes_OFI 15m 1894794 812055 -0.0241 -0.0257 0.491 -15.92 -0.005 -2.0 -0.5 +1.5 0.029 0.009 0.0002
+Hawkes_OFI 30m 1894794 812055 -0.0418 -0.0275 0.491 -16.28 -0.008 -4.8 -1.1 +3.6 0.027 0.008 0.0003
+Hawkes_OFI 1h  1894794 812055 -0.0367 -0.0261 0.491 -16.42 -0.009 -7.8 -2.0 +5.8 0.024 0.007 0.0003
+
+Sig_LevyArea 15m 1894794 812055 0.0274 0.0071 0.501 2.58 -0.001 +1.3 +1.1 -0.2 0.073 0.022 0.0001
+Sig_LevyArea 30m 1894794 812055 0.0369 0.0082 0.502 3.75 -0.001 +3.4 +2.6 -0.7 0.070 0.021 0.0001
+Sig_LevyArea 1h  1894794 812055 0.0323 0.0078 0.504 8.06 -0.002 +6.2 +5.4 -0.8 0.062 0.019 0.0000
+
+Hilbert_Phase 15m 1894794 812055 -0.0040 -0.0209 0.486 -24.91 -0.003 -0.4 -0.6 -0.2 0.001 0.000 0.0002
+Hilbert_Phase 30m 1894794 812055 -0.0064 -0.0213 0.486 -25.38 -0.007 -0.7 -1.0 -0.3 0.001 0.000 0.0002
+Hilbert_Phase 1h  1894794 812055 -0.0063 -0.0187 0.488 -21.77 -0.006 -1.5 -1.7 -0.2 0.001 0.000 0.0002
+
+
+
+# Rolling OOS metrics (test segment only)
+MODEL            HORIZON WIN Count  PearsonIC SpearmanIC  HitRate Sharpe
+-----            ------- --- -----  --------- ----------- ------- ------
+Hawkes_Intensity 15m     0   101506 -0.0034   0.0134      0.502   -0.008
+Hawkes_Intensity 15m     1   101506 0.0079    -0.0019     0.504   -0.002
+Hawkes_Intensity 15m     2   101506 0.0229    0.0095      0.514   0.027
+Hawkes_Intensity 15m     3   101506 0.0228    -0.0001     0.500   -0.011
+Hawkes_Intensity 15m     4   101506 0.0204    -0.0160     0.495   -0.013
+Hawkes_Intensity 15m     5   101506 -0.0099   0.0100      0.500   0.001
+Hawkes_Intensity 15m     6   101506 0.0115    0.0033      0.506   0.008
+Hawkes_Intensity 15m     7   101513 0.0474    -0.0032     0.491   -0.009
+Hawkes_Intensity 30m     0   101506 -0.0038   0.0176      0.500   -0.012
+Hawkes_Intensity 30m     1   101506 0.0143    0.0023      0.507   -0.003
+Hawkes_Intensity 30m     2   101506 0.0211    0.0123      0.516   0.037
+Hawkes_Intensity 30m     3   101506 0.0164    0.0021      0.498   -0.015
+Hawkes_Intensity 30m     4   101506 0.0263    -0.0153     0.494   -0.021
+Hawkes_Intensity 30m     5   101506 -0.0038   0.0088      0.499   0.003
+Hawkes_Intensity 30m     6   101506 0.0077    -0.0002     0.507   0.010
+Hawkes_Intensity 30m     7   101513 0.0601    0.0021      0.494   -0.013
+Hawkes_Intensity 1h      0   101506 -0.0034   0.0195      0.495   -0.019
+Hawkes_Intensity 1h      1   101506 0.0125    -0.0110     0.509   -0.005
+Hawkes_Intensity 1h      2   101506 0.0238    0.0215      0.524   0.049
+Hawkes_Intensity 1h      3   101506 0.0149    0.0076      0.496   -0.021
+Hawkes_Intensity 1h      4   101506 0.0404    -0.0036     0.498   -0.027
+Hawkes_Intensity 1h      5   101506 0.0024    0.0102      0.504   0.008
+Hawkes_Intensity 1h      6   101506 -0.0001   -0.0115     0.509   0.012
+Hawkes_Intensity 1h      7   101513 0.0941    0.0069      0.501   -0.021
+
+Hawkes_OFI 15m 0 101506 -0.0474 -0.0207 0.496 0.000
+Hawkes_OFI 15m 1 101506 -0.0255 -0.0287 0.493 -0.011
+Hawkes_OFI 15m 2 101506 -0.0145 -0.0323 0.488 -0.011
+Hawkes_OFI 15m 3 101506 0.0016  -0.0288 0.487 -0.003
+Hawkes_OFI 15m 4 101506 -0.0263 -0.0292 0.492 -0.012
+Hawkes_OFI 15m 5 101506 -0.0015 -0.0202 0.493 0.001
+Hawkes_OFI 15m 6 101506 -0.0181 -0.0128 0.495 -0.003
+Hawkes_OFI 15m 7 101513 -0.1031 -0.0340 0.486 -0.002
+Hawkes_OFI 30m 0 101506 -0.0541 -0.0115 0.499 0.003
+Hawkes_OFI 30m 1 101506 -0.0245 -0.0348 0.491 -0.008
+Hawkes_OFI 30m 2 101506 -0.0366 -0.0360 0.489 -0.017
+Hawkes_OFI 30m 3 101506 -0.0127 -0.0360 0.487 -0.006
+Hawkes_OFI 30m 4 101506 -0.0407 -0.0327 0.490 -0.020
+Hawkes_OFI 30m 5 101506 0.0050  -0.0207 0.490 -0.001
+Hawkes_OFI 30m 6 101506 -0.0237 -0.0241 0.490 -0.013
+Hawkes_OFI 30m 7 101513 -0.1664 -0.0260 0.491 -0.003
+Hawkes_OFI 1h  0 101506 -0.0431 -0.0008 0.501 0.015
+Hawkes_OFI 1h  1 101506 -0.0196 -0.0397 0.491 -0.010
+Hawkes_OFI 1h  2 101506 -0.0093 -0.0366 0.486 -0.017
+Hawkes_OFI 1h  3 101506 -0.0397 -0.0367 0.488 -0.006
+Hawkes_OFI 1h  4 101506 -0.0352 -0.0314 0.491 -0.023
+Hawkes_OFI 1h  5 101506 0.0121  -0.0086 0.495 0.005
+Hawkes_OFI 1h  6 101506 -0.0325 -0.0333 0.483 -0.023
+Hawkes_OFI 1h  7 101513 -0.1611 -0.0213 0.492 -0.011
+
+Sig_LevyArea 15m 0 101506 0.0031  0.0198  0.502 -0.007
+Sig_LevyArea 15m 1 101506 0.0076  0.0092  0.504 -0.003
+Sig_LevyArea 15m 2 101506 0.0251  0.0151  0.514 0.027
+Sig_LevyArea 15m 3 101506 0.0032  0.0093  0.500 -0.011
+Sig_LevyArea 15m 4 101506 0.0273  -0.0073 0.495 -0.014
+Sig_LevyArea 15m 5 101506 -0.0066 0.0194  0.500 0.002
+Sig_LevyArea 15m 6 101506 0.0084  -0.0034 0.506 0.008
+Sig_LevyArea 15m 7 101513 0.1081  0.0018  0.491 -0.009
+Sig_LevyArea 30m 0 101506 -0.0006 0.0211  0.500 -0.011
+Sig_LevyArea 30m 1 101506 0.0197  0.0133  0.507 -0.004
+Sig_LevyArea 30m 2 101506 0.0324  0.0174  0.517 0.038
+Sig_LevyArea 30m 3 101506 0.0001  0.0130  0.498 -0.016
+Sig_LevyArea 30m 4 101506 0.0422  -0.0103 0.494 -0.021
+Sig_LevyArea 30m 5 101506 -0.0026 0.0213  0.499 0.003
+Sig_LevyArea 30m 6 101506 0.0047  -0.0104 0.507 0.010
+Sig_LevyArea 30m 7 101513 0.1628  0.0072  0.494 -0.013
+Sig_LevyArea 1h  0 101506 0.0002  0.0270  0.495 -0.019
+Sig_LevyArea 1h  1 101506 0.0110  -0.0026 0.509 -0.006
+Sig_LevyArea 1h  2 101506 0.0221  0.0221  0.524 0.048
+Sig_LevyArea 1h  3 101506 0.0034  0.0108  0.496 -0.021
+Sig_LevyArea 1h  4 101506 0.0433  -0.0068 0.498 -0.027
+Sig_LevyArea 1h  5 101506 -0.0050 0.0179  0.504 0.008
+Sig_LevyArea 1h  6 101506 -0.0017 -0.0195 0.509 0.012
+Sig_LevyArea 1h  7 101513 0.1569  0.0093  0.501 -0.021
+
+Hilbert_Phase 15m 0 101506 -0.0051 -0.0261 0.482 -0.005
+Hilbert_Phase 15m 1 101506 -0.0167 -0.0316 0.483 -0.018
+Hilbert_Phase 15m 2 101506 -0.0050 -0.0161 0.490 -0.003
+Hilbert_Phase 15m 3 101506 0.0122  -0.0046 0.496 0.015
+Hilbert_Phase 15m 4 101506 -0.0079 -0.0175 0.487 -0.009
+Hilbert_Phase 15m 5 101506 -0.0062 -0.0217 0.488 -0.005
+Hilbert_Phase 15m 6 101506 -0.0053 -0.0163 0.490 -0.002
+Hilbert_Phase 15m 7 101513 -0.0053 -0.0398 0.473 -0.006
+Hilbert_Phase 30m 0 101506 -0.0099 -0.0237 0.482 -0.012
+Hilbert_Phase 30m 1 101506 -0.0097 -0.0286 0.483 -0.009
+Hilbert_Phase 30m 2 101506 -0.0079 -0.0135 0.493 -0.007
+Hilbert_Phase 30m 3 101506 0.0041  -0.0166 0.490 0.004
+Hilbert_Phase 30m 4 101506 -0.0117 -0.0170 0.488 -0.011
+Hilbert_Phase 30m 5 101506 -0.0082 -0.0220 0.486 -0.007
+Hilbert_Phase 30m 6 101506 -0.0157 -0.0259 0.484 -0.014
+Hilbert_Phase 30m 7 101513 -0.0009 -0.0292 0.481 -0.003
+Hilbert_Phase 1h  0 101506 0.0026  -0.0131 0.489 0.002
+Hilbert_Phase 1h  1 101506 -0.0088 -0.0252 0.487 -0.007
+Hilbert_Phase 1h  2 101506 -0.0079 -0.0169 0.490 -0.005
+Hilbert_Phase 1h  3 101506 0.0010  -0.0210 0.485 -0.000
+Hilbert_Phase 1h  4 101506 -0.0100 -0.0131 0.494 -0.007
+Hilbert_Phase 1h  5 101506 -0.0026 -0.0138 0.491 -0.000
+Hilbert_Phase 1h  6 101506 -0.0187 -0.0268 0.481 -0.019
+Hilbert_Phase 1h  7 101513 -0.0090 -0.0220 0.486 -0.010
+
+
+
+# Volatility regime OOS metrics (test segment only)
+MODEL            HORIZON REGIME  Count  PearsonIC SpearmanIC  HitRate Sharpe
+-----            ------- ------  -----  --------- ----------- ------- ------
+Hawkes_Intensity 15m     VolLow  270687 -0.0012   -0.0026     0.501   0.005
+Hawkes_Intensity 15m     VolMed  270684 0.0011    -0.0006     0.505   0.010
+Hawkes_Intensity 15m     VolHigh 270684 0.0237    0.0089      0.497   -0.004
+Hawkes_Intensity 30m     VolLow  270686 -0.0015   -0.0051     0.502   0.005
+Hawkes_Intensity 30m     VolMed  270685 0.0024    0.0059      0.507   0.012
+Hawkes_Intensity 30m     VolHigh 270684 0.0253    0.0110      0.497   -0.005
+Hawkes_Intensity 1h      VolLow  270686 -0.0047   -0.0024     0.508   0.018
+Hawkes_Intensity 1h      VolMed  270685 0.0033    0.0057      0.507   0.013
+Hawkes_Intensity 1h      VolHigh 270684 0.0315    0.0139      0.497   -0.008
+
+Hawkes_OFI 15m VolLow  270687 -0.0122 -0.0112 0.497 -0.006
+Hawkes_OFI 15m VolMed  270684 -0.0307 -0.0318 0.489 -0.023
+Hawkes_OFI 15m VolHigh 270684 -0.0255 -0.0164 0.488 -0.003
+Hawkes_OFI 30m VolLow  270686 -0.0072 -0.0077 0.498 -0.006
+Hawkes_OFI 30m VolMed  270685 -0.0235 -0.0275 0.490 -0.020
+Hawkes_OFI 30m VolHigh 270684 -0.0492 -0.0239 0.485 -0.009
+Hawkes_OFI 1h  VolLow  270686 -0.0141 -0.0093 0.497 -0.008
+Hawkes_OFI 1h  VolMed  270685 -0.0267 -0.0291 0.488 -0.024
+Hawkes_OFI 1h  VolHigh 270684 -0.0423 -0.0225 0.487 -0.010
+
+Sig_LevyArea 15m VolLow  270687 0.0047 0.0035  0.501 0.005
+Sig_LevyArea 15m VolMed  270684 0.0120 0.0111  0.506 0.011
+Sig_LevyArea 15m VolHigh 270684 0.0329 0.0044  0.497 -0.004
+Sig_LevyArea 30m VolLow  270686 0.0029 -0.0025 0.502 0.005
+Sig_LevyArea 30m VolMed  270685 0.0124 0.0143  0.507 0.013
+Sig_LevyArea 30m VolHigh 270684 0.0452 0.0077  0.497 -0.005
+Sig_LevyArea 1h  VolLow  270686 0.0007 -0.0026 0.509 0.018
+Sig_LevyArea 1h  VolMed  270685 0.0101 0.0083  0.507 0.013
+Sig_LevyArea 1h  VolHigh 270684 0.0408 0.0084  0.498 -0.008
+
+Hilbert_Phase 15m VolLow  270687 -0.0174 -0.0172 0.492 -0.020
+Hilbert_Phase 15m VolMed  270684 -0.0397 -0.0356 0.477 -0.046
+Hilbert_Phase 15m VolHigh 270684 0.0045  -0.0014 0.489 0.008
+Hilbert_Phase 30m VolLow  270686 -0.0166 -0.0159 0.491 -0.019
+Hilbert_Phase 30m VolMed  270685 -0.0370 -0.0347 0.479 -0.044
+Hilbert_Phase 30m VolHigh 270684 -0.0005 -0.0041 0.488 0.001
+Hilbert_Phase 1h  VolLow  270686 -0.0120 -0.0120 0.493 -0.016
+Hilbert_Phase 1h  VolMed  270685 -0.0352 -0.0319 0.481 -0.039
+Hilbert_Phase 1h  VolHigh 270684 -0.0010 -0.0027 0.490 0.001
+
+
+
+# Time-of-day regime OOS metrics (test segment only)
+MODEL            HORIZON REGIME    Count  PearsonIC SpearmanIC  HitRate Sharpe
+-----            ------- ------    -----  --------- ----------- ------- ------
+Hawkes_Intensity 15m     TOD_Early 281970 0.0119    0.0007      0.500   0.004
+Hawkes_Intensity 15m     TOD_Mid   282720 0.0276    0.0050      0.495   -0.007
+Hawkes_Intensity 15m     TOD_Late  247365 0.0195    0.0045      0.510   0.002
+Hawkes_Intensity 30m     TOD_Early 281970 0.0146    0.0018      0.501   0.005
+Hawkes_Intensity 30m     TOD_Mid   282720 0.0238    0.0074      0.493   -0.010
+Hawkes_Intensity 30m     TOD_Late  247365 0.0230    0.0085      0.513   0.002
+Hawkes_Intensity 1h      TOD_Early 281970 0.0200    0.0062      0.506   0.006
+Hawkes_Intensity 1h      TOD_Mid   282720 0.0259    0.0116      0.492   -0.015
+Hawkes_Intensity 1h      TOD_Late  247365 0.0302    0.0078      0.517   0.004
+
+Hawkes_OFI 15m TOD_Early 281970 -0.0099 -0.0207 0.495 -0.001
+Hawkes_OFI 15m TOD_Mid   282720 -0.0061 -0.0348 0.485 -0.012
+Hawkes_OFI 15m TOD_Late  247365 -0.0531 -0.0207 0.493 -0.002
+Hawkes_OFI 30m TOD_Early 281970 -0.0337 -0.0227 0.495 -0.005
+Hawkes_OFI 30m TOD_Mid   282720 -0.0148 -0.0348 0.485 -0.014
+Hawkes_OFI 30m TOD_Late  247365 -0.0761 -0.0243 0.493 -0.006
+Hawkes_OFI 1h  TOD_Early 281970 -0.0331 -0.0275 0.493 -0.007
+Hawkes_OFI 1h  TOD_Mid   282720 -0.0164 -0.0342 0.484 -0.018
+Hawkes_OFI 1h  TOD_Late  247365 -0.0620 -0.0154 0.496 -0.003
+
+Sig_LevyArea 15m TOD_Early 281970 0.0166 -0.0021 0.500 0.004
+Sig_LevyArea 15m TOD_Mid   282720 0.0162 0.0117  0.495 -0.007
+Sig_LevyArea 15m TOD_Late  247365 0.0471 0.0161  0.511 0.002
+Sig_LevyArea 30m TOD_Early 281970 0.0259 -0.0072 0.501 0.005
+Sig_LevyArea 30m TOD_Mid   282720 0.0147 0.0137  0.493 -0.010
+Sig_LevyArea 30m TOD_Late  247365 0.0697 0.0245  0.513 0.003
+Sig_LevyArea 1h  TOD_Early 281970 0.0214 -0.0041 0.506 0.006
+Sig_LevyArea 1h  TOD_Mid   282720 0.0210 0.0146  0.492 -0.015
+Sig_LevyArea 1h  TOD_Late  247365 0.0552 0.0213  0.517 0.005
+
+Hilbert_Phase 15m TOD_Early 281970 -0.0001 -0.0154 0.489 0.002
+Hilbert_Phase 15m TOD_Mid   282720 -0.0141 -0.0322 0.481 -0.015
+Hilbert_Phase 15m TOD_Late  247365 0.0016  -0.0147 0.490 0.002
+Hilbert_Phase 30m TOD_Early 281970 -0.0036 -0.0185 0.488 -0.003
+Hilbert_Phase 30m TOD_Mid   282720 -0.0136 -0.0266 0.483 -0.015
+Hilbert_Phase 30m TOD_Late  247365 -0.0022 -0.0191 0.486 -0.003
+Hilbert_Phase 1h  TOD_Early 281970 -0.0021 -0.0177 0.487 -0.002
+Hilbert_Phase 1h  TOD_Mid   282720 -0.0119 -0.0221 0.487 -0.011
+Hilbert_Phase 1h  TOD_Late  247365 -0.0048 -0.0169 0.490 -0.004
+
